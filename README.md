@@ -1,25 +1,27 @@
-## ENVIRONMENT SETUP
-### set up ruby (rvm) and rails
+# Nourish
 
-Even if you have it, this worked to update to recent version:
-`gem install rails`
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
-### set up mySQL
-`gem install mysql2`
+## Development server
 
-### set up node (nvm)
-If nvm already installed:
-`nvm install stable`
-currently using node v9.11.0 (npm v5.6.0)
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-### set up angular CLI
-`npm install -g @angular/cli`
+## Code scaffolding
 
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## AUTHORS
-Sarah Maas
-Carrie Edwards
-Colin Powell
+## Build
 
-## C9 NOTES
-To serve Angular app on C9 `ng serve --open --host $IP --port $PORT --disable-host-check`
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
