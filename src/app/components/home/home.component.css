@@ -1,0 +1,38 @@
+h2 {
+    text-align: center;
+}
+
+
+#container1{width:100%; padding: 50px;}
+#left{
+    float:left;
+    width:300px;
+    text-align: center; 
+}
+#right{
+    float:right;
+    width:300px;
+    text-align: center; 
+}
+#center{
+    margin:0 auto;
+    width:300px;
+    text-align: center; 
+}
+
+#container2{width:100%;}
+#left2{
+    float:left;
+    width:300px;
+    text-align: center; 
+}
+#right2{
+    float:right;
+    width:300px;
+    text-align: center; 
+}
+#center2{
+    margin:0 auto;
+    width:300px;
+    text-align: center; 
+}
