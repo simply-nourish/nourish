@@ -4,7 +4,7 @@
       <div class="margin-20">
         <h4>Add Recipe</h4>
       </div>
-      <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
+      <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm['name'])">
         <div class="form-group">
           <label>Recipe Name</label>
           <input type="text" class="form-control" formControlName="name">
@@ -14,7 +14,7 @@
         </div>
         <!--addresses-->
         <div formArrayName="addresses">
-          <div *ngFor="let address of myForm.controls.addresses.controls; let i=index" class="panel panel-default">
+          <div *ngFor="let address of myForm['controls'].addresses['controls']; let i=index" class="panel panel-default">
             <div class="panel-heading">
               <span>Ingredient {{i + 1}}</span>
               <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)"></span>
@@ -41,7 +41,7 @@
         </div>
         
         <div formArrayName="addresses">
-          <div *ngFor="let address of myForm.controls.addresses.controls; let i=index" class="panel panel-default">
+          <div *ngFor="let address of myForm['controls'].addresses['controls']; let i=index" class="panel panel-default">
             <div class="panel-heading">
               <span>Step {{i + 1}}</span>
               <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)"></span>
