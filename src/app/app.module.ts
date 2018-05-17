@@ -16,6 +16,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { MyrecipesComponent } from './components/myrecipes/myrecipes.component';
 import { RecipeformComponent } from './components/recipeform/recipeform.component';
 
+import { ApiService } from './api.service';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +38,7 @@ import { RecipeformComponent } from './components/recipeform/recipeform.componen
     ReactiveFormsModule,
     CalendarModule.forRoot()
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
