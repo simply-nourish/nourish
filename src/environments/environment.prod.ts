@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   
-  // URL of production API
-  apiUrl: 'http://nourish-backend.herokuapp.com'
+  token_auth_config: {
+    apiBase: 'http://nourish-backend.herokuapp.com'
+  }
 };
