@@ -7,14 +7,18 @@ import { RecipeComponent } from './components/recipe/recipe.component';
 import { MyrecipesComponent } from './components/myrecipes/myrecipes.component';
 import { RecipeformComponent } from './components/recipeform/recipeform.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
-
+import {HomepageComponent} from "./components/homepage/homepage.component";
+import {ProfileComponent} from "./components/profile/profile.component";
+import {AuthGuard} from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
+  { path: '', component: HomepageComponent, pathMatch: 'full'},
+  { path: 'main', component: HomeComponent},
   { path: 'recipes', component: MyrecipesComponent},
   { path: 'create', component: RecipeformComponent },
   { path: 'browse', component: BrowseComponent },
   { path: 'calendar', component: CalendarComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   ]; 
 
 @NgModule({
