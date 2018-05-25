@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Http, Response } from '@angular/http';
+import 'rxjs/add/operator/map';
+
+
 import {Recipe} from '../../models/Recipe';
 
 @Component({
@@ -8,11 +12,17 @@ import {Recipe} from '../../models/Recipe';
   styleUrls: ['./browse.component.css']
 })
 export class BrowseComponent implements OnInit {
-
+  private apiUrl: 'https://nourish-backend.herokuapp.com/recipes';
   recipes: Recipe[]; 
   showExtended: boolean = true; 
+  data: any = {}; 
 
-  constructor() { }
+  constructor(private http: Http) {
+    console.log('Hello');
+    this.getContacts(); 
+    this.getData(); 
+    
+  }
 
   ngOnInit() {
     
@@ -45,6 +55,17 @@ export class BrowseComponent implements OnInit {
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
     
+  }
+  
+  getData() {
+     return this.http.get(this.apiUrl).map((res: Response) => res.json())
+  }
+  
+  getContacts() {
+    this.getData().subscribe(data => {
+      console.log(data); 
+      this.data = data
+    })
   }
 
 }
