@@ -29,7 +29,37 @@
     </h1>
     <span class="toolbar-filler"></span>
     <!--<button id="button-login" mat-button [routerLink]="['/signupin']" *ngIf="!(user | async)">Log In</button>-->
-    <button id="button-logout" mat-button>Log Out</button>
+     <a [routerLink]="['']" id="logo-container" class="brand-logo">Nourish</a>
+
+      <ul class="right hide-on-med-and-down">
+
+        <li *ngIf="!(authService.userSignedIn$ | async)"> <a (click)="presentAuthDialog()" >LOGIN</a></li>
+        <li *ngIf="!(authService.userSignedIn$ | async)"> <a (click)="presentAuthDialog('register')">REGISTER</a></li>
+
+        <li *ngIf="(authService.userSignedIn$ | async)"><a [routerLink]="['/profile']">PROFILE</a></li>
+        <li *ngIf="(authService.userSignedIn$ | async)">
+        <button mat-button [matMenuTriggerFor]="menu">Recipes</button>
+          <mat-menu #menu="matMenu">
+          <button mat-menu-item><a [routerLink]="['/browse']">BROWSE</a></button>
+          <button mat-menu-item><a [routerLink]="['/recipes']">MY RECIPES</a></button>
+          <button mat-menu-item><a [routerLink]="['/create']">ADD RECIPE</a></button>
+        </mat-menu>
+        </li>
+        <li *ngIf="(authService.userSignedIn$ | async)">
+        <button mat-button [matMenuTriggerFor]="menu">Meal Planning</button>
+          <mat-menu #menu="matMenu">
+          <button mat-menu-item><a [routerLink]="['/mealplan']">MY MEAL PLAN</a></button>
+          <button mat-menu-item><a [routerLink]="['/list']">MY SHOPPING LIST</a></button>
+        </mat-menu>
+        </li>
+  
+
+        <li *ngIf="(authService.userSignedIn$ | async)"><a (click)="logOut()">LOGOUT</a></li>
+      
+
+      </ul>
   </mat-toolbar>
   <router-outlet></router-outlet>
 </mat-sidenav-container>
+
+<app-auth-dialog #authDialog ></app-auth-dialog>

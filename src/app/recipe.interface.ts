@@ -9,6 +9,7 @@ export interface Recipe {
 export interface Ingredients {
     ingredient: string;  // required field
     amount: string; 
+    measure: string; 
 }
 
 export interface Steps {

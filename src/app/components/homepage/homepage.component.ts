@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import {AuthDialogComponent} from '../auth-dialog/auth-dialog.component';
+import {AuthService} from '../../services/auth.service';
+
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+   constructor(public authService: AuthService) { }
 
   ngOnInit() {
   }

@@ -12,12 +12,13 @@ import {Recipe} from '../../models/Recipe';
   styleUrls: ['./browse.component.css']
 })
 export class BrowseComponent implements OnInit {
-  private apiUrl: 'https://nourish-backend.herokuapp.com/recipes';
+  private apiUrl;
   recipes: Recipe[]; 
   showExtended: boolean = true; 
   data: any = {}; 
 
   constructor(private http: Http) {
+    this.apiUrl = 'https://nourish-backend.herokuapp.com/recipes';
     console.log('Hello');
     this.getContacts(); 
     this.getData(); 
@@ -58,13 +59,15 @@ export class BrowseComponent implements OnInit {
   }
   
   getData() {
-     return this.http.get(this.apiUrl).map((res: Response) => res.json())
+     return this.http.get(this.apiUrl)
+     .map((res: Response) => res.json())
   }
   
   getContacts() {
     this.getData().subscribe(data => {
       console.log(data); 
       this.data = data
+      this.recipes = data
     })
   }
 

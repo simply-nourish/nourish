@@ -13,7 +13,9 @@ export class ProfileComponent implements OnInit {
 
   constructor(public authTokenService:Angular2TokenService,
               public authService:AuthService,
-              private router:Router) {}
+              private router:Router) {
+                
+              }
 
   logOut(){
     this.authService.logOutUser().subscribe(() => this.router.navigate(['/']));

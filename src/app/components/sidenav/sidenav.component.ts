@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {AuthDialogComponent} from '../auth-dialog/auth-dialog.component';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
@@ -9,11 +9,21 @@ import {Router} from '@angular/router';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.css']
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent {
 
-  constructor() { }
+  @ViewChild('authDialog') authDialog: AuthDialogComponent;
 
-  ngOnInit() {
+
+  constructor(public authService: AuthService, private router: Router) { }
+
+
+  logOut() {
+    this.authService.logOutUser().subscribe(() => this.router.navigate(['/']));
+  }
+
+  presentAuthDialog(mode?: 'login'| 'register') {
+    this.authDialog.openDialog(mode);
+
   }
 
 }

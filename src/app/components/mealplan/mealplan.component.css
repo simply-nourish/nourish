@@ -1,6 +1,9 @@
 .h4 {
     text-align: center;
 }
+.container {
+  width: 100%;
+}
 .demo-tab-group {
   border: 1px solid #e8e8e8;
 }

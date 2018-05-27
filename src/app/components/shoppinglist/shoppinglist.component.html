@@ -16,10 +16,12 @@
  
     <br />
  
+    <div *ngFor="let recipe of data">
     <ul class="list-group">
-        <li *ngFor="let task of tasks" class="list-group-item">
-            <span> {{ task.name }} </span>
+        <li *ngFor="let item of recipe.ingredient_recipes"class="list-group-item">
+            <span>  {{item.amount}} {{item.measure}} {{item.ingredient.name}} </span>
         </li>
     </ul>
- 
+     </div> 
 </div>
+
