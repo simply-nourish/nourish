@@ -1,0 +1,27 @@
+<div>
+    <h4> My Shopping List </h4>
+ 
+    <div class="row">
+        <div class="col-xs-6 col-md-4">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="enter grocery items" [(ngModel)]="task" />
+                <div class="input-group-btn">
+                    <button class="btn btn-primary" type="button" (click)="onClick()">
+        <i class="fa fa-plus"></i>
+        </button>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <br />
+ 
+    <div *ngFor="let recipe of data">
+    <ul class="list-group">
+        <li *ngFor="let item of recipe.ingredient_recipes"class="list-group-item">
+            <span>  {{item.amount}} {{item.measure}} {{item.ingredient.name}} </span>
+        </li>
+    </ul>
+     </div> 
+</div>
+

@@ -8,6 +8,10 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Angular2TokenService } from 'angular2-token';
 import { MaterializeModule } from 'angular2-materialize';
+import { MatMenuModule, MatButtonModule, MatIconModule, MatCardModule } from '@angular/material';
+import { MatSidenavModule, MatToolbarModule, MatListModule } from '@angular/material';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 import {AuthService} from "./services/auth.service";
 import {AuthGuard} from "./guards/auth.guard";
@@ -28,6 +32,9 @@ import { AuthDialogComponent } from './components/auth-dialog/auth-dialog.compon
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
+import { MealplanComponent } from './components/mealplan/mealplan.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 
 @NgModule({
@@ -45,11 +52,22 @@ import { ProfileComponent } from './components/profile/profile.component';
     AuthDialogComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    ProfileComponent
+    ProfileComponent,
+    ShoppinglistComponent,
+    MealplanComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTabsModule,
     MaterialAppModule,
     HttpModule,
     HttpClientModule,
@@ -59,7 +77,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     FormsModule, 
     CalendarModule.forRoot()
   ],
-  providers: [Angular2TokenService, AuthService, AuthGuard],
+  providers: [Angular2TokenService, AuthService, AuthGuard, BrowseComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

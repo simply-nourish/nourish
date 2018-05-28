@@ -19,7 +19,14 @@ export class RecipeformComponent implements OnInit {
             name: ['', [Validators.required, Validators.minLength(2)]],
             addresses: this._fb.array([
                 this.initAddress(),
+            ]),
+            ingredients: this._fb.array([
+                this.initIngredient(),
+            ]),
+            steps: this._fb.array([
+                this.initStep(),
             ])
+            
         });
     }
 
@@ -29,28 +36,53 @@ export class RecipeformComponent implements OnInit {
             amount: ['']
         });
     }
+    
+    initIngredient() {
+        return this._fb.group({
+            ingredient: ['', Validators.required],
+            amount: [''],
+            measure: ['']
+        });
+    }
+    
+    initStep() {
+        return this._fb.group({
+            step: ['', Validators.required],
+        });
+    }
 
     addAddress() {
         const control = <FormArray>this.myForm.controls['addresses'];
         control.push(this.initAddress());
+    }
+    
+    addIngredient(){
+        const control = <FormArray>this.myForm.controls['ingredients'];
+        control.push(this.initIngredient());
+    }
+
+    addStep(){
+        const control = <FormArray>this.myForm.controls['steps'];
+        control.push(this.initStep());
     }
 
     removeAddress(i: number) {
         const control = <FormArray>this.myForm.controls['addresses'];
         control.removeAt(i);
     }
-
-    addSteps() {
-        const control = <FormArray>this.myForm.controls['addresses'];
-        control.push(this.initAddress());
-    }
     
-    removeSteps(){
-         const control = <FormArray>this.myForm.controls['addresses'];
-        control.push(this.initAddress());
+    removeIngredient(i: number){
+        const control = <FormArray>this.myForm.controls['ingredients'];
+        control.removeAt(i);
     }
 
-    save(model: Customer) {
+    removeStep(i: number){
+        const control = <FormArray>this.myForm.controls['steps'];
+        control.removeAt(i);
+    }
+
+
+    save(model: Recipe) {
         // call API to save
         // ...
         console.log(model);

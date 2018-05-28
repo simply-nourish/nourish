@@ -1,10 +1,11 @@
 <!--Navigation-->
 <div class="navbar-fixed">
 
-  <nav  role="navigation">
 
+  <nav  role="navigation">
+    
     <div class="nav-wrapper blue ">
-      <a [routerLink]="['']" id="logo-container" class="brand-logo">Rails & Angular Auth</a>
+      <a [routerLink]="['']" id="logo-container" class="brand-logo">Nourish</a>
 
       <ul class="right hide-on-med-and-down">
 
@@ -12,7 +13,25 @@
         <li *ngIf="!(authService.userSignedIn$ | async)"> <a (click)="presentAuthDialog('register')">REGISTER</a></li>
 
         <li *ngIf="(authService.userSignedIn$ | async)"><a [routerLink]="['/profile']">PROFILE</a></li>
+        <li *ngIf="(authService.userSignedIn$ | async)">
+        <button mat-button [matMenuTriggerFor]="menu">RECIPES</button>
+          <mat-menu #menu="matMenu">
+          <button mat-menu-item><a [routerLink]="['/browse']">BROWSE</a></button>
+          <button mat-menu-item><a [routerLink]="['/recipes']">MY RECIPES</a></button>
+          <button mat-menu-item><a [routerLink]="['/create']">ADD RECIPE</a></button>
+        </mat-menu>
+        </li>
+        <li *ngIf="(authService.userSignedIn$ | async)">
+        <button mat-button [matMenuTriggerFor]="menu">MEAL PLANNING</button>
+          <mat-menu #menu="matMenu">
+          <button mat-menu-item><a [routerLink]="['/mealplan']">MY MEAL PLAN</a></button>
+          <button mat-menu-item><a [routerLink]="['/list']">MY SHOPPING LIST</a></button>
+        </mat-menu>
+        </li>
+  
+
         <li *ngIf="(authService.userSignedIn$ | async)"><a (click)="logOut()">LOGOUT</a></li>
+      
 
       </ul>
 
@@ -23,3 +42,4 @@
 </div>
 
 <app-auth-dialog #authDialog ></app-auth-dialog>
+

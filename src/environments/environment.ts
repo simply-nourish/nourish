@@ -6,6 +6,6 @@
 export const environment = {
   production: false,
   token_auth_config: {
-    apiBase: 'http://nourish-backend.herokuapp.com'
+    apiBase: 'https://nourish-backend.herokuapp.com'
   }
 };
