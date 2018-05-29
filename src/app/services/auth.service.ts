@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Angular2TokenService, RegisterData} from 'angular2-token';
+import {Angular2TokenService} from 'angular2-token';
 import {Response} from '@angular/http';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
