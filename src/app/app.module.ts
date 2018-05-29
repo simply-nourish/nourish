@@ -37,7 +37,6 @@ import { MealplanComponent } from './components/mealplan/mealplan.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { RecipeService } from './services/recipe.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,
