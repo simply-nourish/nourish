@@ -20,8 +20,9 @@ export class MealplanComponent implements OnInit {
     console.log('Hello');
     this.getContacts(); 
     this.getData(); 
-    console.log(this.getUserID());
-    
+    //console.log(this.getUserID());
+    console.log(this.authService.getUser());
+    console.log(this.authService.getUser().email);
   }
 
   ngOnInit() {

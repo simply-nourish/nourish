@@ -41,9 +41,16 @@ export class AuthService {
     return this.authService.signIn(signInData).map(
         res => {
           this.userSignedIn$.next(true);
+          console.log(this.authService.currentUserData);
+          console.log(res);
+          console.log(this.userSignedIn$);
           return res;
         }
     );
+  }
+
+  getUser() {
+    return this.authService.currentUserData;
   }
   
 }
