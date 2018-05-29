@@ -5,6 +5,8 @@ import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+import { RegisterUser } from '../register.interface';
+
 @Injectable()
 export class AuthService {
 
@@ -27,7 +29,7 @@ export class AuthService {
     );
   }
 
-  registerUser(signUpData:  {email: string, password: string, passwordConfirmation: string}): Observable<Response> {
+  registerUser(signUpData: RegisterUser): Observable<Response> {
     return this.authService.registerAccount(signUpData).map(
         res => {
           this.userSignedIn$.next(true);

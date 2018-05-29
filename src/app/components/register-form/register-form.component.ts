@@ -1,32 +1,37 @@
 import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {Angular2TokenService} from "angular2-token";
 
+import { RegisterUser } from '../../register.interface';
+
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
   styleUrls: ['./register-form.component.css']
 })
 export class RegisterFormComponent implements OnInit {
-
-  signUpUser = {
+  signUpUser: RegisterUser = {  
+    nickname: '',
+    first_name: '',
+    last_name: '',
+    default_servings: '2',
+    image: '',
     email: '',
     password: '',
-    passwordConfirmation: ''
+    passwordConfirmation: '',
+    confirmSuccessUrl: ''
   };
 
   @Output() onFormResult = new EventEmitter<any>();
 
-  constructor(private tokenAuthSerivce:Angular2TokenService) { }
+  constructor(private tokenAuthService:Angular2TokenService) {}
 
   ngOnInit() {}
 
 
   onSignUpSubmit(){
 
-    this.tokenAuthSerivce.registerAccount(this.signUpUser).subscribe(
-
+    this.tokenAuthService.registerAccount(this.signUpUser).subscribe(
         (res) => {
-
           if (res.status == 200){
             this.onFormResult.emit({signedUp: true, res})
           }
