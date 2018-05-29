@@ -35,6 +35,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
 import { MealplanComponent } from './components/mealplan/mealplan.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { HttpService } from './services/http.service';
 
 
 @NgModule({
@@ -77,7 +78,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     FormsModule, 
     CalendarModule.forRoot()
   ],
-  providers: [Angular2TokenService, AuthService, AuthGuard, BrowseComponent],
+  providers: [Angular2TokenService, AuthService, AuthGuard, BrowseComponent, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
