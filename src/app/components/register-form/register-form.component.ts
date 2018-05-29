@@ -11,9 +11,9 @@ import { RegisterUser } from '../../register.interface';
 export class RegisterFormComponent implements OnInit {
   signUpUser: RegisterUser = {  
     nickname: '',
-    firstName: '',
-    lastName: '',
-    defaultServings: '2',
+    first_name: '',
+    last_name: '',
+    default_servings: '2',
     image: '',
     email: '',
     password: '',
@@ -31,9 +31,7 @@ export class RegisterFormComponent implements OnInit {
   onSignUpSubmit(){
 
     this.tokenAuthService.registerAccount(this.signUpUser).subscribe(
-
         (res) => {
-
           if (res.status == 200){
             this.onFormResult.emit({signedUp: true, res})
           }

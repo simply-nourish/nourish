@@ -6,9 +6,9 @@ import { RegisterData } from "angular2-token";
 
 export interface RegisterUser extends RegisterData {
   nickname: string,
-  firstName: string,
-  lastName: string,
-  defaultServings: string, 
+  first_name: string,
+  last_name: string,
+  default_servings: string, 
   image: string,
   email: string,
   password: string,
