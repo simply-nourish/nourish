@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import {Angular2TokenService} from 'angular2-token';
+import {Angular2TokenService, RegisterData} from 'angular2-token';
 import {Response} from '@angular/http';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+
+import { RegisterUser } from '../register.interface';
 
 @Injectable()
 export class AuthService {
@@ -27,7 +29,7 @@ export class AuthService {
     );
   }
 
-  registerUser(signUpData:  {email: string, password: string, passwordConfirmation: string}): Observable<Response> {
+  registerUser(signUpData: RegisterUser): Observable<Response> {
     return this.authService.registerAccount(signUpData).map(
         res => {
           this.userSignedIn$.next(true);
