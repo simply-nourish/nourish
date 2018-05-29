@@ -13,6 +13,7 @@ export class SidenavComponent {
 
   @ViewChild('authDialog') authDialog: AuthDialogComponent;
 
+  title = '';
 
   constructor(public authService: AuthService, private router: Router) { }
 
