@@ -35,7 +35,7 @@ export class IngredientService {
   }
 
   // GET /ingredient_categories/:ingredient_category_id/ingredients
-  public getIngredientsByCategoryId(categoryID: number): Observable<IngredientCategory[]> {
+  public getCategoryIngredients(categoryID: number): Observable<IngredientCategory[]> {
     return this.authTokenService
     .get('/ingredient_categories/' + categoryID + '/ingredients').map(
       res => {
