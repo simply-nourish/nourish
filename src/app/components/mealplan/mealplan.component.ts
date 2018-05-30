@@ -15,7 +15,7 @@ export class MealplanComponent implements OnInit {
   private apiUrl;
   data: any = {}; 
 
-  constructor(private http: Http, public authTokenService:Angular2TokenService, public authService:AuthService) {
+  constructor(private http: Http, public authTokenService: Angular2TokenService, public authService: AuthService) {
     this.apiUrl = 'https://nourish-backend.herokuapp.com/recipes';
     console.log('Hello');
     this.getContacts(); 
