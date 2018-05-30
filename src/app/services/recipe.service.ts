@@ -12,13 +12,11 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
-const API_URL = environment.token_auth_config.apiBase;
-
-
 @Injectable()
 export class RecipeService {
   private userID: number;
-  constructor(private http: Http, public authTokenService: Angular2TokenService, public authService: AuthService) { 
+
+  constructor(private authTokenService: Angular2TokenService, private authService: AuthService) { 
     console.log('RecipeService constructed:');
     console.log(this.authService.getUser());
     console.log(this.authService.getUser().email);  
@@ -37,7 +35,7 @@ export class RecipeService {
 
   // GET /recipes --> gets all recipes
   public getAllRecipes(): Observable<Recipe[]> {
-    return this.http.get(API_URL + '/recipes').map(
+    return this.authTokenService.get('/recipes').map(
       res =>{
         const recipes = res.json();
         return recipes.map((recipe) => new Recipe(recipe));
@@ -56,7 +54,7 @@ export class RecipeService {
 
   // DELETE /recipes/:id 
   public deleteRecipe(recipeID: number) {
-    return this.http.delete(API_URL + '/recipes/' + recipeID)
+    return this.authTokenService.delete('/recipes/' + recipeID)
     .map(res => null)
     .catch(this.handleError);
   }
