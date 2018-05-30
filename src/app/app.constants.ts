@@ -13,5 +13,11 @@ export const appConfig = {
     addActionName: 'Create',
     updateActionName: 'Update',
     deleteActionName: 'Delete',
-  }
+  },
+  mealPlanDays: [
+    'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'
+  ],
+  mealPlanMeals: [
+    'breakfast', 'lunch', 'dinner', 'snack'
+  ]
 };
