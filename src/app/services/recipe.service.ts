@@ -3,20 +3,28 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { Recipe } from '../recipe.interface';
+
+import {Angular2TokenService} from "angular2-token";
 import {AuthService} from "./auth.service";
+import { Recipe } from '../models/Recipe';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 const API_URL = environment.token_auth_config.apiBase;
 
 
 @Injectable()
 export class RecipeService {
-
-  constructor(private http: Http) { 
-  
+  private userID: number;
+  constructor(private http: Http, public authTokenService: Angular2TokenService, public authService: AuthService) { 
+    console.log('RecipeService constructed:');
+    console.log(this.authService.getUser());
+    console.log(this.authService.getUser().email);  
+    this.userID = this.authService.getUser().id;
   }
-  
+
   // GET /users/:id/recipes
   public getUserRecipes() {
     
@@ -31,8 +39,9 @@ export class RecipeService {
   public getAllRecipes(): Observable<Recipe[]> {
     return this.http.get(API_URL + '/recipes').map(
       res =>{
-      return res.json();
-    })
+        const recipes = res.json();
+        return recipes.map((recipe) => new Recipe(recipe));
+    }).catch(this.handleError);
   }
 
   // POST /users/:id/recipes
@@ -47,7 +56,14 @@ export class RecipeService {
 
   // DELETE /recipes/:id 
   public deleteRecipe(recipeID: number) {
+    return this.http.delete(API_URL + '/recipes/' + recipeID)
+    .map(res => null)
+    .catch(this.handleError);
+  }
 
+  private handleError (error: Response | any) {
+    console.error('RecipeService::handleError', error);
+    return Observable.throw(error);
   }
 }
 
