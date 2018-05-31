@@ -10,8 +10,10 @@ export class IngredientCategory {
   @JsonProperty('name', String)
   name: string = undefined;
 
+  /*
   constructor(values: Object = {}) {
     Object.assign(this, values);
   }
+  */
 
 }
