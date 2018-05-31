@@ -1,4 +1,4 @@
-import {IngredientCategory} from './IngredientCategory';
+import { IngredientCategory } from './IngredientCategory';
 
 export class Ingredient {
   id: number;

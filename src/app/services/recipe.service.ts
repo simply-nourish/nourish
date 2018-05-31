@@ -3,10 +3,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
-
 import {Angular2TokenService} from "angular2-token";
 import {AuthService} from "./auth.service";
 import { Recipe } from '../models/Recipe';
+import {JsonConvert, OperationMode, ValueCheckingMode} from "json2typescript";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -15,12 +15,19 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class RecipeService {
   private userID: number;
-
+  private jsonConvert: JsonConvert;
   constructor(private authTokenService: Angular2TokenService, private authService: AuthService) { 
     console.log('RecipeService constructed:');
     console.log(this.authService.getUser());
     console.log(this.authService.getUser().email);  
     this.userID = this.authService.getUser().id;
+    // Choose your settings
+    // Check the detailed reference in the chapter "JsonConvert class properties and methods"
+    this.jsonConvert = new JsonConvert();
+    this.jsonConvert.operationMode = OperationMode.LOGGING; // print some debug data
+    this.jsonConvert.ignorePrimitiveChecks = false; // don't allow assigning number to string etc.
+    this.jsonConvert.valueCheckingMode = ValueCheckingMode.DISALLOW_NULL; // never allow null
+
   }
 
   // GET /users/:id/recipes
@@ -29,7 +36,10 @@ export class RecipeService {
     .get('/users/' + userID + '/recipes').map(
       res => {
         const recipes = res.json();
-        return recipes.map((recipe) => new Recipe(recipe));
+        return recipes.map((recipe) => {
+          recipe = this.jsonConvert.deserialize(res.json(), Recipe);
+          return recipe;
+        }
       }
     ).catch(this.handleError);
   }
@@ -39,7 +49,9 @@ export class RecipeService {
     return this.authTokenService.get('/users/' + this.userID + '/recipes/' + recipeID)
     .map(
       res => {
-        return new Recipe(res.json());
+        let recipe: Recipe;
+        recipe = this.jsonConvert.deserialize(res.json(), Recipe);
+        return recipe;
       }
     ).catch(this.handleError);
   } 
@@ -49,8 +61,12 @@ export class RecipeService {
     return this.authTokenService.get('/recipes').map(
       res => {
         const recipes = res.json();
-        return recipes.map((recipe) => new Recipe(recipe));
-    }).catch(this.handleError);
+        return recipes.map((recipe) => {
+          recipe = this.jsonConvert.deserialize(res.json(), Recipe);
+          return recipe;
+        }
+      }  
+    ).catch(this.handleError);
   }
 
   // POST /users/:id/recipes
@@ -58,7 +74,9 @@ export class RecipeService {
     return this.authTokenService.post('/users/' + this.userID + '/recipes', recipe)
     .map(
       res => {
-        return new Recipe(res.json());
+        let recipe: Recipe;
+        recipe = this.jsonConvert.deserialize(res.json(), Recipe);
+        return recipe;
       }
     ).catch(this.handleError);
   }
