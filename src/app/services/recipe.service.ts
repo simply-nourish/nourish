@@ -39,7 +39,7 @@ export class RecipeService {
         return recipes.map((recipe) => {
           recipe = this.jsonConvert.deserialize(res.json(), Recipe);
           return recipe;
-        }
+        });
       }
     ).catch(this.handleError);
   }
@@ -64,7 +64,7 @@ export class RecipeService {
         return recipes.map((recipe) => {
           recipe = this.jsonConvert.deserialize(res.json(), Recipe);
           return recipe;
-        }
+        });
       }  
     ).catch(this.handleError);
   }
