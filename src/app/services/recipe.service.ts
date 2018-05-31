@@ -14,15 +14,16 @@ import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class RecipeService {
+
   private userID: number;
   private jsonConvert: JsonConvert;
-  constructor(private authTokenService: Angular2TokenService, private authService: AuthService) { 
+
+  constructor(private authTokenService: Angular2TokenService) { 
+
     console.log('RecipeService constructed:');
-    console.log(this.authService.getUser());
-    console.log(this.authService.getUser().email);  
-    this.userID = this.authService.getUser().id;
-    // Choose your settings
-    // Check the detailed reference in the chapter "JsonConvert class properties and methods"
+    console.log(this.authTokenService.currentUserData);
+    this.userID = this.authTokenService.currentUserData.id;
+    
     this.jsonConvert = new JsonConvert();
     this.jsonConvert.operationMode = OperationMode.LOGGING; // print some debug data
     this.jsonConvert.ignorePrimitiveChecks = false; // don't allow assigning number to string etc.
@@ -31,17 +32,11 @@ export class RecipeService {
   }
 
   // GET /users/:id/recipes
-  public getUserRecipes(userID: number): Observable<Recipe[]> {
-    return this.authTokenService
-    .get('/users/' + userID + '/recipes').map(
+  public getUserRecipes(userID: number = this.userID): Observable<Recipe[]> {
+    return this.authTokenService.get('/users/' + userID + '/recipes').map(
       res => {
-        const recipes = res.json();
-        return recipes.map((recipe) => {
-          recipe = this.jsonConvert.deserialize(res.json(), Recipe);
-          return recipe;
-        });
-      }
-    ).catch(this.handleError);
+          return this.jsonConvert.deserialize(res.json(), Recipe);
+        }).catch(this.handleError);
   }
 
   // GET /users/:user_id/recipes/:id
@@ -58,7 +53,7 @@ export class RecipeService {
 
   // GET /recipes --> gets all recipes
   public getAllRecipes(): Observable<Recipe[]> {
-    return this.authTokenService.get('/recipes')    .map(
+    return this.authTokenService.get('/recipes').map(
       res => {
         return this.jsonConvert.deserialize(res.json(), Recipe);
       }

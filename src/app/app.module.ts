@@ -24,7 +24,7 @@ import { HomeComponent } from './components/home/home.component';
 import { BrowseComponent } from './components/browse/browse.component';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { MyrecipesComponent } from './components/myrecipes/myrecipes.component';
+import { MyRecipesComponent } from './components/myrecipes/myrecipes.component';
 import { RecipeformComponent } from './components/recipeform/recipeform.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
@@ -47,7 +47,7 @@ import { DietaryRestrictionService } from './services/dietary-restriction.servic
     BrowseComponent,
     RecipeComponent,
     CalendarComponent,
-    MyrecipesComponent,
+    MyRecipesComponent,
     RecipeformComponent,
     HomepageComponent,
     ToolbarComponent,

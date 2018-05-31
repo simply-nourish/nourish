@@ -11,10 +11,8 @@ import { RecipeUser } from './RecipeUser';
 export class Recipe {
 
   @JsonProperty('id', Number)
-  id: number = undefined;
-  private _id: number = undefined;
-  get founded() { return this._id; }
-  set founded(value: number) { this._id = value; }
+  _id: number = undefined;
+  get id() { return this._id; }
 
   @JsonProperty('title', String)
   title: string = undefined;
@@ -23,10 +21,7 @@ export class Recipe {
   summary: string = undefined;
 
   @JsonProperty('instructions', String)
-  instructions: string;
-
-  // @JsonProperty('steps', [String])
-  // steps?: string[] = undefined;
+  instructions: string = undefined;
 
   @JsonProperty('ingredient_recipes', [RecipeIngredient])
   ingredient_recipes: RecipeIngredient[] = undefined;
