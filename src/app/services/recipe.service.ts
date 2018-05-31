@@ -58,14 +58,12 @@ export class RecipeService {
 
   // GET /recipes --> gets all recipes
   public getAllRecipes(): Observable<Recipe[]> {
-    return this.authTokenService.get('/recipes').map(
+    return this.authTokenService.get('/recipes')    .map(
       res => {
-        const recipes = res.json();
-        return recipes.map((recipe) => {
-          recipe = this.jsonConvert.deserialize(res.json(), Recipe);
-          return recipe;
-        });
-      }  
+        let recipes: Recipe[];
+        recipes = this.jsonConvert.deserialize(res.json(), Recipe);
+        return recipes;
+      }
     ).catch(this.handleError);
   }
 

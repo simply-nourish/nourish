@@ -25,8 +25,8 @@ export class Recipe {
   @JsonProperty('instructions', String)
   instructions: string;
 
-  @JsonProperty('steps', [String])
-  steps: string[] = undefined;
+  // @JsonProperty('steps', [String])
+  // steps?: string[] = undefined;
 
   @JsonProperty('ingredient_recipes', [RecipeIngredient])
   ingredient_recipes: RecipeIngredient[] = undefined;

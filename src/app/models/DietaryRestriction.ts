@@ -1,3 +1,6 @@
+import {JsonObject, JsonProperty} from "json2typescript";
+
+@JsonObject
 export class DietaryRestriction {
   id: number;
   name: string;
