@@ -2,9 +2,11 @@ import {JsonObject, JsonProperty} from "json2typescript";
 
 @JsonObject
 export class RecipeUser {
-  nickname: string;
 
-  constructor(values: Object = {}) {
-    Object.assign(this, values);
-  }
+  @JsonProperty('nickname', String)
+  nickname: string = undefined;
+
+  // constructor(values: Object = {}) {
+  //   Object.assign(this, values);
+  // }
 }

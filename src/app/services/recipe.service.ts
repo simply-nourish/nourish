@@ -60,9 +60,7 @@ export class RecipeService {
   public getAllRecipes(): Observable<Recipe[]> {
     return this.authTokenService.get('/recipes')    .map(
       res => {
-        let recipes: Recipe[];
-        recipes = this.jsonConvert.deserialize(res.json(), Recipe);
-        return recipes;
+        return this.jsonConvert.deserialize(res.json(), Recipe);
       }
     ).catch(this.handleError);
   }
