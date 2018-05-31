@@ -74,7 +74,7 @@ export class RecipeService {
   // }
 
   // DELETE /recipes/:id 
-  public deleteRecipe(recipeID: number) {
+  public deleteRecipe(recipeID: number): Observable<null> {
     return this.authTokenService.delete('/recipes/' + recipeID)
     .map(res => null)
     .catch(this.handleError);

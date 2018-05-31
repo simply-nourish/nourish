@@ -59,14 +59,14 @@ export class DietaryRestrictionService {
   }
   
   // DELETE /dietary_restrictions/:id
-  public deleteDietaryRestriction(restrictionID: number) {
+  public deleteDietaryRestriction(restrictionID: number): Observable<null> {
     return this.authTokenService.delete('/dietary_restrictions/' + restrictionID)
     .map(res => null)
     .catch(this.handleError);
   }
 
   private handleError (error: Response | any) {
-    console.error('RecipeService::handleError', error);
+    console.error('DietaryRestrictionService::handleError', error);
     return Observable.throw(error);
   }
 }

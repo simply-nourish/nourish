@@ -91,7 +91,7 @@ export class IngredientService {
   } 
   
   // DELETE /ingredient_categories/:id
-  public deleteIngredientCategory(categoryID: number) {
+  public deleteIngredientCategory(categoryID: number): Observable<null> {
     return this.authTokenService.delete('/ingredient_categories/' + categoryID)
     .map(res => null)
     .catch(this.handleError);
@@ -116,14 +116,14 @@ export class IngredientService {
   }
 
   // DELETE /ingredients/:id
-  public deleteIngredient(ingredientID: number) {
+  public deleteIngredient(ingredientID: number): Observable<null> {
     return this.authTokenService.delete('/ingredients/' + ingredientID)
     .map(res => null)
     .catch(this.handleError);
   }
 
   private handleError (error: Response | any) {
-    console.error('RecipeService::handleError', error);
+    console.error('IngredientService::handleError', error);
     return Observable.throw(error);
   }
 }
