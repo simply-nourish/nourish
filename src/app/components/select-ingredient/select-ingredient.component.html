@@ -1,0 +1,19 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Ingredient" aria-label="Ingredient" [matAutocomplete]="auto" [formControl]="ingredientCtrl">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let ingredient of ingredientOptions | async" [value]="ingredient.name">
+        <span>{{ ingredient.name }}</span> |
+        <small>Category: {{ingredient.ingredient_category.name}}</small>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <br />
+
+  <mat-slide-toggle
+    [checked]="ingredientCtrl.disabled"
+    (change)="ingredientCtrl.disabled ? ingredientCtrl.enable() : ingredientCtrl.disable()">
+    Disable Input?
+  </mat-slide-toggle>
+</form>
