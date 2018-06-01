@@ -20,6 +20,9 @@ export class Recipe {
   @JsonProperty('summary', String)
   summary: string = undefined;
 
+  @JsonProperty('servings', Number)
+  servings: number = undefined;
+
   @JsonProperty('instructions', String)
   instructions: string = undefined;
 
