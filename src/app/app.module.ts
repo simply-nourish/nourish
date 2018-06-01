@@ -8,10 +8,10 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Angular2TokenService } from 'angular2-token';
 import { MaterializeModule } from 'angular2-materialize';
-import { MatMenuModule, MatButtonModule, MatIconModule, MatCardModule } from '@angular/material';
+import { MatMenuModule, MatButtonModule, MatIconModule, MatCardModule, MatFormFieldModule } from '@angular/material';
 import { MatSidenavModule, MatToolbarModule, MatListModule } from '@angular/material';
-import {MatTabsModule} from '@angular/material/tabs';
-
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import {AuthService} from "./services/auth.service";
 import {AuthGuard} from "./guards/auth.guard";
@@ -69,9 +69,11 @@ import { SelectIngredientComponent } from './components/select-ingredient/select
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+    MatFormFieldModule,
     MatSidenavModule,
     MatListModule,
     MatTabsModule,
+    MatAutocompleteModule,
     MaterialAppModule,
     HttpModule,
     HttpClientModule,

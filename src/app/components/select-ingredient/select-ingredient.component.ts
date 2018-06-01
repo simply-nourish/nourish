@@ -3,6 +3,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
