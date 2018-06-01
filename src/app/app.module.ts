@@ -20,6 +20,7 @@ import { AppComponent } from './app.component';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppRoutingModule } from './/app-routing.module';
+
 import { HomeComponent } from './components/home/home.component';
 import { BrowseComponent } from './components/browse/browse.component';
 import { RecipeComponent } from './components/recipe/recipe.component';
@@ -35,9 +36,11 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
 import { MealplanComponent } from './components/mealplan/mealplan.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+
 import { RecipeService } from './services/recipe.service';
 import { IngredientService } from './services/ingredient.service';
 import { DietaryRestrictionService } from './services/dietary-restriction.service';
+import { MealPlanService } from './services/meal-plan.service';
 
 @NgModule({
   declarations: [
@@ -79,8 +82,19 @@ import { DietaryRestrictionService } from './services/dietary-restriction.servic
     FormsModule, 
     CalendarModule.forRoot()
   ],
-  providers: [Angular2TokenService, AuthService, AuthGuard, BrowseComponent, RecipeService, IngredientService, DietaryRestrictionService],
-  bootstrap: [AppComponent]
+  providers: [
+    Angular2TokenService, 
+    AuthService, 
+    AuthGuard, 
+    BrowseComponent, 
+    RecipeService, 
+    IngredientService, 
+    DietaryRestrictionService,
+    MealPlanService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
 
