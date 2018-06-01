@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { Customer } from '../../customer.interface';
-import { Recipe } from '../../recipe.interface';
+import { IngredientService } from "../../services/ingredient.service";
+import { Recipe } from '../../models/Recipe';
+import { Ingredient } from '../../models/Ingredient';
 
 @Component({
   selector: 'app-recipeform',
@@ -10,9 +12,12 @@ import { Recipe } from '../../recipe.interface';
 })
 
 export class RecipeformComponent implements OnInit {
-      public myForm: FormGroup;
+    public myForm: FormGroup;
+    private ingredients: Ingredient[];
 
-    constructor(private _fb: FormBuilder) { }
+    constructor(private _fb: FormBuilder, private ingredientService: IngredientService) { 
+        this.getIngredients();
+    }
 
     ngOnInit() {
         this.myForm = this._fb.group({
@@ -91,4 +96,15 @@ export class RecipeformComponent implements OnInit {
     fireEvent(e) {
         console.log(e)
     }
+
+    getIngredients() {
+        this.ingredientService.getAllIngredients().subscribe(
+            data => {
+                console.log('Ingredient Service data');
+                console.log(data);
+                this.ingredients = data;
+            }
+        )
+    }
+
 }
