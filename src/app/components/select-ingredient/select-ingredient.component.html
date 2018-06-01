@@ -1,4 +1,3 @@
-<form class="example-form">
   <mat-form-field class="example-full-width">
     <input matInput placeholder="Ingredient" aria-label="Ingredient" [matAutocomplete]="auto" [formControl]="ingredientCtrl">
     <mat-autocomplete #auto="matAutocomplete">
@@ -9,11 +8,3 @@
     </mat-autocomplete>
   </mat-form-field>
 
-  <br />
-
-  <mat-slide-toggle
-    [checked]="ingredientCtrl.disabled"
-    (change)="ingredientCtrl.disabled ? ingredientCtrl.enable() : ingredientCtrl.disable()">
-    Disable Input?
-  </mat-slide-toggle>
-</form>
