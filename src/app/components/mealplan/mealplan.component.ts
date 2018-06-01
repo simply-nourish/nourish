@@ -34,9 +34,6 @@ export class MealplanComponent implements OnInit {
         this.meal_plans = data;
         this.convertToMealDays();
         this.sortMeals();
-
-        console.log(this.meal_plans[0].meal_days);
-
       });
   }
 
