@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   constructor(public authTokenService:Angular2TokenService,
               public authService:AuthService,
               private router:Router) {
-                console.log(this.authTokenService.currentUserData);
+                // console.log(this.authTokenService.currentUserData);
                 
               }
 
@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.authService.getUser());
+    // console.log(this.authService.getUser());
   }
 
 }
