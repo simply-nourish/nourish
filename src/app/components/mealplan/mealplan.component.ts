@@ -101,4 +101,8 @@ export class MealplanComponent implements OnInit {
 
   }
 
+  private generateMealArray(obj) {
+    return Object.keys(obj).map((key) => obj[key] );
+  }
+
 }

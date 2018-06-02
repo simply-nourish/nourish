@@ -4,76 +4,40 @@
     <div class="container">
       <mat-card>
         <mat-card-content>
-          <h4 class="example-h2">{{meal_plan.name}}
+          <h1 class="mealtitle">{{meal_plan.name}}
             <small>
-              <button class="float-right btn btn-dark btn-sm">Delete</button>
-          </small>
-          </h4>
+              <button class="delete float-right btn btn-dark btn-sm">Delete</button>
+            </small>
+          </h1>
 
           <mat-tab-group class="demo-tab-group" *ngIf="meal_plan.meal_days">
-           
-            <mat-tab label="Monday">
 
-              <div class="demo-tab-content">
+            <div *ngFor="let day of constants.mealPlanDays">
 
-                <div *ngFor="let meal of meal_plan.meal_days.monday">
-                  <ul class="list-unstyled">
-                   
-                    <li class="card card-body mb-2"> 
-                      <h4 class="text-capitalize"> {{meal.meal}}: {{meal.recipe.title}}
-                        <small> 
-                          <button (click)="meal.hide = !meal.hide" class="float-right btn btn-dark btn-sm"> <i [ngClass]="meal.hide ? 'fa fa-plus' : 'fa fa-minus'"></i></button>
-                        </small>         
-                      </h4>
-                      <ul class="list-group"  *ngIf="!meal.hide"> 
-                        <li class="text-capitalize list-group-item"> {{meal.recipe.title}}</li>
-                      </ul>
-                    </li>
+              <mat-tab class="text-capitalize" label="{{day}}">
 
-                  </ul>
+                <div class="demo-tab-content">
+
+                  <div class="meal" *ngFor="let meal of meal_plan.meal_days[day]">
+                    <ul class="list-unstyled">                     
+                      <li class="card card-body mb-2">
+                        <h2 class="text-capitalize">{{meal.meal}}:
+                          <small><button class="float-right btn btn-dark btn-sm">Remove</button></small>
+                        </h2>
+                        <app-recipe [recipe]="meal.recipe"></app-recipe>
+                      </li>        
+                    </ul>
+                  </div>
+
+                  <a [routerLink]="['/create']"><button class="btn btn-light btn-block mb-3">
+                      Add Meal
+                  </button></a>
 
                 </div>
-              </div>
-            
-            </mat-tab>
 
+              </mat-tab>
+            </div>
 
-
-
-            <mat-tab label="Tuesday">
-              <div class="demo-tab-content">
-                
-
-
-              </div>  
-            </mat-tab>
-            <mat-tab label="Wednesday" disabled>
-              No content  
-            </mat-tab>
-            <mat-tab label="Thursday">
-              <div class="demo-tab-content">
-                
-                
-                
-              </div>  
-            </mat-tab>
-            <mat-tab label="Friday">
-
-
-
-            </mat-tab>
-            <mat-tab label="Saturday">
-
-              
-
-
-            </mat-tab>
-            <mat-tab label="Sunday">
-
-              
-
-
-            </mat-tab>
           </mat-tab-group>
         </mat-card-content>
       </mat-card>

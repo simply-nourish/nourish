@@ -60,7 +60,7 @@ import { MealPlanService } from './services/meal-plan.service';
     ProfileComponent,
     ShoppinglistComponent,
     MealplanComponent,
-    SidenavComponent
+    SidenavComponent,
   ],
   imports: [
     BrowserModule,
