@@ -39,6 +39,7 @@ import { RecipeService } from './services/recipe.service';
 import { IngredientService } from './services/ingredient.service';
 import { DietaryRestrictionService } from './services/dietary-restriction.service';
 import { SelectIngredientComponent } from './components/select-ingredient/select-ingredient.component';
+import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { SelectIngredientComponent } from './components/select-ingredient/select
     ShoppinglistComponent,
     MealplanComponent,
     SidenavComponent,
-    SelectIngredientComponent
+    SelectIngredientComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,
