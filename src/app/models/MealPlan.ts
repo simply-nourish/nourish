@@ -18,7 +18,7 @@ export class MealPlan {
   name: string = undefined;
 
   @JsonProperty('meal_plan_recipes', [ MealPlanRecipe ])
-  meal_plan_recipes: MealPlanRecipe[] = undefined;
+  meal_plan_recipes_attributes: MealPlanRecipe[] = undefined;
 
   @JsonProperty('user', RecipeUser)
   user: RecipeUser = undefined;

@@ -12,6 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import { MealPlanRecipe } from '../models/MealPlanRecipe';
 
 @Injectable()
 export class MealPlanService {
@@ -44,45 +45,39 @@ export class MealPlanService {
     }).catch(this.handleError);
   }
 
-  /*
-    // GET /recipes --> gets all recipes
-    public getAllRecipes(): Observable<Recipe[]> {
-      return this.authTokenService.get('/recipes').map(
-        res => {
-          return this.jsonConvert.deserialize(res.json(), Recipe);
-        }
-      ).catch(this.handleError);
-    }
-  
-    // POST /users/:id/recipes
-    public createRecipe(recipe: Recipe): Observable<Recipe> {
-      return this.authTokenService.post('/users/' + this.userID + '/recipes', recipe)
-      .map(
-        res => {
-          let recipe: Recipe;
-          recipe = this.jsonConvert.deserialize(res.json(), Recipe);
-          return recipe;
-        }
-      ).catch(this.handleError);
-    }
-  
-    // PUT /users/:user_id/recipes/:id
-    // id is not yet an attribute of recipe model
-    // public updateRecipe(recipe: Recipe): Observable<Recipe> {
-    //   return this.authTokenService.put('/users/' + this.userID + '/recipes/' + recipe.id, recipe).map(
-    //     res => {
-    //       return new Recipe(res.json());
-    //     }
-    //   ).catch(this.handleError);
-    // }
-  
-    // DELETE /recipes/:id 
-    public deleteRecipe(recipeID: number): Observable<null> {
-      return this.authTokenService.delete('/recipes/' + recipeID)
-      .map(res => null)
-      .catch(this.handleError);
-    }
-*/  
+  // POST /users/:id/meal_plans
+  public createMealPlan(meal_plan: MealPlan): Observable<MealPlan> {
+    return this.authTokenService.post('/users/' +
+                                      this.authTokenService.currentUserData.id +
+                                      '/meal_plans/',
+                                      meal_plan)
+    .map( res => {
+      return this.jsonConvert.deserialize(res.json(), MealPlan);
+    }).catch(this.handleError);
+  }
+
+
+  // PUT /recipes/:id
+  // id is not yet an attribute of recipe model
+  public updateMealPlan(meal_plan: MealPlan): Observable<MealPlan> {
+   return this.authTokenService.put('/users/' +
+                                    this.authTokenService.currentUserData.id +
+                                    '/meal_plans/'
+                                    + meal_plan.id,
+                                    meal_plan)
+    .map( res => {
+      return this.jsonConvert.deserialize(res.json(), MealPlan);
+    }).catch(this.handleError);
+  }
+
+/*
+  // DELETE /recipes/:id 
+  public deleteRecipe(recipeID: number): Observable<null> {
+    return this.authTokenService.delete('/recipes/' + recipeID)
+    .map(res => null)
+    .catch(this.handleError);
+  }
+*/
 
   private handleError (error: Response | any) {
     console.error('RecipeService::handleError', error);

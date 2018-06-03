@@ -8,13 +8,23 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Angular2TokenService } from 'angular2-token';
 import { MaterializeModule } from 'angular2-materialize';
-import { MatMenuModule, MatButtonModule, MatIconModule, MatCardModule } from '@angular/material';
-import { MatSidenavModule, MatToolbarModule, MatListModule } from '@angular/material';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatAutocompleteModule,
+         MatFormFieldModule,
+         MatButtonToggleModule,
+         MatMenuModule,
+         MatButtonModule,
+         MatIconModule,
+         MatCardModule,
+         MatRadioModule,
+         MatInputModule,
+         MatSidenavModule,
+         MatToolbarModule,
+         MatListModule,
+         MatDialogModule } from '@angular/material';
+import { MatTabsModule } from '@angular/material/tabs';
 
-
-import {AuthService} from "./services/auth.service";
-import {AuthGuard} from "./guards/auth.guard";
+import { AuthService } from "./services/auth.service";
+import { AuthGuard } from "./guards/auth.guard";
 
 import { AppComponent } from './app.component';
 
@@ -42,6 +52,9 @@ import { IngredientService } from './services/ingredient.service';
 import { DietaryRestrictionService } from './services/dietary-restriction.service';
 import { MealPlanService } from './services/meal-plan.service';
 
+import { TitleCasePipe } from './pipes/title-case.pipe';
+import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-dialog.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +74,8 @@ import { MealPlanService } from './services/meal-plan.service';
     ShoppinglistComponent,
     MealplanComponent,
     SidenavComponent,
+    TitleCasePipe,
+    MealplanDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +86,10 @@ import { MealPlanService } from './services/meal-plan.service';
     MatIconModule,
     MatCardModule,
     MatSidenavModule,
+    MatDialogModule,
+    MatRadioModule,
     MatListModule,
+    MatInputModule,
     MatTabsModule,
     MaterialAppModule,
     HttpModule,
@@ -79,21 +97,25 @@ import { MealPlanService } from './services/meal-plan.service';
     AppRoutingModule,
     ReactiveFormsModule,
     MaterializeModule,
-    FormsModule, 
+    FormsModule,
+    MatFormFieldModule,
     CalendarModule.forRoot()
   ],
   providers: [
-    Angular2TokenService, 
-    AuthService, 
-    AuthGuard, 
-    BrowseComponent, 
-    RecipeService, 
-    IngredientService, 
+    Angular2TokenService,
+    AuthService,
+    AuthGuard,
+    BrowseComponent,
+    RecipeService,
+    IngredientService,
     DietaryRestrictionService,
     MealPlanService
   ],
   bootstrap: [
     AppComponent
+  ],
+  entryComponents: [
+    MealplanDialogComponent
   ]
 })
 export class AppModule { }

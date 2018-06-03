@@ -1,47 +1,87 @@
+<mat-sidenav-container>
+  <mat-sidenav #snav mode="side" opened="true" class="meal-plan-sidenav">      
 
-<ul class="list-unstyled" *ngIf="meal_plans.length > 0">
-  <li class="card card-body mb-2" *ngFor="let meal_plan of meal_plans"> 
-    <div class="container">
-      <mat-card>
-        <mat-card-content>
-          <h1 class="mealtitle">{{meal_plan.name}}
-            <small>
-              <button class="delete float-right btn btn-dark btn-sm">Delete</button>
-            </small>
-          </h1>
+    <h1 class="text-left">Meal Plans</h1>
+    <mat-divider></mat-divider>
+    <mat-nav-list>
+      <ng-container *ngFor="let meal_plan of meal_plans">
+       <mat-list-item (click)="this.selectMealPlan(meal_plan)" role="listitem">
+          {{meal_plan.name}}
+        </mat-list-item>
+      </ng-container>
+    </mat-nav-list>
 
-          <mat-tab-group class="demo-tab-group" *ngIf="meal_plan.meal_days">
-
-            <div *ngFor="let day of constants.mealPlanDays">
-
-              <mat-tab class="text-capitalize" label="{{day}}">
-
-                <div class="demo-tab-content">
-
-                  <div class="meal" *ngFor="let meal of meal_plan.meal_days[day]">
-                    <ul class="list-unstyled">                     
-                      <li class="card card-body mb-2">
-                        <h2 class="text-capitalize">{{meal.meal}}:
-                          <small><button class="float-right btn btn-dark btn-sm">Remove</button></small>
-                        </h2>
-                        <app-recipe [recipe]="meal.recipe"></app-recipe>
-                      </li>        
-                    </ul>
-                  </div>
-
-                  <a [routerLink]="['/create']"><button class="btn btn-light btn-block mb-3">
-                      Add Meal
-                  </button></a>
-
-                </div>
-
-              </mat-tab>
-            </div>
-
-          </mat-tab-group>
-        </mat-card-content>
-      </mat-card>
+    <div class="create-box">
+       <label>Create Meal Plan:
+          <input #mpName />
+        </label>
+      <!-- (click) passes input value to add() and then clears the input -->
+      <button class="btn btn-dark btn-sm" (click)="addMealPlan(mpName.value); mpName.value=''">
+        add
+      </button>
     </div>
-  </li>
 
-</ul>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="meal-plan-content">
+ 
+  <!-- 
+    <ul class="list-unstyled" *ngIf="meal_plans.length > 0">
+      <li class="card card-body mb-2" *ngFor="let meal_plan of meal_plans"> 
+  -->
+
+    <div *ngIf="selected_mp">
+      <mat-card class="meal-plan-card">
+        <mat-card-content>
+          <div class="mealtitle">
+              
+            <h1>{{selected_mp.name}}
+                  <small>
+                    <button class="delete float-right btn btn-dark btn-sm">Delete</button>
+                  </small>
+                </h1>
+             
+              </div>
+
+              <mat-tab-group class="tab-group" *ngIf="selected_mp.meal_plan_recipes_attributes">
+              
+                <!-- find all meals for each day -->
+                <div *ngFor="let day of constants.mealPlanDays">
+                  <mat-tab label="{{day | titleCase}}">
+                    <div class="demo-tab-content">
+
+                      <div class="meal" *ngFor="let meal of this.findMealsForDay(selected_mp, day)">
+                      
+                        <ul class="list-unstyled">                     
+                          <li class="card card-body mb-2">
+                            <h2 class="text-center">{{meal.meal | titleCase}}:</h2>
+                            <mat-divider [inset]="true"></mat-divider>
+                      
+                            <app-recipe [id]="meal.recipe_id"></app-recipe>
+               
+                            <small><button class="btn btn-dark btn-block mb-3">Remove</button></small>
+                           
+                          </li>        
+                        </ul>
+                     
+                      </div>
+
+                      <button (click)="openDialog(selected_mp, day)" class="btn btn-light btn-block mb-3">Add Meal</button>
+
+                    </div>
+                  </mat-tab>
+                </div>
+            
+              </mat-tab-group>
+
+            </mat-card-content>
+          </mat-card>
+    </div>
+
+  <!-- 
+        </li>
+    </ul>
+  -->
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

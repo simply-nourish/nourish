@@ -41,7 +41,8 @@ export class RecipeService {
 
   // GET /users/:user_id/recipes/:id
   public getUserRecipeById(recipeID: number) {
-    return this.authTokenService.get('/users/' + this.userID + '/recipes/' + recipeID)
+    console.log(this.userID);
+    return this.authTokenService.get('/recipes/' + recipeID)
     .map(
       res => {
         let recipe: Recipe;
