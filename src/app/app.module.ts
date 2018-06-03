@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialAppModule } from './ngmaterial.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { CalendarModule } from 'angular-calendar';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
@@ -99,6 +99,7 @@ import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-d
     MaterializeModule,
     FormsModule,
     MatFormFieldModule,
+    MatAutocompleteModule,
     CalendarModule.forRoot()
   ],
   providers: [
@@ -109,7 +110,8 @@ import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-d
     RecipeService,
     IngredientService,
     DietaryRestrictionService,
-    MealPlanService
+    MealPlanService,
+    TitleCasePipe
   ],
   bootstrap: [
     AppComponent

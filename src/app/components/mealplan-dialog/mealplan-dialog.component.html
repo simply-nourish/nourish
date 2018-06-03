@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Add a Meal for {{data.day | titleCase}}</h1>
 <div mat-dialog-content>
     <div>
-      <form id="mpr-update-form" (ngSubmit)="this.onSubmit(meal_plan_recipe)" [formGroup]="meal_plan_recipe">
+      <form novalidate id="mpr-update-form" (ngSubmit)="this.onSubmit(meal_plan_recipe)" [formGroup]="meal_plan_recipe">
         <label>Pick a Meal Time</label>
         
         <mat-radio-group id="mealtime" formControlName="meal">
@@ -11,16 +11,16 @@
         </mat-radio-group>
 
         <mat-form-field class="full-width">
-          <input matInput formControlName="recipe_id">
+          <input placeholder="Choose A Recipe" matInput [matAutocomplete]="auto" formControlName="recipe">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFunc">
+            <mat-option *ngFor="let recipe of filteredRecipes | async" [value]="recipe">{{ recipe.title | titleCase }}</mat-option>
+          </mat-autocomplete>
         </mat-form-field>
 
       </form>
     </div>
 
-  <p>Hi there</p>
+    <button mat-button (click)="onClose()">Cancel</button>
+    <button [disabled]="meal_plan_recipe.invalid" form="mpr-update-form" mat-button cdkFocusInitial>Add</button>
 
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onClose()">Cancel</button>
-  <button form="mpr-update-form" mat-button cdkFocusInitial>Add</button>
 </div>

@@ -117,7 +117,7 @@ export class MealplanComponent implements OnInit {
 
   openDialog(mp: MealPlan, day): void {
     let dialogRef = this.dialog.open(MealplanDialogComponent, {
-      width: '500px',
+      width: '350px',
       data: { meal_plan: mp, day: day }
     });
 /*
