@@ -137,9 +137,6 @@ export class MealplanDialogComponent implements OnInit, AfterViewInit {
     const titleCasePipe = new TitleCasePipe();
     return recipe ? titleCasePipe.transform(recipe.title) : undefined;
   }
-
-  isValidRecipe(entry: Recipe | string | undefined): entry is Recipe {
-    return true;
-  }
+  
 }
 
