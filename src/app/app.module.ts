@@ -11,6 +11,7 @@ import { MaterializeModule } from 'angular2-materialize';
 import { MatMenuModule, MatButtonModule, MatIconModule, MatCardModule } from '@angular/material';
 import { MatSidenavModule, MatToolbarModule, MatListModule } from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
+import {SlideshowModule} from 'ng-simple-slideshow';
 
 
 import {AuthService} from "./services/auth.service";
@@ -38,6 +39,8 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { RecipeService } from './services/recipe.service';
 import { IngredientService } from './services/ingredient.service';
 import { DietaryRestrictionService } from './services/dietary-restriction.service';
+import { CarouselComponent } from './components/carousel/carousel.component';
+
 
 @NgModule({
   declarations: [
@@ -57,7 +60,8 @@ import { DietaryRestrictionService } from './services/dietary-restriction.servic
     ProfileComponent,
     ShoppinglistComponent,
     MealplanComponent,
-    SidenavComponent
+    SidenavComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +81,8 @@ import { DietaryRestrictionService } from './services/dietary-restriction.servic
     ReactiveFormsModule,
     MaterializeModule,
     FormsModule, 
-    CalendarModule.forRoot()
+    CalendarModule.forRoot(),
+    SlideshowModule,
   ],
   providers: [Angular2TokenService, AuthService, AuthGuard, BrowseComponent, RecipeService, IngredientService, DietaryRestrictionService],
   bootstrap: [AppComponent]
