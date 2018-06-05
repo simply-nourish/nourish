@@ -81,7 +81,7 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     CalendarModule.forRoot(),
     SlideshowModule,
   ],
-  providers: [Angular2TokenService, AuthService, AuthGuard, BrowseComponent],
+  providers: [Angular2TokenService, AuthService, AuthGuard, BrowseComponent, RecipeService, IngredientService, DietaryRestrictionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
