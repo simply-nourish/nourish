@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Angular2TokenService} from "angular2-token";
 
 @Component({
   selector: 'app-update-profile',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authTokenService: Angular2TokenService) { }
 
   ngOnInit() {
   }
