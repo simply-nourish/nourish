@@ -35,14 +35,13 @@ export class MealPlanService implements OnInit {
     }).catch(this.handleError);
   }
 
-  // GET /users/:user_id/meal_plans/:id
+  // GET /meal_plans/:id
   public getUserMealPlanById(mealPlanID: number) {
-    return this.authTokenService.get('/users/' +
-                                      this.userID +
-                                      '/meal_plans/' +
+
+    return this.authTokenService.get('meal_plans/' +
                                       mealPlanID)
     .map( res => {
-      return this.jsonConvert.deserialize(res.json(), MealPlan);;
+      return this.jsonConvert.deserialize(res.json(), MealPlan);
     }).catch(this.handleError);
   }
 
