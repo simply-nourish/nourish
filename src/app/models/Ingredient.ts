@@ -14,10 +14,4 @@ export class Ingredient {
 
   get id() { return this._id; }
 
-  /*
-  constructor(values: Object = {}) {
-    Object.assign(this, values);
-  }
-*/
-
 }

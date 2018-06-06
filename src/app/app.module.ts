@@ -2,24 +2,35 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialAppModule } from './ngmaterial.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { CalendarModule } from 'angular-calendar';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Angular2TokenService } from 'angular2-token';
 import { MaterializeModule } from 'angular2-materialize';
-import { MatMenuModule, MatButtonModule, MatIconModule, MatCardModule, MatFormFieldModule } from '@angular/material';
-import { MatSidenavModule, MatToolbarModule, MatListModule } from '@angular/material';
+import { MatAutocompleteModule,
+         MatFormFieldModule,
+         MatButtonToggleModule,
+         MatMenuModule,
+         MatButtonModule,
+         MatIconModule,
+         MatCardModule,
+         MatRadioModule,
+         MatInputModule,
+         MatSidenavModule,
+         MatToolbarModule,
+         MatListModule,
+         MatDialogModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
-import {AuthService} from "./services/auth.service";
-import {AuthGuard} from "./guards/auth.guard";
+import { AuthService } from "./services/auth.service";
+import { AuthGuard } from "./guards/auth.guard";
 
 import { AppComponent } from './app.component';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppRoutingModule } from './/app-routing.module';
+
 import { HomeComponent } from './components/home/home.component';
 import { BrowseComponent } from './components/browse/browse.component';
 import { RecipeComponent } from './components/recipe/recipe.component';
@@ -35,10 +46,16 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
 import { MealplanComponent } from './components/mealplan/mealplan.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+
 import { RecipeService } from './services/recipe.service';
 import { IngredientService } from './services/ingredient.service';
 import { DietaryRestrictionService } from './services/dietary-restriction.service';
 import { SelectIngredientComponent } from './components/select-ingredient/select-ingredient.component';
+import { MealPlanService } from './services/meal-plan.service';
+
+import { TitleCasePipe } from './pipes/title-case.pipe';
+import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-dialog.component';
+import { MealPlanValidator } from './validators/mealplan-validator.validator';
 
 @NgModule({
   declarations: [
@@ -59,7 +76,9 @@ import { SelectIngredientComponent } from './components/select-ingredient/select
     ShoppinglistComponent,
     MealplanComponent,
     SidenavComponent,
-    SelectIngredientComponent
+    SelectIngredientComponent,
+    TitleCasePipe,
+    MealplanDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +90,10 @@ import { SelectIngredientComponent } from './components/select-ingredient/select
     MatCardModule,
     MatFormFieldModule,
     MatSidenavModule,
+    MatDialogModule,
+    MatRadioModule,
     MatListModule,
+    MatInputModule,
     MatTabsModule,
     MatAutocompleteModule,
     MaterialAppModule,
@@ -80,11 +102,29 @@ import { SelectIngredientComponent } from './components/select-ingredient/select
     AppRoutingModule,
     ReactiveFormsModule,
     MaterializeModule,
-    FormsModule, 
+    FormsModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
     CalendarModule.forRoot()
   ],
-  providers: [Angular2TokenService, AuthService, AuthGuard, BrowseComponent, RecipeService, IngredientService, DietaryRestrictionService],
-  bootstrap: [AppComponent]
+  providers: [
+    Angular2TokenService,
+    AuthService,
+    AuthGuard,
+    BrowseComponent,
+    RecipeService,
+    IngredientService,
+    DietaryRestrictionService,
+    MealPlanService,
+    TitleCasePipe,
+    MealPlanValidator
+  ],
+  bootstrap: [
+    AppComponent
+  ],
+  entryComponents: [
+    MealplanDialogComponent
+  ]
 })
 export class AppModule { }
 
