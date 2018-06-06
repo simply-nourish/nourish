@@ -1,5 +1,5 @@
  <h2> Browse Recipes</h2>
-<ul class="list-unstyled" *ngIf="recipes?.length > 0">
+<ul class="list-unstyled" *ngIf="recipes.length > 0">
     <li class="card card-body mb-2" *ngFor="let recipe of recipes"> 
     <h4> {{recipe.title}}
     <small> <button (click)="recipe.hide = !recipe.hide" class="btn btn-dark btn-sm"> <i [ngClass]="recipe.hide ? 'fa fa-plus' : 'fa fa-minus'"></i></button></small>
@@ -14,7 +14,6 @@
         
     </li>
 </ul>
-
 
 <h4 *ngIf="recipes.length == 0"> No recipes to display!</h4> 
 

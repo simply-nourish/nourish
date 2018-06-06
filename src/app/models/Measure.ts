@@ -1,7 +1,7 @@
 import {JsonObject, JsonProperty} from "json2typescript";
 
 @JsonObject
-export class DietaryRestriction {
+export class Measure {
 
   @JsonProperty('id', Number)
   _id: number = undefined;
@@ -10,4 +10,9 @@ export class DietaryRestriction {
   @JsonProperty('name', String)
   name: string = undefined;
 
+  /*
+  constructor(values: Object = {}) {
+    Object.assign(this, values);
+  }
+*/
 }

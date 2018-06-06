@@ -2,29 +2,40 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialAppModule } from './ngmaterial.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { CalendarModule } from 'angular-calendar';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Angular2TokenService } from 'angular2-token';
 import { MaterializeModule } from 'angular2-materialize';
-import { MatMenuModule, MatButtonModule, MatIconModule, MatCardModule } from '@angular/material';
-import { MatSidenavModule, MatToolbarModule, MatListModule } from '@angular/material';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatAutocompleteModule,
+         MatFormFieldModule,
+         MatButtonToggleModule,
+         MatMenuModule,
+         MatButtonModule,
+         MatIconModule,
+         MatCardModule,
+         MatRadioModule,
+         MatInputModule,
+         MatSidenavModule,
+         MatToolbarModule,
+         MatListModule,
+         MatDialogModule } from '@angular/material';
+import { MatTabsModule } from '@angular/material/tabs';
 
-
-import {AuthService} from "./services/auth.service";
-import {AuthGuard} from "./guards/auth.guard";
+import { AuthService } from "./services/auth.service";
+import { AuthGuard } from "./guards/auth.guard";
 
 import { AppComponent } from './app.component';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppRoutingModule } from './/app-routing.module';
+
 import { HomeComponent } from './components/home/home.component';
 import { BrowseComponent } from './components/browse/browse.component';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { MyrecipesComponent } from './components/myrecipes/myrecipes.component';
+import { MyRecipesComponent } from './components/myrecipes/myrecipes.component';
 import { RecipeformComponent } from './components/recipeform/recipeform.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
@@ -35,9 +46,15 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
 import { MealplanComponent } from './components/mealplan/mealplan.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+
 import { RecipeService } from './services/recipe.service';
 import { IngredientService } from './services/ingredient.service';
 import { DietaryRestrictionService } from './services/dietary-restriction.service';
+import { MealPlanService } from './services/meal-plan.service';
+
+import { TitleCasePipe } from './pipes/title-case.pipe';
+import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-dialog.component';
+import { MealPlanValidator } from './validators/mealplan-validator.validator';
 
 @NgModule({
   declarations: [
@@ -47,7 +64,7 @@ import { DietaryRestrictionService } from './services/dietary-restriction.servic
     BrowseComponent,
     RecipeComponent,
     CalendarComponent,
-    MyrecipesComponent,
+    MyRecipesComponent,
     RecipeformComponent,
     HomepageComponent,
     ToolbarComponent,
@@ -57,7 +74,9 @@ import { DietaryRestrictionService } from './services/dietary-restriction.servic
     ProfileComponent,
     ShoppinglistComponent,
     MealplanComponent,
-    SidenavComponent
+    SidenavComponent,
+    TitleCasePipe,
+    MealplanDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +87,10 @@ import { DietaryRestrictionService } from './services/dietary-restriction.servic
     MatIconModule,
     MatCardModule,
     MatSidenavModule,
+    MatDialogModule,
+    MatRadioModule,
     MatListModule,
+    MatInputModule,
     MatTabsModule,
     MaterialAppModule,
     HttpModule,
@@ -76,11 +98,29 @@ import { DietaryRestrictionService } from './services/dietary-restriction.servic
     AppRoutingModule,
     ReactiveFormsModule,
     MaterializeModule,
-    FormsModule, 
+    FormsModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
     CalendarModule.forRoot()
   ],
-  providers: [Angular2TokenService, AuthService, AuthGuard, BrowseComponent, RecipeService, IngredientService, DietaryRestrictionService],
-  bootstrap: [AppComponent]
+  providers: [
+    Angular2TokenService,
+    AuthService,
+    AuthGuard,
+    BrowseComponent,
+    RecipeService,
+    IngredientService,
+    DietaryRestrictionService,
+    MealPlanService,
+    TitleCasePipe,
+    MealPlanValidator
+  ],
+  bootstrap: [
+    AppComponent
+  ],
+  entryComponents: [
+    MealplanDialogComponent
+  ]
 })
 export class AppModule { }
 

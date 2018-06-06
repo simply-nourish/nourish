@@ -1,8 +1,12 @@
-export class IngredientCategory {
-  id: number;
-  name: string;
+import {JsonObject, JsonProperty} from "json2typescript";
 
-  constructor(values: Object = {}) {
-    Object.assign(this, values);
-  }
+@JsonObject
+export class IngredientCategory {
+
+  @JsonProperty('id', Number)
+  id: number = undefined;
+
+  @JsonProperty('name', String)
+  name: string = undefined;
+
 }

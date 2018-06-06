@@ -1,11 +1,17 @@
-import {IngredientCategory} from './IngredientCategory';
+import {JsonObject, JsonProperty} from "json2typescript";
+import { IngredientCategory } from './IngredientCategory';
 
+@JsonObject
 export class Ingredient {
-  id: number;
-  name: string;
+  @JsonProperty('id', Number)
+  _id: number = undefined;
+
+  @JsonProperty('name', String)
+  name: string = undefined;
+
+  @JsonProperty('ingredient_category', IngredientCategory)
   ingredient_category: IngredientCategory;
 
-  constructor(values: Object = {}) {
-    Object.assign(this, values);
-  }
+  get id() { return this._id; }
+
 }

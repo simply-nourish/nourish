@@ -1,0 +1,20 @@
+.borderless li {
+    border: none;
+}
+
+h1 {
+    font-size: 18pt;
+}
+
+h2 {
+    font-size: 14pt;
+    padding-bottom: 0px;
+}
+
+ul {
+    padding: 3px;
+}
+
+li {
+    padding: 3px;
+}
