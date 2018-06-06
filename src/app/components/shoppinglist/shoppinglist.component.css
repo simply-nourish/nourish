@@ -6,3 +6,9 @@
 .container {
     text-aign: center; 
 }
+
+mat-sidenav-container {
+    top: 64px !important;
+    position: relative;
+    height: 100%;
+}  
