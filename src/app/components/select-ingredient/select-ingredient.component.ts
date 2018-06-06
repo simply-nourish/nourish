@@ -8,7 +8,7 @@ import { MatInputModule, MatFormField,MatAutocompleteModule, MatAutocompleteTrig
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
-import {TitleCasePipe} from '../../pipes/title-case.pipe';
+import { TitleCasePipe } from '../../pipes/title-case.pipe';
 
 import { Ingredient } from '../../models/Ingredient';
 import { IngredientService } from '../../services/ingredient.service';
@@ -21,21 +21,17 @@ import { IngredientService } from '../../services/ingredient.service';
 export class SelectIngredientComponent implements OnInit {
   ingredientCtrl: FormControl;
   private ingredients: Ingredient[];
-  filteredIngredients: Observable<any[]>;
+  filteredIngredients: Observable<Ingredient[]>;
 
-  constructor(private ingredientService: IngredientService) { 
+  constructor(public ingredientService: IngredientService) { 
     
-    this.getIngredients();
+    
  
     }
 
   ngOnInit() {
-    this.ingredientCtrl = new FormControl('');
-    this.filteredIngredients = this.ingredientCtrl.valueChanges
-    .pipe(
-      startWith(''),
-      map(ingredient => ingredient ? this.filterIngredients(ingredient) : this.ingredients.slice())
-    ); 
+    this.ingredientCtrl = new FormControl();
+    this.getIngredients();
   }
 
   getIngredients() {
@@ -45,6 +41,11 @@ export class SelectIngredientComponent implements OnInit {
             console.log(data);
             this.ingredients = data;
             console.log(this.ingredients);
+            this.filteredIngredients = this.ingredientCtrl.valueChanges
+            .pipe(
+              startWith(''),
+              map(ingredient => ingredient ? this.filterIngredients(ingredient) : this.ingredients.slice())
+            ); 
         }
     )
   }
