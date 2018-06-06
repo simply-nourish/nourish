@@ -2,7 +2,10 @@ import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatInputModule, MatFormField, MatAutocompleteModule, MatAutocompleteTrigger, 
+         MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Validators, FormGroup, FormArray, FormBuilder,
+         FormControl, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 
 import {AuthService} from '../../services/auth.service';
 import {Angular2TokenService} from 'angular2-token';
@@ -16,6 +19,8 @@ import {MealPlan} from '../../models/MealPlan';
 import {MealPlanRecipe} from '../../models/MealPlanRecipe';
 
 import {MealplanDialogComponent} from '../mealplan-dialog/mealplan-dialog.component';
+import {MealPlanValidator} from '../../validators/mealplan-validator.validator';
+
 
 @Component({
   selector: 'app-mealplan',
@@ -30,19 +35,32 @@ export class MealplanComponent implements OnInit {
   showExtended: true;
 
   constants = appConfig;
+  mpForm: FormGroup;
 
   constructor(private mealPlanService: MealPlanService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              public mpVal: MealPlanValidator) { }
+
+
+  /*
+   * trigger actions on 'init' hook
+   */
+
+  ngOnInit() {
+    this.mpForm = new FormGroup({
+       new_mealplan: new FormControl('', null, this.mpVal.ValidateMealPlan.bind(this))
+    });
     this.getMealPlans();
   }
 
-  ngOnInit() { }
+  /*
+   * gets all meal plans for the current user
+   */
 
   getMealPlans() {
     this.mealPlanService.getUserMealPlans().subscribe(
       data => {
         this.meal_plans = data;
-        console.log(this.meal_plans);
         if (this.meal_plans) {
           this.selected_mp = this.meal_plans[0];
         }
@@ -60,6 +78,8 @@ export class MealplanComponent implements OnInit {
       if (mpr.day === day) {
         day_meals.push(mpr);
       }
+
+      return day_meals;
     });
 
     return day_meals.sort( (a, b) => {
@@ -78,29 +98,60 @@ export class MealplanComponent implements OnInit {
 
   /*
    * delete a meal from a meal plan
-   */ 
+   */
 
-  private deleteMeal(meal_plan: MealPlan, meal: MealPlanRecipe) {}
+  deleteMeal(mp: MealPlan, del_mpr: MealPlanRecipe) {
+
+    const destroy = 1;
+
+    // attempt to add a meal to meal_plan; on failure, remove it
+    this.mealPlanService.deleteMeal(mp, del_mpr).subscribe( data => {
+      if (data.status === 204) {
+        this.selected_mp.meal_plan_recipes_attributes =
+          this.selected_mp.meal_plan_recipes_attributes.filter( mpr => mpr.id !== del_mpr.id );
+      }
+    });
+
+  }
 
   /*
    * delete an entire meal plan
    */
 
-  private deleteMealPlan(meal_plan: MealPlan) {}
+  deleteMealPlan(meal_plan: MealPlan) {
+
+    this.mealPlanService.deleteMealPlan(meal_plan).subscribe( data => {
+      if (data.status && data.status < 300) {
+        this.meal_plans = this.meal_plans.filter( mp => mp.id !== meal_plan.id);
+        // reset selected meal plan, if it exists
+        if ( this.meal_plans.length > 0) {
+          this.selected_mp = this.meal_plans[0];
+        } else {
+          this.selected_mp = null;
+        }
+      }
+    });
+
+  }
 
   /*
    * create a new (blank) meal plan
    */
 
-  private addMealPlan(name: string) {
+  addMealPlan(mpForm: FormGroup) {
 
     const new_meal_plan = new MealPlan();
-    new_meal_plan.name = name;
+    new_meal_plan.name = mpForm.controls.new_mealplan.value;
 
     this.mealPlanService.createMealPlan(new_meal_plan).subscribe( mp => {
       this.meal_plans.push(mp);
+      if (this.meal_plans.length === 1) {
+        this.selected_mp = this.meal_plans[0];
+      }
     });
- 
+
+    mpForm.reset();
+
   }
 
   /*
@@ -115,84 +166,51 @@ export class MealplanComponent implements OnInit {
    * open add meal dialog
    */
 
-  openDialog(mp: MealPlan, day): void {
-    let dialogRef = this.dialog.open(MealplanDialogComponent, {
+  openDialog(mp: MealPlan, current_day: string): void {
+    const dialogRef = this.dialog.open(MealplanDialogComponent, {
       width: '350px',
-      data: { meal_plan: mp, day: day }
+      data: { meal_plan: mp, day: current_day }
     });
-/*
+
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+
+      const new_mpr = new MealPlanRecipe();
+
+      new_mpr.day = current_day;
+      new_mpr.meal = result.meal;
+      new_mpr.recipe_id = result.recipe_id;
+
+      this.addMealToMealPlan(this.selected_mp, new_mpr);
     });
-*/
+
   }
 
   /*
-   * sort each day's meals by the meal type: in order, breakfast, lunch, dinner, snack
+   * add a specific meal to a meal plan
    */
-/*
-  private sortMeals(meal_plan: MealPlan) {
 
-    // iterate through each array element, sort meal_days by the meal type
-    meal_plan.meal_plan_recipes_attributes.forEach( (mpr) => {
-      // tslint:disable-next-line:forin
+  addMealToMealPlan(meal_plan: MealPlan, new_mpr: MealPlanRecipe) {
 
-      for (const day in meal_plan.meal_days) {
-        meal_plan.meal_days[day].sort( (a, b) => {
-
-          const day1 = this.constants.mealPlanDays.indexOf( a.day.toLowerCase() );
-          const day2 = this.constants.mealPlanDays.indexOf( b.day.toLowerCase() );
-
-          const meal1 = this.constants.mealPlanMeals.indexOf( a.meal.toLowerCase() );
-          const meal2 = this.constants.mealPlanMeals.indexOf( b.meal.toLowerCase() );
-
-          // note that meal/day combination must be unique, per API
-          // meal 1 is less than meal 2 if is on an earlier or equal day, and earlier or equal meal
-          if ((day1 <= day2) && (meal1 < meal2)) {
-            return -1;
-          }
-          // otherwise, meal 1 is greater than meal 2 if it's on a later day or is a later meal
-          if ((day1 > day2) || (meal1 > meal2)) {
-            return 1;
-          }
-          // this will never fire, if API is configured correctly
-          return 0;
-
+    // attempt to add a meal to meal_plan; on failure, remove it
+    this.mealPlanService.updateMealPlan(meal_plan, new_mpr).subscribe( data => {
+      if (data.status < 300) {
+        // GET for updated resource
+        this.mealPlanService.getUserMealPlans().subscribe( mp_data => {
+          this.selected_mp = mp_data.find( mp => mp.id === this.selected_mp.id);
         });
       }
-
     });
+
   }
-*/
 
   /*
-   * convert "meal_plan_recipes_attributes" to a more useful format: "meal_days", 
-   * a series of day: { meal, recipe } key / value pairs
+   * checks if any meals can be added to the meal plan for the current day
+   * returns false if not
    */
-/*
-  private convertToMealDays() {
 
-    this.meal_plans.forEach( (meal_plan) => { 
-
-      meal_plan.meal_days = {};
-
-      // populate hash with days, initialize each value as an empty array
-      this.constants.mealPlanDays.forEach( (day) => {
-        meal_plan.meal_days[day] = new Array();
-      });
-
-      // for each recipe in the meal plan, add it to the appropriate day
-      meal_plan.meal_plan_recipes_attributes.forEach( (recipe) => { 
-        meal_plan.meal_days[ recipe.day ].push(recipe);
-      });
-
-      // destroy previously-used meal_plan_recipes_attributes array
-      // as we've replaced it
-      delete meal_plan.meal_plan_recipes_attributes;
-
-    });
-
+  areMealsLeft(day) {
+    const day_meals = this.findMealsForDay(this.selected_mp, day);
+    return day_meals.length < this.constants.mealPlanMeals.length;
   }
-*/
 
 }

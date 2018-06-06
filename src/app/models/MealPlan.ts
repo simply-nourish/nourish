@@ -11,8 +11,7 @@ import { MealPlanRecipe } from './MealPlanRecipe';
 export class MealPlan {
 
   @JsonProperty('id', Number)
-  _id: number = undefined;
-  get id() { return this._id; }
+  id: number = undefined;
 
   @JsonProperty('name', String)
   name: string = undefined;

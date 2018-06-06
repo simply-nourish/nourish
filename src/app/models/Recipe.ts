@@ -3,7 +3,7 @@
 import {JsonObject, JsonProperty} from "json2typescript";
 
 import { RecipeIngredient } from './RecipeIngredient';
-import { DietaryRestriction } from './DietaryRestriction';
+import { DietaryRestrictionRecipe } from './DietaryRestrictionRecipe';
 import { RecipeUser } from './RecipeUser';
 
 
@@ -29,8 +29,8 @@ export class Recipe {
   @JsonProperty('ingredient_recipes', [RecipeIngredient])
   ingredient_recipes: RecipeIngredient[] = undefined;
 
-  @JsonProperty('dietary_restriction_recipes', [DietaryRestriction])  
-  dietary_restriction_recipes: DietaryRestriction[] = undefined;
+  @JsonProperty('dietary_restriction_recipes', [DietaryRestrictionRecipe])
+  dietary_restriction_recipes: DietaryRestrictionRecipe [] = undefined;
 
   @JsonProperty('user', RecipeUser)
   user: RecipeUser = undefined;

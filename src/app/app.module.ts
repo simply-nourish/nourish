@@ -54,6 +54,7 @@ import { MealPlanService } from './services/meal-plan.service';
 
 import { TitleCasePipe } from './pipes/title-case.pipe';
 import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-dialog.component';
+import { MealPlanValidator } from './validators/mealplan-validator.validator';
 
 @NgModule({
   declarations: [
@@ -111,7 +112,8 @@ import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-d
     IngredientService,
     DietaryRestrictionService,
     MealPlanService,
-    TitleCasePipe
+    TitleCasePipe,
+    MealPlanValidator
   ],
   bootstrap: [
     AppComponent

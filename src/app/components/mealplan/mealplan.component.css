@@ -32,9 +32,9 @@ app-recipe {
 }
 
 mat-sidenav-container {
+  top: 64px !important;
   position: relative;
-  min-height: 100%;
-  height: 100%
+  height: 100%;
 }
 
 .meal-plan-sidenav {

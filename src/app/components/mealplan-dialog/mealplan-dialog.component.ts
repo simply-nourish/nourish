@@ -57,8 +57,6 @@ export class MealplanDialogComponent implements OnInit, AfterViewInit {
 
     this.recipeService.getAllRecipes().subscribe( data => {
       this.recipes = data;
-      console.log(this.recipes);
-
       this.filteredRecipes = this.meal_plan_recipe.controls.recipe.valueChanges.pipe(
         startWith<string | Recipe>(''),
         map(value => typeof value === 'string' ? value : value.title),
@@ -119,14 +117,9 @@ export class MealplanDialogComponent implements OnInit, AfterViewInit {
    */
 
   onSubmit(meal_plan_recipe: FormGroup) {
-
     const data = {  meal: this.meal_plan_recipe.controls.meal.value,
                     recipe_id: this.meal_plan_recipe.controls.recipe.value.id };
-
-    console.log(data);
-
     this.dialogRef.close(data);
-
   }
 
   /*
@@ -137,6 +130,6 @@ export class MealplanDialogComponent implements OnInit, AfterViewInit {
     const titleCasePipe = new TitleCasePipe();
     return recipe ? titleCasePipe.transform(recipe.title) : undefined;
   }
-  
+
 }
 
