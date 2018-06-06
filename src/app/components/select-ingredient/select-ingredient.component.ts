@@ -1,12 +1,14 @@
 // https://material.angular.io/components/autocomplete/examples
 // for use in recipe form builder
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule, MatFormField,MatAutocompleteModule, MatAutocompleteTrigger } from '@angular/material';
 
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+
+import {TitleCasePipe} from '../../pipes/title-case.pipe';
 
 import { Ingredient } from '../../models/Ingredient';
 import { IngredientService } from '../../services/ingredient.service';
@@ -19,19 +21,21 @@ import { IngredientService } from '../../services/ingredient.service';
 export class SelectIngredientComponent implements OnInit {
   ingredientCtrl: FormControl;
   private ingredients: Ingredient[];
-  ingredientOptions: Observable<any[]>;
+  filteredIngredients: Observable<any[]>;
 
   constructor(private ingredientService: IngredientService) { 
-    this.ingredientCtrl = new FormControl();
+    
     this.getIngredients();
-    this.ingredientOptions = this.ingredientCtrl.valueChanges
-      .pipe(
-        startWith(''),
-        map(ingredient => ingredient ? this.filterIngredients(ingredient) : this.ingredients.slice())
-      );  
+ 
     }
 
   ngOnInit() {
+    this.ingredientCtrl = new FormControl('');
+    this.filteredIngredients = this.ingredientCtrl.valueChanges
+    .pipe(
+      startWith(''),
+      map(ingredient => ingredient ? this.filterIngredients(ingredient) : this.ingredients.slice())
+    ); 
   }
 
   getIngredients() {
@@ -48,5 +52,10 @@ export class SelectIngredientComponent implements OnInit {
   filterIngredients(name: string) {
     return this.ingredients.filter(ingredient =>
       ingredient.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  }
+
+  displayIngredients(ingredient?: Ingredient): string | undefined {
+    const titleCasePipe = new TitleCasePipe();
+    return ingredient ? titleCasePipe.transform(ingredient.name) : undefined;
   }
 }

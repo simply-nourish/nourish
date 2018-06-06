@@ -4,11 +4,11 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
 
-import {Angular2TokenService} from "angular2-token";
-import {AuthService} from "./auth.service";
+import { Angular2TokenService } from "angular2-token";
+import { AuthService } from "./auth.service";
 import { IngredientCategory } from '../models/IngredientCategory';
 import { Ingredient } from '../models/Ingredient';
-import {JsonConvert, OperationMode, ValueCheckingMode} from "json2typescript";
+import { JsonConvert, OperationMode, ValueCheckingMode } from "json2typescript";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -23,7 +23,7 @@ export class IngredientService {
   constructor(private authTokenService: Angular2TokenService, private authService: AuthService) { 
     console.log('IngredientService constructed:');
     console.log(this.authService.getUser());
-    console.log(this.authService.getUser().email);  
+    // console.log(this.authService.getUser().email);  
     this.userID = this.authService.getUser().id;
 
     this.jsonConvert = new JsonConvert();
