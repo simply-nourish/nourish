@@ -1,8 +1,17 @@
-.h4 {
+h2 {
     text-align: center;
     
 }
 
 .container {
     text-aign: center; 
+}
+
+
+button {
+    background-color: #B8AEB8;
+}
+
+button:hover {
+    background-color: #B8AEB8;
 }

@@ -1,13 +1,17 @@
 
-<div class="carousel carousel-slider center" data-indicators="true" materialize="carousel" [materializeActions]="carouselActions">
-    <div class="carousel-fixed-item white-text left" id="buttons">
+<!--  carousel-slider -->
+<div id="container" class="carousel carousel-slider center" data-indicators="true" materialize="carousel" [materializeActions]="carouselActions">
+       <div class="carousel-fixed-item white-text" id="left">
       <a (click)="prev()">
         <i class="fa fa-arrow-left"></i>
         </a> 
-        <a (click)="next()">
+    </div>
+    <div class="carousel-fixed-item white-text" id="right">
+         <a (click)="next()">
         <i class="fa fa-arrow-right"></i>
         </a> 
     </div>
+
     <div class="carousel-item red white-text" id="image1" href="#one!">
       <h2>Discover Recipes</h2>
        <p class="white-text">Browse what others have shared</p>

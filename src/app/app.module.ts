@@ -16,6 +16,8 @@ import {SlideshowModule} from 'ng-simple-slideshow';
 
 import {AuthService} from "./services/auth.service";
 import {AuthGuard} from "./guards/auth.guard";
+import { PagerService } from './services/pager.service';
+import { RecipeService} from './services/recipe.service';
 
 import { AppComponent } from './app.component';
 
@@ -81,7 +83,7 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     CalendarModule.forRoot(),
     SlideshowModule,
   ],
-  providers: [Angular2TokenService, AuthService, AuthGuard, BrowseComponent],
+  providers: [Angular2TokenService, AuthService, AuthGuard, BrowseComponent, RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

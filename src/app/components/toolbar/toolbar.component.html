@@ -4,7 +4,7 @@
 
   <nav  role="navigation">
     
-    <div class="nav-wrapper blue ">
+    <div class="nav-wrapper ">
       <a [routerLink]="['']" id="logo-container" class="brand-logo">Nourish</a>
 
       <ul class="right hide-on-med-and-down">
@@ -16,7 +16,7 @@
         <li *ngIf="(authService.userSignedIn$ | async)">
         <button mat-button [matMenuTriggerFor]="menu">RECIPES</button>
           <mat-menu #menu="matMenu">
-          <button mat-menu-item><a [routerLink]="['/browse']">BROWSE</a></button>
+          <button mat-menu-item class="dropdown"><a [routerLink]="['/browse']">BROWSE</a></button>
           <button mat-menu-item><a [routerLink]="['/recipes']">MY RECIPES</a></button>
           <button mat-menu-item><a [routerLink]="['/create']">ADD RECIPE</a></button>
         </mat-menu>

@@ -1,3 +1,11 @@
 h2 {
     text-align: center;
 }
+
+button {
+    background-color: #B8AEB8;
+}
+
+button:hover {
+    background-color: #B8AEB8;
+}
