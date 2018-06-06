@@ -13,6 +13,7 @@
             </small>
         </div>
         <!--addresses-->
+        <app-select-ingredient></app-select-ingredient>
         <div formArrayName="ingredients">
           <div *ngFor="let ingredient of myForm['controls'].ingredients['controls']; let i=index" class="panel panel-default">
             <div class="panel-heading">

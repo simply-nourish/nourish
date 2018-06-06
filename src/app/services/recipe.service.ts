@@ -72,15 +72,15 @@ export class RecipeService {
     ).catch(this.handleError);
   }
 
-  // PUT /users/:user_id/recipes/:id
-  // id is not yet an attribute of recipe model
-  // public updateRecipe(recipe: Recipe): Observable<Recipe> {
-  //   return this.authTokenService.put('/users/' + this.userID + '/recipes/' + recipe.id, recipe).map(
-  //     res => {
-  //       return new Recipe(res.json());
-  //     }
-  //   ).catch(this.handleError);
-  // }
+  //PUT /users/:user_id/recipes/:id
+  //id is not yet an attribute of recipe model
+  public updateRecipe(recipe: Recipe): Observable<Recipe> {
+    return this.authTokenService.put('/users/' + this.userID + '/recipes/' + recipe.id, recipe).map(
+      res => {
+        return this.jsonConvert.deserialize(res.json(), Recipe);
+      }
+    ).catch(this.handleError);
+  }
 
   // DELETE /recipes/:id 
   public deleteRecipe(recipeID: number): Observable<null> {

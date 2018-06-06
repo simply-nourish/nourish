@@ -40,6 +40,7 @@ export class SelectIngredientComponent implements OnInit {
             console.log('Ingredient Service data');
             console.log(data);
             this.ingredients = data;
+            console.log(this.ingredients);
         }
     )
   }

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import { Customer } from '../../customer.interface';
+import {Observable} from 'rxjs';
+import {startWith, map} from 'rxjs/operators';
+// import { Customer } from '../../customer.interface';
 import { IngredientService } from "../../services/ingredient.service";
 import { Recipe } from '../../models/Recipe';
 import { Ingredient } from '../../models/Ingredient';
+
 
 @Component({
   selector: 'app-recipeform',
@@ -13,10 +16,10 @@ import { Ingredient } from '../../models/Ingredient';
 
 export class RecipeformComponent implements OnInit {
     public myForm: FormGroup;
-    private ingredients: Ingredient[];
+
 
     constructor(private _fb: FormBuilder, private ingredientService: IngredientService) { 
-        this.getIngredients();
+        
     }
 
     ngOnInit() {
@@ -33,6 +36,7 @@ export class RecipeformComponent implements OnInit {
             ])
             
         });
+
     }
 
     initAddress() {
@@ -95,16 +99,6 @@ export class RecipeformComponent implements OnInit {
     
     fireEvent(e) {
         console.log(e)
-    }
-
-    getIngredients() {
-        this.ingredientService.getAllIngredients().subscribe(
-            data => {
-                console.log('Ingredient Service data');
-                console.log(data);
-                this.ingredients = data;
-            }
-        )
     }
 
 }
