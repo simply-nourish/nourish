@@ -21,7 +21,8 @@ import { MatAutocompleteModule,
          MatToolbarModule,
          MatListModule,
          MatDialogModule } from '@angular/material';
-import { MatTabsModule } from '@angular/material/tabs';
+import {MatTabsModule} from '@angular/material/tabs';
+import {SlideshowModule} from 'ng-simple-slideshow';
 
 import { AuthService } from "./services/auth.service";
 import { AuthGuard } from "./guards/auth.guard";
@@ -56,6 +57,8 @@ import { MealPlanService } from './services/meal-plan.service';
 import { TitleCasePipe } from './pipes/title-case.pipe';
 import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-dialog.component';
 import { MealPlanValidator } from './validators/mealplan-validator.validator';
+import { CarouselComponent } from './components/carousel/carousel.component';
+
 
 @NgModule({
   declarations: [
@@ -78,7 +81,8 @@ import { MealPlanValidator } from './validators/mealplan-validator.validator';
     SidenavComponent,
     SelectIngredientComponent,
     TitleCasePipe,
-    MealplanDialogComponent
+    MealplanDialogComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +109,8 @@ import { MealPlanValidator } from './validators/mealplan-validator.validator';
     FormsModule,
     MatFormFieldModule,
     MatAutocompleteModule,
-    CalendarModule.forRoot()
+    CalendarModule.forRoot(),
+    SlideshowModule
   ],
   providers: [
     Angular2TokenService,

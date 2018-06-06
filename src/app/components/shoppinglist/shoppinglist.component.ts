@@ -1,47 +1,60 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Component({
-  selector: 'app-shoppinglist',
-  templateUrl: './shoppinglist.component.html',
+	selector: 'app-shoppinglist',
+	  templateUrl: './shoppinglist.component.html',
   styleUrls: ['./shoppinglist.component.css']
 })
-export class ShoppinglistComponent implements OnInit {
-  private apiUrl;
-  data: any = {}; 
-  task: string;
-  tasks = [];
 
-  
-  constructor(private http: Http) {
-    this.apiUrl = 'https://nourish-backend.herokuapp.com/recipes';
-    console.log('Hello');
-    this.getContacts(); 
-    this.getData(); 
+export class ShoppinglistComponent {
+    private apiUrl;
+
+    task = {
+      name: '',
+      id: 0
+    };
+    tasks = [];
+
+    onClick(){
+      if(this.task.id == 0){
+        this.tasks.push({id: (new Date()).getTime(),name: this.task.name, strike: false});
+      }
+      
+      this.task = {
+        name: '',
+        id: 0
+      };
+    }
     
-  }
+    onEdit(item){
+      this.task = item;
+    }
 
-  ngOnInit() {
-  }
-  
-  onClick(){
-    this.tasks.push({name: this.task});
-    this.task = '';
-  }
-  
-  getData() {
-     return this.http.get(this.apiUrl)
-     .map((res: Response) => res.json())
-  }
-  
-  getContacts() {
-    this.getData().subscribe(data => {
-      console.log(data); 
-      this.data = data
-    })
-  }
+    onDelete(item){
+      for(var i = 0;i < this.tasks.length; i++){
+        if(item.id == this.tasks[i].id){
+          this.tasks.splice(i,1);
+          break;
+        }
+      }
+    }
 
+    onStrike(item){
+      for(var i = 0;i < this.tasks.length; i++){
+        if(item.id == this.tasks[i].id){
+          if(this.tasks[i].strike){
+            this.tasks[i].strike = false;
+          }
+          else{
+            this.tasks[i].strike = true;
+          }
+          break;
+        }
+      }
+    }
 
+  
 }
