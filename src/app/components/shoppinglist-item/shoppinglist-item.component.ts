@@ -22,11 +22,11 @@ export class ShoppinglistItemComponent implements OnInit {
   ngOnInit() { }
 
   itemPurchased() {
-    this.purchasedEvent.emit( {id: this.list_item.id, purchased: this.list_item.purchased } );
+    this.purchasedEvent.emit(this.list_item.id);
   }
 
   itemAmountAdjusted() {
-    this.amountAdjustedEvent.emit( {id: this.list_item.id, amount: this.list_item.amount} );
+    this.amountAdjustedEvent.emit( {id: this.list_item.id, amount: this.list_item.amount} ) ;
   }
 
 }

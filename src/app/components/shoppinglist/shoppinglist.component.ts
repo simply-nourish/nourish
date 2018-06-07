@@ -184,14 +184,14 @@ export class ShoppinglistComponent implements OnInit {
 
   }
 
-  setItemPurchased(event) {
+  setItemPurchased(itemID: number) {
   /*
     .purchased = true;
     this.setPurchasedColor(list_item);
   */
   }
 
-  setItemAmount(event) {
+  setItemAmount(new_state) {
 
   }
 
