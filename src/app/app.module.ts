@@ -51,10 +51,12 @@ import { RecipeService } from './services/recipe.service';
 import { IngredientService } from './services/ingredient.service';
 import { DietaryRestrictionService } from './services/dietary-restriction.service';
 import { MealPlanService } from './services/meal-plan.service';
+import { ShoppingListService } from './services/shopping-list.service';
 
 import { TitleCasePipe } from './pipes/title-case.pipe';
 import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-dialog.component';
 import { MealPlanValidator } from './validators/mealplan-validator.validator';
+import { ShoppinglistDialogComponent } from './components/shoppinglist-dialog/shoppinglist-dialog.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +78,8 @@ import { MealPlanValidator } from './validators/mealplan-validator.validator';
     MealplanComponent,
     SidenavComponent,
     TitleCasePipe,
-    MealplanDialogComponent
+    MealplanDialogComponent,
+    ShoppinglistDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -112,6 +115,7 @@ import { MealPlanValidator } from './validators/mealplan-validator.validator';
     IngredientService,
     DietaryRestrictionService,
     MealPlanService,
+    ShoppingListService,
     TitleCasePipe,
     MealPlanValidator
   ],
@@ -119,7 +123,8 @@ import { MealPlanValidator } from './validators/mealplan-validator.validator';
     AppComponent
   ],
   entryComponents: [
-    MealplanDialogComponent
+    MealplanDialogComponent,
+    ShoppinglistDialogComponent
   ]
 })
 export class AppModule { }

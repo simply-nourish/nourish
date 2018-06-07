@@ -4,76 +4,87 @@
     
         <h1 class="text-left">Shopping Lists</h1>
         <mat-divider></mat-divider>
-<!--
+
         <mat-nav-list>
           <ng-container *ngFor="let shopping_list of shopping_lists">
-           <mat-list-item (click)="    " role="listitem">
+           <mat-list-item (click)="selectShoppingList(shopping_list)" role="listitem">
               {{shopping_list.name}}
             </mat-list-item>
           </ng-container>
         </mat-nav-list>
-    
-        <form [formGroup]="   ">
 
-        </form>
--->
+        <div id="button-container">
+          <button (click)="activateCreateDialog()" mat-button float-right cdkFocusInitial>Create New</button>
+        </div>
+
       </mat-sidenav>
 
       <mat-sidenav-content class="meal-plan-content">
 
-
-
-
-
- <!--   
-        <div *ngIf="selected_mp">
-          <mat-card class="meal-plan-card">
-            <mat-card-content>
-              <div class="mealtitle">
-                  
-                <h1>{{selected_mp.name}}
-                  <small>
-                    <button (click)="deleteMealPlan(selected_mp)" class="delete float-right btn btn-dark btn-sm">Delete</button>
-                  </small>
-                </h1>
-                 
-              </div>
-    
-              <mat-tab-group class="tab-group" *ngIf="selected_mp.meal_plan_recipes_attributes">
-                  
   
-                <div *ngFor="let day of constants.mealPlanDays">
-                  <mat-tab label="{{day | titleCase}}">
-                    <div class="demo-tab-content">
+      <div *ngIf="selected_sl">
+        <mat-card class="shopping-list-card">
+          <mat-card-content>
     
-                      <div class="meal" *ngFor="let meal of this.findMealsForDay(selected_mp, day)">
-                          
-                        <ul class="list-unstyled">                     
-                          <li class="card card-body mb-2">
-                            <h2 class="text-center">{{meal.meal | titleCase}}:</h2>
-                            <mat-divider [inset]="true"></mat-divider>
-                          
-                            <app-recipe [id]="meal.recipe_id"></app-recipe>
-                   
-                            <small><button (click)="deleteMeal(selected_mp, meal)" class="btn btn-dark btn-block mb-3">Remove</button></small>
-                               
-                          </li>        
-                        </ul>
-                         
-                      </div>
-    
-                      <button [disabled]="!areMealsLeft(day)" (click)="openDialog(selected_mp, day)" class="btn btn-light btn-block mb-3">Add Meal</button>
-    
+            <div id="listname">
+              <div>
+                <h1 id="sl-name">{{selected_sl.name}}</h1>
+                <h2 id="sl-meal_plan">Created from Meal Plan: {{selected_sl.meal_plan.name}}</h2>
+              </div>
+              <small>
+                <button (click)="deleteShoppingList(selected_sl)" class="delete float-right btn btn-dark btn-sm">Delete</button>
+              </small>        
+            </div>
+
+            <ul class="list-unstyled">
+              <div *ngFor="let listitem of selected_sl.ingredient_shopping_lists_attributes">
+        
+                <li id="sl-item-card" class="card card=body mb=2">
+                  <h2>{{listitem.amount}} {{listitem.measure.name}} {{listitem.ingredient.name | titleCase}}</h2>
+                </li>
+       
+              </div>
+            </ul>
+            
+            <mat-divider></mat-divider>
+            <button class="btn btn-light btn-block mb-3">Add New Item</button>
+
+<!--
+            <mat-tab-group class="tab-group" *ngIf="selected_sl.ingredient_shopping_list_attributes">
+              
+              <div *ngFor="let day of constants.mealPlanDays">
+                <mat-tab label="{{day | titleCase}}">
+                  <div class="demo-tab-content">
+  
+                    <div class="meal" *ngFor="let meal of this.findMealsForDay(selected_mp, day)">
+                        
+                      <ul class="list-unstyled">                     
+                        <li class="card card-body mb-2">
+                          <h2 class="text-center">{{meal.meal | titleCase}}:</h2>
+                          <mat-divider [inset]="true"></mat-divider>
+                        
+                          <app-recipe [id]="meal.recipe_id"></app-recipe>
+                  
+                          <small><button (click)="deleteMeal(selected_mp, meal)" class="btn btn-dark btn-block mb-3">Remove</button></small>
+                              
+                        </li>        
+                      </ul>
+                        
                     </div>
-                  </mat-tab>
-                </div>
-                
-              </mat-tab-group>
-    
-            </mat-card-content>
-          </mat-card>
-        </div>
---> 
+  
+                    <button [disabled]="!areMealsLeft(day)" (click)="openDialog(selected_mp, day)" class="btn btn-light btn-block mb-3">Add Meal</button>
+  
+                  </div>
+                </mat-tab>
+              </div>
+              
+            </mat-tab-group>
+          -->
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+
 
 
       </mat-sidenav-content>

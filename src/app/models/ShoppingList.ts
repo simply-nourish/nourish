@@ -13,7 +13,7 @@ export class ShoppingList {
   name: string = undefined;
 
   @JsonProperty('ingredient_shopping_lists', [IngredientShoppingList])
-  ingredient_shopping_list_attributes: IngredientShoppingList[] = undefined;
+  ingredient_shopping_lists_attributes: IngredientShoppingList[] = undefined;
 
   @JsonProperty('user', RecipeUser)
   user: RecipeUser = undefined;
