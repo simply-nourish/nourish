@@ -41,11 +41,13 @@ export class ShoppinglistDialogComponent implements OnInit {
                public mealPlanService: MealPlanService ) { }
 
   ngOnInit() {
+    // create form group
     this.shopping_list = new FormGroup({
       name: new FormControl('', [Validators.required]),
       meal_plan: new FormControl('', [Validators.required, ValidateMealPlanName])
     });
 
+    // get a list of the user's meal plans
     this.mealPlanService.getUserMealPlans().subscribe( data => {
       this.meal_plans = data;
 

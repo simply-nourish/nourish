@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { of } from 'rxjs/observable/of';
+import { IngredientShoppingList } from '../models/IngredientShoppingList';
 
 @Injectable()
 export class ShoppingListService {
@@ -89,6 +90,34 @@ export class ShoppingListService {
    * add ingredient to shopping list
    */
 
+  public addIngredientToShoppingList(existing_list: ShoppingList,
+                                     list_item: IngredientShoppingList) {
+
+    // manually build our request to ensure that it's consistent with API needs
+    const shopping_list = { shopping_list: {
+      ingredient_shopping_lists_attributes: [{
+          ingredient_id: list_item.ingredient._id,
+          measure_id: list_item.measure._id,
+          amount: list_item.amount,
+     //     purchased: false
+        }]
+      }
+    };
+
+    console.log(shopping_list);
+
+    // fetch user ID, make request
+    const userID = this.authTokenService.currentUserData.id;
+    return this.authTokenService.put('shopping_lists/' + existing_list.id,
+                                     shopping_list)
+    .map( res => {
+      console.log(res.json());
+      if (res && res.status < 300) {
+        return {status: res.status, json: res};
+      }
+    }).catch(this.handleError);
+
+  }
 
   /*
    * mark ingredient as purchased

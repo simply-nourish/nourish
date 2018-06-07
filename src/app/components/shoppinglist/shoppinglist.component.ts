@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 
 import {appConfig} from '../../app.constants';
 
+import { IngredientShoppingList } from '../../models/IngredientShoppingList';
 import { ShoppingList } from '../../models/ShoppingList';
 import { ShoppingListService } from '../../services/shopping-list.service';
 
@@ -15,6 +16,7 @@ import { MatInputModule, MatFormField, MatAutocompleteModule, MatAutocompleteTri
 import { Validators, FormGroup, FormArray, FormBuilder,
          FormControl, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { ShoppinglistDialogComponent } from '../shoppinglist-dialog/shoppinglist-dialog.component';
+import { ShoppinglistAdditemDialogComponent } from '../shoppinglist-additem-dialog/shoppinglist-additem-dialog.component';
 
 @Component({
   selector: 'app-shoppinglist',
@@ -31,7 +33,8 @@ export class ShoppinglistComponent implements OnInit {
   slForm: FormGroup;
 
   constructor( private shoppingListService: ShoppingListService,
-               public dialog: MatDialog ) { }
+               public createDialog: MatDialog,
+               public addItemDialog: MatDialog ) { }
                // public slVal: ShoppingListValidator */)
 
 
@@ -73,7 +76,7 @@ export class ShoppinglistComponent implements OnInit {
 
   activateCreateDialog(): void {
 
-    const dialogRef = this.dialog.open(ShoppinglistDialogComponent, {
+    const dialogRef = this.createDialog.open(ShoppinglistDialogComponent, {
       width: '350px',
       data: { }
     });
@@ -82,11 +85,43 @@ export class ShoppinglistComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if (result.meal_plan != null && result.name != null) {
+
         const new_sl = new ShoppingList();
         new_sl.name = result.name;
         new_sl.meal_plan = result.meal_plan;
         console.log(new_sl);
         this.addShoppingList(new_sl);
+
+      }
+    });
+
+  }
+
+  /*
+   * open add item dialog
+   */
+
+  activateAddItemDialog(): void {
+
+    const dialogRef = this.addItemDialog.open(ShoppinglistAdditemDialogComponent, {
+      width: '350px',
+      data: this.selected_sl
+    });
+
+    // make request if data passed back from dialog
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result != null ) {
+        console.log('result passed back');
+
+        const new_listitem = new IngredientShoppingList();
+        new_listitem.ingredient = result.ingredient;
+        new_listitem.measure = result.measure;
+        new_listitem.amount = result.amount;
+
+        console.log(new_listitem);
+        this.addItemToShoppingList(this.selected_sl, new_listitem);
+
       }
     });
 
@@ -109,6 +144,7 @@ export class ShoppinglistComponent implements OnInit {
   deleteShoppingList(shopping_list: ShoppingList) {
 
     this.shoppingListService.deleteShoppingList(shopping_list.id).subscribe( data => {
+
       if (data.status && data.status < 300) {
         this.shopping_lists = this.shopping_lists.filter( sl => sl.id !== shopping_list.id );
         // reset selected shopping list, if it exists
@@ -117,6 +153,25 @@ export class ShoppinglistComponent implements OnInit {
         } else {
           this.selected_sl = null;
         }
+      }
+
+    });
+
+  }
+
+  /*
+   * add a new item to the shopping list
+   */
+
+  addItemToShoppingList(input_list: ShoppingList, list_item: IngredientShoppingList) {
+
+    // add ingredient to shopping list
+    this.shoppingListService.addIngredientToShoppingList(input_list, list_item).subscribe( data => {
+      if ( data.status < 300) {
+        // GET for updated resource
+        this.shoppingListService.getShoppingListByID(input_list.id).subscribe( sl => {
+          this.selected_sl = sl;
+        });
       }
     });
 
