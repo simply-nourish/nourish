@@ -177,4 +177,22 @@ export class ShoppinglistComponent implements OnInit {
 
   }
 
+  setPurchasedColor(list_item: IngredientShoppingList) {
+    if (list_item.purchased) {
+      return '#f45c42';
+    }
+
+  }
+
+  setItemPurchased(event) {
+  /*
+    .purchased = true;
+    this.setPurchasedColor(list_item);
+  */
+  }
+
+  setItemAmount(event) {
+
+  }
+
 }

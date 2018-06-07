@@ -38,11 +38,12 @@
 
             <ul class="list-unstyled">
               <div *ngFor="let listitem of selected_sl.ingredient_shopping_lists_attributes">
-        
                 <li id="sl-item-card" class="card card=body mb=2">
-                  <h2>{{listitem.amount}} {{listitem.measure.name}} {{listitem.ingredient.name | titleCase}}</h2>
+                  <app-shoppinglist-item [list_item]="listitem" 
+                                         [background_color]="setPurchasedColor(listitem)"
+                                         (itemPurchased)="setItemPurchased($event)"
+                                         (itemAmountAdjusted)="setItemAmount($event)"></app-shoppinglist-item>
                 </li>
-       
               </div>
             </ul>
             

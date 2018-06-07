@@ -59,6 +59,7 @@ import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-d
 import { MealPlanValidator } from './validators/mealplan-validator.validator';
 import { ShoppinglistDialogComponent } from './components/shoppinglist-dialog/shoppinglist-dialog.component';
 import { ShoppinglistAdditemDialogComponent } from './components/shoppinglist-additem-dialog/shoppinglist-additem-dialog.component';
+import { ShoppinglistItemComponent } from './components/shoppinglist-item/shoppinglist-item.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { ShoppinglistAdditemDialogComponent } from './components/shoppinglist-ad
     TitleCasePipe,
     MealplanDialogComponent,
     ShoppinglistDialogComponent,
-    ShoppinglistAdditemDialogComponent
+    ShoppinglistAdditemDialogComponent,
+    ShoppinglistItemComponent
   ],
   imports: [
     BrowserModule,

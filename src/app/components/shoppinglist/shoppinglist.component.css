@@ -45,9 +45,3 @@ mat-sidenav-container {
 #sl-meal_plan {
   padding-top: 3px;
 }
-
-#sl-item-card {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-}
