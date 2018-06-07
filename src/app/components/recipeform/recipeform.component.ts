@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { MatSelectModule } from '@angular/material';
-import {Observable} from 'rxjs';
-import {startWith, map} from 'rxjs/operators';
-// import { Customer } from '../../customer.interface';
+import { MatSelectModule, MatInputModule, MatFormField, MatAutocompleteModule, MatAutocompleteTrigger, 
+    MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+
 import { AuthService } from '../../services/auth.service';
 import { IngredientService } from "../../services/ingredient.service";
 import { DietaryRestrictionService } from "../../services/dietary-restriction.service";
+import { RecipeService } from '../../services/recipe.service';
+
 import { Recipe } from '../../models/Recipe';
 import { Ingredient } from '../../models/Ingredient';
 import { DietaryRestriction } from '../../models/DietaryRestriction';
 import { RecipeIngredient } from '../../models/RecipeIngredient';
+
+import { RecipeformDialogComponent } from '../recipeform-dialog/recipeform-dialog.component';
 
 @Component({
   selector: 'app-recipeform',
@@ -23,9 +28,8 @@ export class RecipeformComponent implements OnInit {
     recipeForm: FormGroup;
     ingredients: Ingredient[];
     restrictions: DietaryRestriction[];
-    restrictionList = ['vegan', 'vegetarian', 'ketogenic', 'gluten free', 'lactose free']; 
     
-    constructor(private _fb: FormBuilder, public authService: AuthService, private ingredientService: IngredientService, private restrictionService: DietaryRestrictionService) { 
+    constructor(private _fb: FormBuilder, public authService: AuthService, private ingredientService: IngredientService, private restrictionService: DietaryRestrictionService, private recipeService: RecipeService, public dialog: MatDialog) { 
         this.getIngredients();
         this.getDietaryRestrictions(); 
     }
@@ -38,17 +42,14 @@ export class RecipeformComponent implements OnInit {
             title: ['', [Validators.required, Validators.minLength(2)]],
             summary: [''],
             servings: [''],
-            instructions: [''],
-            recipe_ingredients: this._fb.array([
-                this.initIngredient(),
-            ]),
-            dietary_restriction_recipes: this._fb.array([
-                this.initRestriction(),
-            ])
-            
+            instructions: ['']   
         });
 
     }
+ 
+    /*
+     * gets all ingredients
+     */
 
     getIngredients() {
         this.ingredientService.getAllIngredients().subscribe(
@@ -72,45 +73,78 @@ export class RecipeformComponent implements OnInit {
         )
     }
 
-    initIngredient() {
-        return this._fb.group({
-            ingredient: ['', Validators.required],
-            amount: [''],
-            measure: ['']
+    /*
+   * open add meal dialog
+   */
+
+    openDialog(new_recipe: Recipe): void {
+        const dialogRef = this.dialog.open(RecipeformDialogComponent, {
+            width: '350px',
+            data: { recipe: new_recipe }
         });
-    }
-    
-    initRestriction() {
-        return this._fb.group({
-            restriction: ['', Validators.required],
+
+        dialogRef.afterClosed().subscribe(result => {
+
+            const new_ri = new RecipeIngredient();
+
+            new_ri.amount = result.amount;
+            new_ri.measure = result.measure;
+            new_ri.ingredient = result.ingredient;
+
+            this.recipe.ingredient_recipes.push(new_ri);
         });
-    }
-    
-    addIngredient(){
-        const control = <FormArray>this.recipeForm.controls['recipe_ingredients'];
-        control.push(this.initIngredient());
+
     }
 
-    addRestriction(){
-        const control = <FormArray>this.recipeForm.controls['restrictions'];
-        control.push(this.initRestriction());
-    }
-    
-    removeIngredient(i: number){
-        const control = <FormArray>this.recipeForm.controls['ingredients'];
-        control.removeAt(i);
-    }
 
-    removeRestriction(i: number){
-        const control = <FormArray>this.recipeForm.controls['restrictions'];
-        control.removeAt(i);
-    }
+    // initIngredient() {
+    //     return this._fb.group({
+    //         ingredient: ['', Validators.required],
+    //         amount: [''],
+    //         measure: ['']
+    //     });
+    // }
+    
+    // initRestriction() {
+    //     return this._fb.group({
+    //         restriction: ['', Validators.required],
+    //     });
+    // }
+    
+    // addIngredient(){
+    //     const control = <FormArray>this.recipeForm.controls['recipe_ingredients'];
+    //     control.push(this.initIngredient());
+    // }
+
+    // addRestriction(){
+    //     const control = <FormArray>this.recipeForm.controls['restrictions'];
+    //     control.push(this.initRestriction());
+    // }
+    
+    // removeIngredient(i: number){
+    //     const control = <FormArray>this.recipeForm.controls['ingredients'];
+    //     control.removeAt(i);
+    // }
+
+    // removeRestriction(i: number){
+    //     const control = <FormArray>this.recipeForm.controls['restrictions'];
+    //     control.removeAt(i);
+    // }
 
 
     save(model: Recipe) {
         // call API to save
-        // ...
         console.log(model);
+        this.recipeService.createRecipe(model).subscribe(
+            data => {
+                console.log(data);
+                this.recipeService.getUserRecipes().subscribe(
+                    recipe_data => {
+                        console.log(recipe_data);
+                    }
+                );
+            }
+        );
     }
     
     fireEvent(e) {

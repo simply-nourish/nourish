@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col s12">
       <div class="margin-20">
         <h4>Add Recipe</h4>
       </div>
@@ -26,6 +26,17 @@
               <mat-option *ngFor="let restriction of restrictions" [value]="restrictions">{{restriction.id}} {{ restriction.name}}</mat-option>
             </mat-select>
           </mat-form-field>
+        </div>
+        <div>
+          
+          <ul>
+              <li *ngFor="let recipe_ingredient of recipe.ingredient_recipes">
+                {{ recipe_ingredient.amount }} 
+                {{ recipe_ingredient.measure.name }} 
+                {{ recipe_ingredient.ingredient.name }}
+              </li>
+            </ul>
+            <button (click)="openDialog(recipe)" class="btn btn-light btn-block mb-3">Add Ingredient</button>
         </div>
         <div>
           <mat-form-field class="full-width">
