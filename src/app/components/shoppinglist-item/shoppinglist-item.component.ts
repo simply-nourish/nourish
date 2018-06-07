@@ -14,19 +14,27 @@ export class ShoppinglistItemComponent implements OnInit {
 
   @Input() list_item: IngredientShoppingList;
   @Input() background_color: string;
-  @Output() purchasedEvent = new EventEmitter();
-  @Output() amountAdjustedEvent = new EventEmitter();
+  @Output() purchasedEvent = new EventEmitter<any>();
+  @Output() amountAdjustedEvent = new EventEmitter<any>();
+  @Output() itemRemovedEvent = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit() { }
 
   itemPurchased() {
-    this.purchasedEvent.emit(this.list_item.id);
+    console.log('item purchased');
+    this.purchasedEvent.emit( this.list_item );
   }
 
   itemAmountAdjusted() {
-    this.amountAdjustedEvent.emit( {id: this.list_item.id, amount: this.list_item.amount} ) ;
+    console.log('amount adjusted');
+    this.amountAdjustedEvent.emit( this.list_item ) ;
+  }
+
+  itemRemoved() {
+    console.log('item removed');
+    this.itemRemovedEvent.emit( this.list_item );
   }
 
 }

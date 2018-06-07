@@ -39,6 +39,7 @@ export class ShoppingListService {
       return this.authTokenService.get('/users/' + userID + '/shopping_lists')
       .map( res => {
         console.log('result');
+        console.log(res);
         return this.jsonConvert.deserialize(res.json(), ShoppingList);
       }).catch(this.handleError);
 
@@ -48,7 +49,10 @@ export class ShoppingListService {
 
   }
 
-  // GET /shopping_lists/:id
+  /*
+   * GET /shopping_lists/:id
+   */
+
   public getShoppingListByID(shoppingListID: number) {
 
     return this.authTokenService.get('shopping_lists/' + shoppingListID).map( res => {
@@ -57,7 +61,10 @@ export class ShoppingListService {
 
   }
 
-  // POST /users/:id/shopping_lists/
+  /*
+   * POST /users/:id/shopping_lists/
+   */
+
   public createShoppingList(input_list: ShoppingList): Observable<ShoppingList> {
 
     // create object to match format
@@ -123,15 +130,87 @@ export class ShoppingListService {
    * mark ingredient as purchased
    */
 
+  markItemAsPurchased( existing_list: ShoppingList,
+                   list_item: IngredientShoppingList ) {
+
+    // build our shopping list request manually, setting ID and purchased
+    const shopping_list = {
+      shopping_list: {
+        ingredient_shopping_lists_attributes: [{
+          id: list_item.id,
+          purchased: true,
+        }]
+      }
+    };
+
+    console.log(shopping_list);
+
+    return this.updateListItem(existing_list.id, shopping_list);
+  }
 
   /*
    * update ingredient amount
    */
 
+  updateIngredientAmount( existing_list: ShoppingList,
+                          list_item: IngredientShoppingList ) {
 
+    // build our shopping list request manually, setting ID and purchased
+    const shopping_list = {
+      shopping_list: {
+        ingredient_shopping_lists_attributes: [{
+          id: list_item.id,
+          amount: list_item.amount,
+        }]
+      }
+    };
+
+    return this.updateListItem(existing_list.id, shopping_list);
+
+  }
 
   /*
-   *
+   * delete ingredient from the list
+   */
+
+  deleteIngredient( existing_list: ShoppingList,
+                    list_item: IngredientShoppingList ) {
+
+    // build our shopping list request manually, setting ID and purchased
+    const shopping_list = {
+      shopping_list: {
+        ingredient_shopping_lists_attributes: [{
+          id: list_item.id,
+          _destroy: true,
+        }]
+      }
+    };
+
+    return this.updateListItem(existing_list.id, shopping_list);
+
+  }
+
+  /*
+   * update list item
+   */
+
+  private updateListItem(list_id: number, list_request: any) {
+    // send request, get response
+    return this.authTokenService.put('shopping_lists/' +
+                                     list_id,
+                                     list_request)
+    .map( res => {
+      console.log(res);
+      if (res && res.status < 300) {
+        console.log('returned from updatelistitem');
+        return { status: res.status, json: res };
+      }
+    }).catch(this.handleError);
+
+  }
+
+  /*
+   * delete a shopping list wholesale
    */
 
   public deleteShoppingList(shoppingListID: number) {

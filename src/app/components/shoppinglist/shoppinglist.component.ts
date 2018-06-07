@@ -111,6 +111,7 @@ export class ShoppinglistComponent implements OnInit {
     // make request if data passed back from dialog
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
+
       if (result != null ) {
         console.log('result passed back');
 
@@ -167,7 +168,7 @@ export class ShoppinglistComponent implements OnInit {
 
     // add ingredient to shopping list
     this.shoppingListService.addIngredientToShoppingList(input_list, list_item).subscribe( data => {
-      if ( data.status < 300) {
+      if (data.status < 300) {
         // GET for updated resource
         this.shoppingListService.getShoppingListByID(input_list.id).subscribe( sl => {
           this.selected_sl = sl;
@@ -177,21 +178,65 @@ export class ShoppinglistComponent implements OnInit {
 
   }
 
-  setPurchasedColor(list_item: IngredientShoppingList) {
+  /*
+   * set item color to 'purchased' (red)
+   */
+
+  setPurchasedColor(list_item: IngredientShoppingList): string {
     if (list_item.purchased) {
       return '#f45c42';
     }
-
   }
 
-  setItemPurchased(itemID: number) {
   /*
-    .purchased = true;
-    this.setPurchasedColor(list_item);
-  */
+   * make call to API to mark item as purchased
+   */
+
+  setItemPurchased(list_item: IngredientShoppingList) {
+
+    console.log('in set item purchased');
+    console.log(list_item);
+
+    // mark item as purchased
+    this.shoppingListService.markItemAsPurchased(this.selected_sl, list_item).subscribe( data => {
+      if (data.status < 300) {
+        // grab updated state of the enclosing shopping list
+        this.shoppingListService.getShoppingListByID(this.selected_sl.id).subscribe( sl => {
+          this.selected_sl = sl;
+        });
+      }
+    });
+
   }
+
+  /*
+   * update ingredient list item amount
+   */
 
   setItemAmount(new_state) {
+
+
+
+
+  }
+
+  /*
+   * remove ingredient from list
+   */
+
+  removeItem(list_item: IngredientShoppingList) {
+
+    console.log('in item delete');
+    console.log(list_item);
+
+    // send PUT to delete item, then GET shopping list to update its state.
+    this.shoppingListService.deleteIngredient(this.selected_sl, list_item).subscribe( data => {
+      if (data.status < 300) {
+        this.selected_sl.ingredient_shopping_lists_attributes =
+          this.selected_sl.ingredient_shopping_lists_attributes.filter( item => {
+            return item.id !== list_item.id; });
+        }
+      });
 
   }
 

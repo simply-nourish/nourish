@@ -21,7 +21,6 @@
 
       <mat-sidenav-content class="meal-plan-content">
 
-  
       <div *ngIf="selected_sl">
         <mat-card class="shopping-list-card">
           <mat-card-content>
@@ -41,8 +40,10 @@
                 <li id="sl-item-card" class="card card=body mb=2">
                   <app-shoppinglist-item [list_item]="listitem" 
                                          [background_color]="setPurchasedColor(listitem)"
-                                         (itemPurchased)="setItemPurchased($event)"
-                                         (itemAmountAdjusted)="setItemAmount($event)"></app-shoppinglist-item>
+                                         (purchasedEvent)="this.setItemPurchased($event)"
+                                         (amountAdjustedEvent)="this.setItemAmount($event)"
+                                         (itemRemovedEvent)="this.removeItem($event)">
+                  </app-shoppinglist-item>
                 </li>
               </div>
             </ul>
@@ -50,43 +51,9 @@
             <mat-divider></mat-divider>
             <button (click)="activateAddItemDialog()" class="btn btn-light btn-block mb-3">Add New Item</button>
 
-<!--
-            <mat-tab-group class="tab-group" *ngIf="selected_sl.ingredient_shopping_list_attributes">
-              
-              <div *ngFor="let day of constants.mealPlanDays">
-                <mat-tab label="{{day | titleCase}}">
-                  <div class="demo-tab-content">
-  
-                    <div class="meal" *ngFor="let meal of this.findMealsForDay(selected_mp, day)">
-                        
-                      <ul class="list-unstyled">                     
-                        <li class="card card-body mb-2">
-                          <h2 class="text-center">{{meal.meal | titleCase}}:</h2>
-                          <mat-divider [inset]="true"></mat-divider>
-                        
-                          <app-recipe [id]="meal.recipe_id"></app-recipe>
-                  
-                          <small><button (click)="deleteMeal(selected_mp, meal)" class="btn btn-dark btn-block mb-3">Remove</button></small>
-                              
-                        </li>        
-                      </ul>
-                        
-                    </div>
-  
-                    <button [disabled]="!areMealsLeft(day)" (click)="openDialog(selected_mp, day)" class="btn btn-light btn-block mb-3">Add Meal</button>
-  
-                  </div>
-                </mat-tab>
-              </div>
-              
-            </mat-tab-group>
-          -->
-
           </mat-card-content>
         </mat-card>
       </div>
-
-
 
       </mat-sidenav-content>
     </mat-sidenav-container>
