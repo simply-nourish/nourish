@@ -59,6 +59,7 @@ import { TitleCasePipe } from './pipes/title-case.pipe';
 import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-dialog.component';
 import { MealPlanValidator } from './validators/mealplan-validator.validator';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { RecipeformDialogComponent } from './components/recipeform-dialog/recipeform-dialog.component';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     SelectIngredientComponent,
     TitleCasePipe,
     MealplanDialogComponent,
-    CarouselComponent
+    CarouselComponent,
+    RecipeformDialogComponent
   ],
   imports: [
     BrowserModule,
