@@ -5,19 +5,33 @@
         <h4>Add Recipe</h4>
       </div>
       <form [formGroup]="recipeForm" id="new-recipe-form" novalidate (ngSubmit)="save(recipeForm['name'])">
+        <div>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Recipe Name" matInput formControlName="title">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Summary" formControlName="summary"></textarea>
+          </mat-form-field>
+        </div>
+        <div>
         <mat-form-field class="full-width">
-          <input matInput placeholder="Recipe Name" matInput formControlName="title">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <textarea matInput placeholder="Summary" formControlName="summary"></textarea>
-        </mat-form-field>
-
-        <mat-form-field class="full-width">
-          <mat-select placeholder="Dietary Restrictions" [formControl]="recipe.dietary_restriction_recipes" multiple>
-            <mat-option *ngFor="let restriction of restrictions" [value]="restrictions">{{restriction.id}} {{ restriction.name}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-
+            <input matInput placeholder="Servings" matInput formControlName="servings">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Dietary Restrictions" [formControl]="recipe.dietary_restriction_recipes" multiple>
+              <mat-option *ngFor="let restriction of restrictions" [value]="restrictions">{{restriction.id}} {{ restriction.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Instructions" matInput formControlName="instructions"></textarea>
+          </mat-form-field>
+        </div>
         <div class="margin-20">
           <button click="fireEvent($event)" type="submit" class="btn btn-primary pull-right" [disabled]="!recipeForm.valid">Submit</button>
         </div>
