@@ -1,6 +1,4 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-//import {MatButtonModule} from '@angular/material/button';
-
 import {IngredientShoppingList} from '../../models/IngredientShoppingList';
 
 import {TitleCasePipe} from '../../pipes/title-case.pipe';
@@ -34,8 +32,6 @@ export class ShoppinglistItemComponent implements OnInit {
   }
 
   itemAmountAdjusted(amount: number) {
-
-    console.log('amount adjusted');
     this.amountAdjustedEvent.emit( {id: this.list_item.id, amount: amount } );
   }
 
@@ -51,7 +47,6 @@ export class ShoppinglistItemComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe( result => {
-      console.log(result);
       if ( result != null ) {
         this.itemAmountAdjusted(result.amount);
       }

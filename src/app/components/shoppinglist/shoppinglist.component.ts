@@ -67,6 +67,10 @@ export class ShoppinglistComponent implements OnInit {
   addShoppingList(sl: ShoppingList) {
     this.shoppingListService.createShoppingList(sl).subscribe( data => {
       this.shopping_lists.push(data);
+      // automatically select if this is the first SL
+      if (this.shopping_lists.length === 1) {
+        this.selected_sl = this.shopping_lists[0];
+      }
     });
   }
 
@@ -83,13 +87,11 @@ export class ShoppinglistComponent implements OnInit {
 
     // make request if data passed back from dialog
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result && result.meal_plan != null && result.name != null) {
 
         const new_sl = new ShoppingList();
         new_sl.name = result.name;
         new_sl.meal_plan = result.meal_plan;
-        console.log(new_sl);
         this.addShoppingList(new_sl);
 
       }
@@ -110,17 +112,14 @@ export class ShoppinglistComponent implements OnInit {
 
     // make request if data passed back from dialog
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
 
       if (result != null ) {
-        console.log('result passed back');
 
         const new_listitem = new IngredientShoppingList();
         new_listitem.ingredient = result.ingredient;
         new_listitem.measure = result.measure;
         new_listitem.amount = result.amount;
 
-        console.log(new_listitem);
         this.addItemToShoppingList(this.selected_sl, new_listitem);
 
       }
@@ -193,10 +192,6 @@ export class ShoppinglistComponent implements OnInit {
    */
 
   setItemPurchased(id: number) {
-
-    console.log('in set item purchased');
-    console.log(id);
-
     // mark item as purchased
     this.shoppingListService.markItemAsPurchased(this.selected_sl.id, id).subscribe( data => {
       if (data.status < 300) {
@@ -215,9 +210,6 @@ export class ShoppinglistComponent implements OnInit {
 
   setItemAmount(update: any) {
 
-    console.log('in set item amount');
-    console.log(update);
-
     this.shoppingListService.updateIngredientAmount(this.selected_sl.id, update.id, update.amount)
     .subscribe( data => {
       if (data.status < 300) {
@@ -235,9 +227,6 @@ export class ShoppinglistComponent implements OnInit {
    */
 
   removeItem(list_item_id: number) {
-
-    console.log('in item delete');
-    console.log(list_item_id);
 
     // send PUT to delete item, then GET shopping list to update its state.
     this.shoppingListService.deleteIngredient(this.selected_sl.id, list_item_id).subscribe( data => {

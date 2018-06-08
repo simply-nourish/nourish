@@ -86,8 +86,6 @@ export class ShoppinglistAdditemDialogComponent implements OnInit {
       taken_ingredients.push(item.ingredient);
     });
 
-    console.log(taken_ingredients);
-
     // filter out ingredients that are already in the shopping list:
     this.ingredientService.getAllIngredients().subscribe( data => {
       this.valid_ingredients = data.filter( ing => {
@@ -95,7 +93,6 @@ export class ShoppinglistAdditemDialogComponent implements OnInit {
         return taken_ingredients.find( taken => taken.id === ing.id ) === undefined;
       });
 
-      console.log(this.valid_ingredients);
       this.setupIngredientFilter();
 
     });
