@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Create New Shopping List</h1>
 <div mat-dialog-content>
 
-  <form novalidate id="sl-create-form" (ngSubmit)="this.onSubmit(shopping_list)" [formGroup]="shopping_list"> 
+  <form novalidate id="sl-create-form" (ngSubmit)="this.onSubmit()" [formGroup]="shopping_list"> 
     <div id="form-container">
       <mat-form-field class="full-width">
         <input placeholder="Enter a Name" matInput formControlName="name">

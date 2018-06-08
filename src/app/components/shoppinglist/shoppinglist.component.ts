@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -20,7 +20,7 @@ import { ShoppinglistAdditemDialogComponent } from '../shoppinglist-additem-dial
 
 @Component({
 	selector: 'app-shoppinglist',
-	  templateUrl: './shoppinglist.component.html',
+	templateUrl: './shoppinglist.component.html',
   styleUrls: ['./shoppinglist.component.css']
 })
 export class ShoppinglistComponent implements OnInit {
@@ -35,8 +35,6 @@ export class ShoppinglistComponent implements OnInit {
   constructor( private shoppingListService: ShoppingListService,
                public createDialog: MatDialog,
                public addItemDialog: MatDialog ) { }
-               // public slVal: ShoppingListValidator */)
-
 
   /*
    * trigger actions on 'init' hook
