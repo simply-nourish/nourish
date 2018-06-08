@@ -11,7 +11,7 @@
              [(ngModel)]="signUpUser.nickname"
              class="validate">
       <label for="nickname">Nickname</label>
-    </div>
+    </div>  <br/>
 
     <div class="input-field col s12">
       <input id="first_name"
@@ -21,7 +21,7 @@
              [(ngModel)]="signUpUser.first_name"
              class="validate">
       <label for="first_name">First Name</label>
-    </div>
+    </div> <br/>
 
     <div class="input-field col s12">
       <input id="last_name"
@@ -31,7 +31,7 @@
              [(ngModel)]="signUpUser.last_name"
              class="validate">
       <label for="last_name">Last Name</label>
-    </div>
+    </div> <br/> <br/>
 
     <div class="input-field col s12">
       <input id="default_servings"
@@ -41,7 +41,7 @@
              [(ngModel)]="signUpUser.default_servings"
              class="validate">
       <label for="default_servings">Default Servings</label>
-    </div>
+    </div> <br/>
 
     <div class="input-field col s12">
       <input id="email"
@@ -51,7 +51,7 @@
              [(ngModel)]="signUpUser.email"
              class="validate">
       <label for="email">Email</label>
-    </div>
+    </div> <br/>
 
 
 
@@ -63,7 +63,7 @@
              [(ngModel)]="signUpUser.password"
              class="validate">
       <label for="password">Password</label>
-    </div>
+    </div> <br/>
 
 
 
@@ -75,14 +75,14 @@
              [(ngModel)]="signUpUser.passwordConfirmation"
              class="validate">
       <label for="password_confirmation">Password confirmation</label>
-    </div>
+    </div> <br/>
 
     <span *ngIf="signUpUser.password != signUpUser.passwordConfirmation"
           style="color:red">
       Passwords must match
     </span>
 
-
+    <br/> <br/> <br/>
     <div class="col s12">
 
       <button type="submit"

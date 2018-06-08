@@ -12,6 +12,10 @@ import 'rxjs/add/operator/map';
 export class ShoppinglistComponent {
     private apiUrl;
 
+  constructor() {
+    
+  }
+
     task = {
       name: '',
       id: 0
