@@ -22,3 +22,7 @@ button.mat-menu-item:hover {
     background-color: #B8AEB8;
     color: #99CCCC !important;
 }
+
+#logo-container {
+    padding-left: 15px;
+}
