@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Add a Meal for {{data.day | titleCase}}</h1>
+<h1 mat-dialog-title class="heading">Add a Meal for {{data.day | titleCase}}</h1>
 <div mat-dialog-content>
     <div>
       <form novalidate id="mpr-update-form" (ngSubmit)="this.onSubmit(meal_plan_recipe)" [formGroup]="meal_plan_recipe">
