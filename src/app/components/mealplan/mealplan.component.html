@@ -19,7 +19,7 @@
         <input placeholder="New Meal Plan" matInput formControlName="new_mealplan">
       </mat-form-field>
   
-      <button [disabled]="!mpForm.valid" mat-button cdkFocusInitial>Add</button>
+      <button [disabled]="!mpForm.valid" mat-button cdkFocusInitial class="btn btn-light btn-block mb-3">Add</button>
     </form>
 
   </mat-sidenav>
@@ -50,7 +50,7 @@
                       
                     <ul class="list-unstyled">                     
                       <li class="card card-body mb-2">
-                        <h2 class="text-center">{{meal.meal | titleCase}}:</h2>
+                        <h2 class="text-center subheading">{{meal.meal | titleCase}}:</h2>
                         <mat-divider [inset]="true"></mat-divider>
                       
                         <app-recipe [id]="meal.recipe_id"></app-recipe>

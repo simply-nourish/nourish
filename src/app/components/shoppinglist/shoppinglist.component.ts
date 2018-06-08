@@ -181,7 +181,7 @@ export class ShoppinglistComponent implements OnInit {
 
   setPurchasedColor(list_item: IngredientShoppingList): string {
     if (list_item.purchased) {
-      return '#f45c42';
+      return '#242A33';
     }
   }
 

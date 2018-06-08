@@ -20,10 +20,12 @@ li {
 }
 
 button {
+    color: white;
     background-color: #B8AEB8;
 }
 
 button:hover, button:focus {
+    color: white;
     background-color: #807980;
 }
 

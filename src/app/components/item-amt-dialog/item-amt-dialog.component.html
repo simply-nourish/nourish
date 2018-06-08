@@ -22,7 +22,7 @@
     </div>
   </form>
   <div id="mat-dialog-footer">
-    <button mat-button (click)="closeDialog()">Cancel</button>
-    <button [disabled]="amount.invalid" form="sl-item-add-form" mat-button cdkFocusInitial>Update Amount</button>
+    <button mat-button (click)="closeDialog()" class="btn btn-light mb-3">Cancel</button>
+    <button [disabled]="amount.invalid" form="sl-item-add-form" mat-button cdkFocusInitial class="btn btn-light mb-3">Update Amount</button>
   </div>
 </div>
