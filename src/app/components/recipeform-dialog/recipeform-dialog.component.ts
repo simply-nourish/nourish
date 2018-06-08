@@ -7,6 +7,7 @@ import { Validators, FormGroup, FormArray, FormBuilder, FormControl } from '@ang
 import { ReactiveFormsModule } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 
+import { MeasureService } from '../../services/measure.service';
 import { IngredientService } from '../../services/ingredient.service';
 
 import { Recipe } from '../../models/Recipe';
@@ -36,7 +37,7 @@ export class RecipeformDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<RecipeformDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public ingredientService: IngredientService) {}
+    public ingredientService: IngredientService, public measureService: MeasureService) {}
 
   ngOnInit() {
     this.recipe_ingredient = new FormGroup({
@@ -44,7 +45,7 @@ export class RecipeformDialogComponent implements OnInit {
       measure: new FormControl('', [Validators.required]),
       ingredient: new FormControl('', [Validators.required])
     });
-
+    this.getMeasures();
     this.getIngredients();
   } 
   
@@ -134,20 +135,19 @@ export class RecipeformDialogComponent implements OnInit {
   }
 
   getMeasures() {
-    console.log("MEASURE SERVICE NEEDED BEFORE ACTIVATING.");
-    // this.measureService.getAllMeasures().subscribe(
-    //   data => {
-    //       console.log('Measure Service data');
-    //       console.log(data);
-    //       this.measures = data;
-    //       console.log(this.measures);
-    //       this.filteredMeasures = this.recipe_ingredient.controls.measure.valueChanges
-    //       .pipe(
-    //         startWith<string | Measure>(''),
-    //         map(value => typeof value === 'string' ? value : value.name),
-    //         map(name => name ? this.filterMeasures(name) : this.measures.slice() )
-    //       ); 
-    //   }
-    // )    
+    this.measureService.getAllMeasures().subscribe(
+      data => {
+          console.log('Measure Service data');
+          console.log(data);
+          this.measures = data;
+          console.log(this.measures);
+          this.filteredMeasures = this.recipe_ingredient.controls.measure.valueChanges
+          .pipe(
+            startWith<string | Measure>(''),
+            map(value => typeof value === 'string' ? value : value.name),
+            map(name => name ? this.filterMeasures(name) : this.measures.slice() )
+          ); 
+      }
+    )    
   }
 }

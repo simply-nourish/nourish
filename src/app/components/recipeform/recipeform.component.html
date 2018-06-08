@@ -30,7 +30,7 @@
         <div>
           
           <ul>
-              <li *ngFor="let recipe_ingredient of recipe.ingredient_recipes">
+              <li *ngFor="let recipe_ingredient of recipeForm.ingredient_recipes">
                 {{ recipe_ingredient.amount }} 
                 {{ recipe_ingredient.measure.name }} 
                 {{ recipe_ingredient.ingredient.name }}
@@ -48,7 +48,9 @@
         </div>
         <div class="clearfix"></div>
 
-     
+     <!--- Log the FormGroup values to see if the binding is working -->
+    <p>Form value {{ recipeForm.value | json }} </p>
+    <p> Form status {{ recipeForm.status | json}} </p>
       </form>
     </div>
   </div>

@@ -3,21 +3,21 @@
     <div>
       <form novalidate id="ri-update-form" (ngSubmit)="this.onSubmit(recipe_ingredient)" [formGroup]="recipe_ingredient">
         <mat-form-field class="full-width">
-            <input matInput #amount formControlName="amount" maxlength="5" placeholder="Choose an Amount" [value]>{{amount}}
+            <input matInput #amount formControlName="amount" maxlength="5" placeholder="Choose an Amount" [value]>
             <mat-hint align="end">Please enter fractions as decimals.
             </mat-hint>
           </mat-form-field>
 
         <mat-form-field class="full-width">
-            <input placeholder="Choose a Measure" matInput [matAutocomplete]="auto" formControlName="measure">
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayMeasures">
+            <input placeholder="Choose a Measure" matInput [matAutocomplete]="automeasure" formControlName="measure">
+            <mat-autocomplete #automeasure="matAutocomplete" [displayWith]="displayMeasures">
               <mat-option *ngFor="let measure of filteredMeasures | async" [value]="measure">{{ measure.name | titleCase }}</mat-option>
             </mat-autocomplete>
           </mat-form-field>
 
         <mat-form-field class="full-width">
-          <input placeholder="Choose an Ingredient" matInput [matAutocomplete]="auto" formControlName="ingredient">
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayIngredients">
+          <input placeholder="Choose an Ingredient" matInput [matAutocomplete]="autoingredient" formControlName="ingredient">
+          <mat-autocomplete #autoingredient="matAutocomplete" [displayWith]="displayIngredients">
             <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">{{ ingredient.name | titleCase }}</mat-option>
           </mat-autocomplete>
         </mat-form-field>
