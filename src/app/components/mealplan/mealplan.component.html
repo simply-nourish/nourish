@@ -2,7 +2,7 @@
 <mat-sidenav-container fullscreen>
   <mat-sidenav #snav mode="side" opened="true" class="meal-plan-sidenav">      
 
-    <h1 class="text-left heading">Meal Plans</h1>
+    <h1 class="text-left dark-heading">Meal Plans</h1>
     <mat-divider></mat-divider>
     <mat-nav-list>
       <ng-container *ngFor="let meal_plan of meal_plans">
@@ -19,7 +19,7 @@
         <input placeholder="New Meal Plan" matInput formControlName="new_mealplan">
       </mat-form-field>
   
-      <button [disabled]="!mpForm.valid" mat-button cdkFocusInitial>Add</button>
+      <button [disabled]="!mpForm.valid" mat-button cdkFocusInitial class="btn btn-light btn-block mb-3">Add</button>
     </form>
 
   </mat-sidenav>
@@ -29,7 +29,7 @@
     <div *ngIf="selected_mp">
       <mat-card class="meal-plan-card">
         <mat-card-content>
-          <div class="mealtitle">
+          <div class="mealtitle heading">
               
             <h1>{{selected_mp.name}}
               <small>
@@ -50,7 +50,7 @@
                       
                     <ul class="list-unstyled">                     
                       <li class="card card-body mb-2">
-                        <h2 class="text-center">{{meal.meal | titleCase}}:</h2>
+                        <h2 class="text-center subheading">{{meal.meal | titleCase}}:</h2>
                         <mat-divider [inset]="true"></mat-divider>
                       
                         <app-recipe [id]="meal.recipe_id"></app-recipe>

@@ -20,7 +20,7 @@
       </form>
     </div>
 
-    <button mat-button (click)="onClose()">Cancel</button>
-    <button [disabled]="meal_plan_recipe.invalid" form="mpr-update-form" mat-button cdkFocusInitial>Add</button>
+    <button mat-button (click)="onClose()" class="btn btn-light mb-3">Cancel</button>
+    <button [disabled]="meal_plan_recipe.invalid" form="mpr-update-form" mat-button cdkFocusInitial class="btn btn-light mb-3">Add</button>
 
 </div>

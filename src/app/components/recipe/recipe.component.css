@@ -20,9 +20,17 @@ li {
 }
 
 button {
+    color: white;
     background-color: #B8AEB8;
 }
 
 button:hover, button:focus {
+    color: white;
     background-color: #807980;
+}
+
+.recipe-card {
+    padding-left: 15px;
+    padding-bottom: 15px;
+    background-color: white;
 }

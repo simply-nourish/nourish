@@ -11,10 +11,12 @@ h2 {
 button {
     padding: 5px;
     margin: 5px;
+    color: white;
     background-color: #B8AEB8;
 }
 
 button:hover, button:focus {
+    color: white;
     background-color: #807980;
 }
 
@@ -23,6 +25,7 @@ button:hover, button:focus {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    border-radius: 5px;
 }
 
 #button-container {
