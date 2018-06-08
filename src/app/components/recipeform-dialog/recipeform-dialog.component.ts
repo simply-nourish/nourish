@@ -13,7 +13,7 @@ import { IngredientService } from '../../services/ingredient.service';
 import { Recipe } from '../../models/Recipe';
 import { Measure } from '../../models/Measure';
 import { Ingredient } from '../../models/Ingredient';
-import { RecipeIngredient } from '../../models/RecipeIngredient';
+import { IngredientRecipe } from '../../models/IngredientRecipe';
 
 import { TitleCasePipe } from '../../pipes/title-case.pipe';
 

@@ -7,9 +7,9 @@
 		
 		<li class="list-group-item">{{recipe.summary}}</li>
 			
-		<ul class="borderless list-group" *ngIf="recipe.ingredient_recipes">
+		<ul class="borderless list-group" *ngIf="recipe.ingredient_recipes_attributes">
 			<h2>Ingredients:</h2>
-			<li class="list-group-item" *ngFor="let item of recipe.ingredient_recipes"> {{item.amount}} {{item.measure.name}} {{item.ingredient.name | titleCase}} </li>
+			<li class="list-group-item" *ngFor="let item of recipe.ingredient_recipes_attributes"> {{item.amount}} {{item.measure.name}} {{item.ingredient.name | titleCase}} </li>
 		</ul>
 
 		<h2>Instructions:</h2>

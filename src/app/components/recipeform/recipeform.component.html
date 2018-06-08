@@ -22,20 +22,21 @@
         </div>
         <div>
           <mat-form-field class="full-width">
-            <mat-select placeholder="Dietary Restrictions" [formControl]="recipe.dietary_restriction_recipes" multiple>
+            <mat-select placeholder="Dietary Restrictions" [formControl]="recipe.dietary_restriction_recipes_attributes" multiple>
               <mat-option *ngFor="let restriction of restrictions" [value]="restrictions">{{restriction.id}} {{ restriction.name}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <div>
-          
+<!--    
           <ul>
-              <li *ngFor="let ri of recipeForm.ingredient_recipes">
+              <li *ngFor="let ri of recipeForm.ingredient_recipes_attributes">
                 {{ ri.amount }} 
                 {{ ri.measure.name }} 
                 {{ ri.ingredient.name }}
               </li>
             </ul>
+-->
             <button (click)="openDialog(recipe)" class="btn btn-light btn-block mb-3">Add Ingredient</button>
         </div>
         <div>

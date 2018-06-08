@@ -1,10 +1,7 @@
 // https://www.npmjs.com/package/json2typescript
 
-import {JsonObject, JsonProperty} from "json2typescript";
-
-import { RecipeIngredient } from './RecipeIngredient';
+import {JsonObject, JsonProperty} from 'json2typescript';
 import { RecipeUser } from './RecipeUser';
-
 
 @JsonObject
 export class RecipeSummary {

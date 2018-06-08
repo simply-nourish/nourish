@@ -3,10 +3,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
-import {Angular2TokenService} from "angular2-token";
-import {AuthService} from "./auth.service";
+import {Angular2TokenService} from 'angular2-token';
+import {AuthService} from './auth.service';
 import { Recipe } from '../models/Recipe';
-import {JsonConvert, OperationMode, ValueCheckingMode} from "json2typescript";
+import {JsonConvert, OperationMode, ValueCheckingMode} from 'json2typescript';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -32,7 +32,7 @@ export class RecipeService {
         }).catch(this.handleError);
   }
 
-  // GET /users/:user_id/recipes/:id
+  // GET /recipes/:id
   public getUserRecipeById(recipeID: number) {
     return this.authTokenService.get('/recipes/' + recipeID)
     .map(
@@ -58,15 +58,14 @@ export class RecipeService {
     return this.authTokenService.post('users/' + this.userID + '/recipes', recipe)
     .map(
       res => {
-        let recipe: Recipe;
-        recipe = this.jsonConvert.deserialize(res.json(), Recipe);
-        return recipe;
+        return this.jsonConvert.deserialize(res.json(), Recipe);
       }
     ).catch(this.handleError);
   }
 
   //PUT /users/:user_id/recipes/:id
   //id is not yet an attribute of recipe model
+/*
   public updateRecipe(recipe: Recipe): Observable<Recipe> {
     return this.authTokenService.put('/users/' + this.userID + '/recipes/' + recipe.id, recipe).map(
       res => {
@@ -74,6 +73,7 @@ export class RecipeService {
       }
     ).catch(this.handleError);
   }
+*/
 
   // DELETE /recipes/:id
   public deleteRecipe(recipeID: number): Observable<null> {
@@ -87,5 +87,3 @@ export class RecipeService {
     return Observable.throw(error);
   }
 }
-
-

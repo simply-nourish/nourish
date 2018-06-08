@@ -1,10 +1,10 @@
 // https://www.npmjs.com/package/json2typescript
 
-import {JsonObject, JsonProperty} from "json2typescript";
+import {JsonObject, JsonProperty} from 'json2typescript';
 
-import { RecipeIngredient } from './RecipeIngredient';
 import { DietaryRestrictionRecipe } from './DietaryRestrictionRecipe';
 import { RecipeUser } from './RecipeUser';
+import { IngredientRecipe } from './IngredientRecipe';
 
 
 @JsonObject
@@ -26,14 +26,13 @@ export class Recipe {
   @JsonProperty('instructions', String)
   instructions: string = undefined;
 
-  @JsonProperty('ingredient_recipes', [RecipeIngredient])
-  ingredient_recipes: RecipeIngredient[] = undefined;
+  @JsonProperty('ingredient_recipes', [IngredientRecipe])
+  ingredient_recipes_attributes: IngredientRecipe[] = undefined;
 
   @JsonProperty('dietary_restriction_recipes', [DietaryRestrictionRecipe])
-  dietary_restriction_recipes: DietaryRestrictionRecipe [] = undefined;
+  dietary_restriction_recipes_attributes: DietaryRestrictionRecipe [] = undefined;
 
   @JsonProperty('user', RecipeUser)
   user: RecipeUser = undefined;
-  hide?: true;
 
 }

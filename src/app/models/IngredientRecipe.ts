@@ -1,10 +1,10 @@
-import {JsonObject, JsonProperty} from "json2typescript";
+import {JsonObject, JsonProperty} from 'json2typescript';
 
 import { Measure } from './Measure';
 import { Ingredient } from './Ingredient';
 
 @JsonObject
-export class RecipeIngredient {
+export class IngredientRecipe {
 
   @JsonProperty('id', Number)
   id: number = undefined;

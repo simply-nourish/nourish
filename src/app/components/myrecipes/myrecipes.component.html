@@ -10,7 +10,7 @@ Create New Recipe
     </h4>
         <ul class="list-group"  *ngIf="!recipe.hide"> 
             <li class="list-group-item"> {{recipe.summary}}</li>
-	        <li class="list-group-item" *ngFor="let item of recipe.ingredient_recipes"> {{item.amount}} {{item.measure.name}} {{item.ingredient.name}} </li>
+	        <li class="list-group-item" *ngFor="let item of recipe.ingredient_recipes_attributes"> {{item.amount}} {{item.measure.name}} {{item.ingredient.name}} </li>
 	        <li class="list-group-item"> {{recipe.instructions}}</li> 
         </ul>
         
