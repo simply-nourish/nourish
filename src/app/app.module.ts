@@ -17,7 +17,6 @@ import {SlideshowModule} from 'ng-simple-slideshow';
 import {AuthService} from "./services/auth.service";
 import {AuthGuard} from "./guards/auth.guard";
 import { PagerService } from './services/pager.service';
-import { RecipeService} from './services/recipe.service';
 
 import { AppComponent } from './app.component';
 

@@ -1,15 +1,15 @@
 
 <!--  carousel-slider -->
-<div id="container" class="carousel carousel-slider center" data-indicators="true" materialize="carousel" [materializeActions]="carouselActions">
+<div id="carousel" class="carousel carousel-slider center" data-indicators="true" materialize="carousel" [materializeActions]="carouselActions">
        <div class="carousel-fixed-item white-text" id="left">
-      <a (click)="prev()">
+      <div class="button1"> <a (click)="prev()">
         <i class="fa fa-arrow-left"></i>
-        </a> 
+        </a> </div>
     </div>
     <div class="carousel-fixed-item white-text" id="right">
-         <a (click)="next()">
+         <div class="button2"> <a (click)="next()">
         <i class="fa fa-arrow-right"></i>
-        </a> 
+        </a> </div>
     </div>
 
     <div class="carousel-item red white-text" id="image1" href="#one!">
@@ -28,4 +28,4 @@
       <h2>Make Shopping Easier</h2>
        <p class="white-text">Generate a shopping list based on your meal plan</p>
     </div>
-  </div>
+</div>
