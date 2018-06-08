@@ -53,7 +53,6 @@ import { RecipeService } from './services/recipe.service';
 import { IngredientService } from './services/ingredient.service';
 import { DietaryRestrictionService } from './services/dietary-restriction.service';
 import { SelectIngredientComponent } from './components/select-ingredient/select-ingredient.component';
-<<<<<<< HEAD
 import { MealPlanService } from './services/meal-plan.service';
 import { ShoppingListService } from './services/shopping-list.service';
 import { MeasureService } from './services/measure.service';
@@ -68,9 +67,7 @@ import { ItemAmtDialogComponent } from './components/item-amt-dialog/item-amt-di
 import { ShoppingListValidator } from './validators/shopping-list-validator.validator';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { RecipeformDialogComponent } from './components/recipeform-dialog/recipeform-dialog.component';
-=======
 import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
->>>>>>> update-profile
 
 @NgModule({
   declarations: [
@@ -92,7 +89,6 @@ import { UpdateProfileComponent } from './components/update-profile/update-profi
     MealplanComponent,
     SidenavComponent,
     SelectIngredientComponent,
-<<<<<<< HEAD
     TitleCasePipe,
     MealplanDialogComponent,
     RecipeformDialogComponent,
@@ -100,10 +96,8 @@ import { UpdateProfileComponent } from './components/update-profile/update-profi
     ShoppinglistAdditemDialogComponent,
     ShoppinglistItemComponent,
     ItemAmtDialogComponent,
-    CarouselComponent
-=======
+    CarouselComponent,
     UpdateProfileComponent
->>>>>>> update-profile
   ],
   imports: [
     BrowserModule,
