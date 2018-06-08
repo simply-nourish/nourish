@@ -4,7 +4,7 @@
  
   <div id="button-container" *ngIf="!(list_item.purchased); else remove">
     <button (click)="itemPurchased()" class="float-right btn-light mb-3">Purchased</button>
-    <button class="float-right btn-light mb-3">Change Amount</button>
+    <button (click)="activateAdjustAmountDialog()" class="float-right btn-light mb-3">Change Amount</button>
   </div>
 
   <ng-template #remove>

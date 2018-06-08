@@ -130,42 +130,44 @@ export class ShoppingListService {
    * mark ingredient as purchased
    */
 
-  markItemAsPurchased( existing_list: ShoppingList,
-                   list_item: IngredientShoppingList ) {
+  markItemAsPurchased( existing_list_id: number,
+                       list_item_id: number ) {
 
     // build our shopping list request manually, setting ID and purchased
     const shopping_list = {
       shopping_list: {
         ingredient_shopping_lists_attributes: [{
-          id: list_item.id,
+          id: list_item_id,
           purchased: true,
         }]
       }
     };
 
     console.log(shopping_list);
-
-    return this.updateListItem(existing_list.id, shopping_list);
+    return this.updateListItem(existing_list_id, shopping_list);
   }
 
   /*
    * update ingredient amount
    */
 
-  updateIngredientAmount( existing_list: ShoppingList,
-                          list_item: IngredientShoppingList ) {
+  updateIngredientAmount( existing_list_id: number,
+                          list_item_id: number,
+                          amount: number ) {
 
     // build our shopping list request manually, setting ID and purchased
     const shopping_list = {
       shopping_list: {
         ingredient_shopping_lists_attributes: [{
-          id: list_item.id,
-          amount: list_item.amount,
+          id: list_item_id,
+          amount: amount,
         }]
       }
     };
 
-    return this.updateListItem(existing_list.id, shopping_list);
+    console.log(shopping_list);
+
+    return this.updateListItem(existing_list_id, shopping_list);
 
   }
 
@@ -173,20 +175,20 @@ export class ShoppingListService {
    * delete ingredient from the list
    */
 
-  deleteIngredient( existing_list: ShoppingList,
-                    list_item: IngredientShoppingList ) {
+  deleteIngredient( existing_list_id: number,
+                    list_item_id: number ) {
 
     // build our shopping list request manually, setting ID and purchased
     const shopping_list = {
       shopping_list: {
         ingredient_shopping_lists_attributes: [{
-          id: list_item.id,
+          id: list_item_id,
           _destroy: true,
         }]
       }
     };
 
-    return this.updateListItem(existing_list.id, shopping_list);
+    return this.updateListItem(existing_list_id, shopping_list);
 
   }
 

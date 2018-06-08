@@ -59,9 +59,9 @@ export class ShoppinglistAdditemDialogComponent implements OnInit {
 
     // create our form group
     this.list_item = new FormGroup({
-      ingredient: new FormControl('', [Validators.required, Validators.min(0.01), Validators.max(9999)]),
+      ingredient: new FormControl('', [Validators.required]),
       measure: new FormControl('', [Validators.required]),
-      amount: new FormControl('', [Validators.required])
+      amount: new FormControl('', [Validators.required, Validators.min(0.01), Validators.max(9999)])
     });
 
     // fetch / initialize list of valid measures + ingredients

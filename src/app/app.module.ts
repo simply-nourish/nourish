@@ -60,6 +60,7 @@ import { MealPlanValidator } from './validators/mealplan-validator.validator';
 import { ShoppinglistDialogComponent } from './components/shoppinglist-dialog/shoppinglist-dialog.component';
 import { ShoppinglistAdditemDialogComponent } from './components/shoppinglist-additem-dialog/shoppinglist-additem-dialog.component';
 import { ShoppinglistItemComponent } from './components/shoppinglist-item/shoppinglist-item.component';
+import { ItemAmtDialogComponent } from './components/item-amt-dialog/item-amt-dialog.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { ShoppinglistItemComponent } from './components/shoppinglist-item/shoppi
     MealplanDialogComponent,
     ShoppinglistDialogComponent,
     ShoppinglistAdditemDialogComponent,
-    ShoppinglistItemComponent
+    ShoppinglistItemComponent,
+    ItemAmtDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -131,7 +133,8 @@ import { ShoppinglistItemComponent } from './components/shoppinglist-item/shoppi
   entryComponents: [
     MealplanDialogComponent,
     ShoppinglistDialogComponent,
-    ShoppinglistAdditemDialogComponent
+    ShoppinglistAdditemDialogComponent,
+    ItemAmtDialogComponent
   ]
 })
 export class AppModule { }

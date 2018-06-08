@@ -5,6 +5,13 @@ import {IngredientShoppingList} from '../../models/IngredientShoppingList';
 
 import {TitleCasePipe} from '../../pipes/title-case.pipe';
 
+import { MatInputModule, MatFormField, MatAutocompleteModule, MatAutocompleteTrigger,
+         MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Validators, FormGroup, FormArray, FormBuilder,
+         FormControl, ReactiveFormsModule, AbstractControl } from '@angular/forms';
+
+import { ItemAmtDialogComponent } from '../item-amt-dialog/item-amt-dialog.component';
+
 @Component({
   selector: 'app-shoppinglist-item',
   templateUrl: './shoppinglist-item.component.html',
@@ -18,23 +25,37 @@ export class ShoppinglistItemComponent implements OnInit {
   @Output() amountAdjustedEvent = new EventEmitter<any>();
   @Output() itemRemovedEvent = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(public adjustDialog: MatDialog) { }
 
   ngOnInit() { }
 
   itemPurchased() {
-    console.log('item purchased');
-    this.purchasedEvent.emit( this.list_item );
+    this.purchasedEvent.emit( this.list_item.id );
   }
 
-  itemAmountAdjusted() {
+  itemAmountAdjusted(amount: number) {
+
     console.log('amount adjusted');
-    this.amountAdjustedEvent.emit( this.list_item ) ;
+    this.amountAdjustedEvent.emit( {id: this.list_item.id, amount: amount } );
   }
 
   itemRemoved() {
-    console.log('item removed');
-    this.itemRemovedEvent.emit( this.list_item );
+    this.itemRemovedEvent.emit( this.list_item.id );
+  }
+
+  activateAdjustAmountDialog(): void {
+
+    const dialogRef = this.adjustDialog.open(ItemAmtDialogComponent, {
+      width: '350px',
+      data: this.list_item
+    });
+
+    dialogRef.afterClosed().subscribe( result => {
+      console.log(result);
+      if ( result != null ) {
+        this.itemAmountAdjusted(result.amount);
+      }
+    });
   }
 
 }
