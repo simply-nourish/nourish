@@ -2,7 +2,7 @@
 <div mat-dialog-content>
 
   <div id="mat-dialog-header">
-    <h1 mat-dialog-title>Add Item to Shopping List</h1>
+    <h1 mat-dialog-title class="heading">Add Item to Shopping List</h1>
   </div>
 
   <form novalidate id="sl-item-add-form" (ngSubmit)="this.onSubmit()" [formGroup]="list_item"> 
@@ -29,7 +29,7 @@
     </div>
   </form>
   <div id="mat-dialog-footer">
-    <button mat-button (click)="closeDialog()">Cancel</button>
-    <button [disabled]="list_item.invalid" form="sl-item-add-form" mat-button cdkFocusInitial>Add to List</button>
+    <button mat-button (click)="closeDialog()" class="btn btn-light mb-3">Cancel</button>
+    <button [disabled]="list_item.invalid" form="sl-item-add-form" mat-button cdkFocusInitial class="btn btn-light mb-3">Add to List</button>
   </div>
 </div>

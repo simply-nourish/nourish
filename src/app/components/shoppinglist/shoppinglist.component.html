@@ -2,19 +2,21 @@
     <mat-sidenav-container fullscreen>
       <mat-sidenav #snav mode="side" opened="true" class="shopping-list-sidenav">      
     
-        <h1 class="text-left">Shopping Lists</h1>
+        <h1 class="text-left dark-heading">Shopping Lists</h1>
         <mat-divider></mat-divider>
 
         <mat-nav-list>
           <ng-container *ngFor="let shopping_list of shopping_lists">
-           <mat-list-item (click)="selectShoppingList(shopping_list)" role="listitem">
+            <div class="heading">
+           <mat-list-item (click)="selectShoppingList(shopping_list)" role="listitem" >
               {{shopping_list.name}}
             </mat-list-item>
+          </div>
           </ng-container>
         </mat-nav-list>
 
         <div id="button-container">
-          <button (click)="activateCreateDialog()" mat-button float-right cdkFocusInitial>Create New</button>
+          <button (click)="activateCreateDialog()" mat-button  float-right cdkFocusInitial class="btn btn-light btn-block mb-3">Create New</button>
         </div>
 
       </mat-sidenav>
@@ -27,8 +29,8 @@
     
             <div id="listname">
               <div>
-                <h1 id="sl-name">{{selected_sl.name}}</h1>
-                <h2 id="sl-meal_plan">Created from Meal Plan: {{selected_sl.meal_plan.name}}</h2>
+                <h1 class="heading" id="sl-name">{{selected_sl.name}}</h1>
+                <h2 class="subheading" id="sl-meal_plan">Created from Meal Plan: {{selected_sl.meal_plan.name}}</h2>
               </div>
               <small>
                 <button (click)="deleteShoppingList(selected_sl)" class="delete float-right btn btn-dark btn-sm">Delete</button>
