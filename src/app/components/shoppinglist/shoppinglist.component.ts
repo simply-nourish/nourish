@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -19,8 +19,8 @@ import { ShoppinglistDialogComponent } from '../shoppinglist-dialog/shoppinglist
 import { ShoppinglistAdditemDialogComponent } from '../shoppinglist-additem-dialog/shoppinglist-additem-dialog.component';
 
 @Component({
-  selector: 'app-shoppinglist',
-  templateUrl: './shoppinglist.component.html',
+	selector: 'app-shoppinglist',
+	  templateUrl: './shoppinglist.component.html',
   styleUrls: ['./shoppinglist.component.css']
 })
 export class ShoppinglistComponent implements OnInit {
@@ -238,5 +238,5 @@ export class ShoppinglistComponent implements OnInit {
       });
 
   }
-
+  
 }
