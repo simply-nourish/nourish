@@ -21,6 +21,8 @@ import { ShoppingList } from '../../models/ShoppingList';
 import { MealplanDialogComponent } from '../mealplan-dialog/mealplan-dialog.component';
 import { MealPlanService } from '../../services/meal-plan.service';
 
+import { ShoppingListValidator } from '../../validators/shopping-list-validator.validator';
+
 @Component({
   selector: 'app-shoppinglist-dialog',
   templateUrl: './shoppinglist-dialog.component.html',
@@ -38,12 +40,13 @@ export class ShoppinglistDialogComponent implements OnInit {
 
   constructor( public dialogRef: MatDialogRef<MealplanDialogComponent>,
                @Inject(MAT_DIALOG_DATA) public data: any,
-               public mealPlanService: MealPlanService ) { }
+               public mealPlanService: MealPlanService,
+               public slVal: ShoppingListValidator ) { }
 
   ngOnInit() {
     // create form group
     this.shopping_list = new FormGroup({
-      name: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required], this.slVal.ValidateShoppingList.bind(this.slVal)),
       meal_plan: new FormControl('', [Validators.required, ValidateMealPlanName])
     });
 

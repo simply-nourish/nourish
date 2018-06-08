@@ -23,8 +23,8 @@ import { MatAutocompleteModule,
          MatDialogModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { AuthService } from "./services/auth.service";
-import { AuthGuard } from "./guards/auth.guard";
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 
 import { AppComponent } from './app.component';
 
@@ -61,6 +61,7 @@ import { ShoppinglistDialogComponent } from './components/shoppinglist-dialog/sh
 import { ShoppinglistAdditemDialogComponent } from './components/shoppinglist-additem-dialog/shoppinglist-additem-dialog.component';
 import { ShoppinglistItemComponent } from './components/shoppinglist-item/shoppinglist-item.component';
 import { ItemAmtDialogComponent } from './components/item-amt-dialog/item-amt-dialog.component';
+import { ShoppingListValidator } from './validators/shopping-list-validator.validator';
 
 @NgModule({
   declarations: [
@@ -125,7 +126,8 @@ import { ItemAmtDialogComponent } from './components/item-amt-dialog/item-amt-di
     ShoppingListService,
     MeasureService,
     TitleCasePipe,
-    MealPlanValidator
+    MealPlanValidator,
+    ShoppingListValidator
   ],
   bootstrap: [
     AppComponent
