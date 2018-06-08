@@ -132,7 +132,8 @@ import { RecipeformDialogComponent } from './components/recipeform-dialog/recipe
     AppComponent
   ],
   entryComponents: [
-    MealplanDialogComponent
+    MealplanDialogComponent,
+    RecipeformDialogComponent
   ]
 })
 export class AppModule { }
