@@ -96,48 +96,14 @@ export class RecipeformComponent implements OnInit {
 
     }
 
-
-    // initIngredient() {
-    //     return this._fb.group({
-    //         ingredient: ['', Validators.required],
-    //         amount: [''],
-    //         measure: ['']
-    //     });
-    // }
-    
-    // initRestriction() {
-    //     return this._fb.group({
-    //         restriction: ['', Validators.required],
-    //     });
-    // }
-    
-    // addIngredient(){
-    //     const control = <FormArray>this.recipeForm.controls['recipe_ingredients'];
-    //     control.push(this.initIngredient());
-    // }
-
-    // addRestriction(){
-    //     const control = <FormArray>this.recipeForm.controls['restrictions'];
-    //     control.push(this.initRestriction());
-    // }
-    
-    // removeIngredient(i: number){
-    //     const control = <FormArray>this.recipeForm.controls['ingredients'];
-    //     control.removeAt(i);
-    // }
-
-    // removeRestriction(i: number){
-    //     const control = <FormArray>this.recipeForm.controls['restrictions'];
-    //     control.removeAt(i);
-    // }
-
-
     save(model: Recipe) {
         // call API to save
+        console.log(this.recipe);
         console.log(model);
         this.recipeService.createRecipe(model).subscribe(
             data => {
                 console.log(data);
+                // this is just for testing:
                 this.recipeService.getUserRecipes().subscribe(
                     recipe_data => {
                         console.log(recipe_data);
