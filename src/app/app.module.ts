@@ -20,7 +20,8 @@ import { MatAutocompleteModule,
          MatSidenavModule,
          MatToolbarModule,
          MatListModule,
-         MatDialogModule } from '@angular/material';
+         MatDialogModule,
+         MatSelectModule } from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import {SlideshowModule} from 'ng-simple-slideshow';
 
@@ -100,12 +101,14 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+    MatFormFieldModule,
     MatSidenavModule,
     MatDialogModule,
     MatRadioModule,
     MatListModule,
     MatInputModule,
     MatTabsModule,
+    MatAutocompleteModule,
     MaterialAppModule,
     HttpModule,
     HttpClientModule,
@@ -116,7 +119,8 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     MatFormFieldModule,
     MatAutocompleteModule,
     CalendarModule.forRoot(),
-    SlideshowModule
+    SlideshowModule,
+    MatSelectModule
   ],
   providers: [
     Angular2TokenService,

@@ -4,6 +4,7 @@ h1 {
   
 h2 {
   font-size: 24px;
+  text-align: center; 
 }
 
 .h4 {
@@ -43,5 +44,13 @@ mat-sidenav-container {
 }
 
 #sl-meal_plan {
-  padding-top: 3px;
+  padding-top: 3px;   
+}
+
+button {
+    background-color: #B8AEB8;
+}
+
+button:hover {
+    background-color: #B8AEB8;
 }
