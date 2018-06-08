@@ -126,6 +126,10 @@ export class RecipeformComponent implements OnInit {
 
   }
 
+  onSubmit() {
+    console.log(this.recipe);
+    console.log(this.recipeForm.value);
+  }
   /*
 
     save(model: Recipe) {

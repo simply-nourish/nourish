@@ -4,7 +4,7 @@
       <div class="margin-20">
         <h4>Add Recipe</h4>
       </div>
-      <form [formGroup]="recipeForm" id="new-recipe-form" novalidate (ngSubmit)="save(recipeForm['name'])">
+      <form [formGroup]="recipeForm" id="new-recipe-form" novalidate (ngSubmit)="onSubmit">
         <div>
           <mat-form-field class="full-width">
             <input matInput placeholder="Recipe Name" matInput formControlName="title">
