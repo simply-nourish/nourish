@@ -55,7 +55,7 @@ export class RecipeService {
 
   // POST /users/:id/recipes
   public createRecipe(recipe: Recipe): Observable<Recipe> {
-    return this.authTokenService.post('/users/' + this.userID + '/recipes', recipe)
+    return this.authTokenService.post('users/' + this.userID + '/recipes', recipe)
     .map(
       res => {
         let recipe: Recipe;
