@@ -16,3 +16,7 @@ button:hover, button:focus {
   color: #99CCCC;
   /* color: #242A33; */
 }
+
+.dark-heading {
+  color: #6b8e8e;
+}

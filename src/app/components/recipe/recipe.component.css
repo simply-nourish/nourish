@@ -26,3 +26,9 @@ button {
 button:hover, button:focus {
     background-color: #807980;
 }
+
+.recipe-card {
+    padding-left: 15px;
+    padding-bottom: 15px;
+    background-color: white;
+}

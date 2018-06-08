@@ -2,7 +2,7 @@
 <mat-sidenav-container fullscreen>
   <mat-sidenav #snav mode="side" opened="true" class="meal-plan-sidenav">      
 
-    <h1 class="text-left heading">Meal Plans</h1>
+    <h1 class="text-left dark-heading">Meal Plans</h1>
     <mat-divider></mat-divider>
     <mat-nav-list>
       <ng-container *ngFor="let meal_plan of meal_plans">
@@ -29,7 +29,7 @@
     <div *ngIf="selected_mp">
       <mat-card class="meal-plan-card">
         <mat-card-content>
-          <div class="mealtitle">
+          <div class="mealtitle heading">
               
             <h1>{{selected_mp.name}}
               <small>
