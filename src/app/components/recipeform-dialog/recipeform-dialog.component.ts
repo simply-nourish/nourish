@@ -41,7 +41,7 @@ export class RecipeformDialogComponent implements OnInit {
 
   ngOnInit() {
     this.recipe_ingredient = new FormGroup({
-      amount: new FormControl('', [Validators.required]),
+      amount: new FormControl('', [Validators.required, Validators.min(0.01), Validators.max(9999)]),
       measure: new FormControl('', [Validators.required]),
       ingredient: new FormControl('', [Validators.required])
     });
@@ -92,10 +92,12 @@ export class RecipeformDialogComponent implements OnInit {
    *  pass data back to parent component, and close
    */
 
-  onSubmit(meal_plan_recipe: FormGroup) {
-    const data = {  amount: this.recipe_ingredient.controls.amount.value,
-                    measure: this.recipe_ingredient.controls.measure.value,
-                    ingredient: this.recipe_ingredient.controls.ingredient.value };
+  onSubmit() {
+    const data = {  
+      amount: this.recipe_ingredient.controls.amount.value,
+      measure: this.recipe_ingredient.controls.measure.value,
+      ingredient: this.recipe_ingredient.controls.ingredient.value 
+    };
     this.dialogRef.close(data);
   }
 

@@ -30,10 +30,10 @@
         <div>
           
           <ul>
-              <li *ngFor="let recipe_ingredient of recipeForm.ingredient_recipes">
-                {{ recipe_ingredient.amount }} 
-                {{ recipe_ingredient.measure.name }} 
-                {{ recipe_ingredient.ingredient.name }}
+              <li *ngFor="let ri of recipeForm.ingredient_recipes">
+                {{ ri.amount }} 
+                {{ ri.measure.name }} 
+                {{ ri.ingredient.name }}
               </li>
             </ul>
             <button (click)="openDialog(recipe)" class="btn btn-light btn-block mb-3">Add Ingredient</button>

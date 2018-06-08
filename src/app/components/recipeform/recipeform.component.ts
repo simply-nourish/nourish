@@ -90,7 +90,6 @@ export class RecipeformComponent implements OnInit {
             new_ri.amount = result.amount;
             new_ri.measure = result.measure;
             new_ri.ingredient = result.ingredient;
-
             this.recipe.ingredient_recipes.push(new_ri);
         });
 

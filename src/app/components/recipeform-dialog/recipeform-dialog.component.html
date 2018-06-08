@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Add a Ingredient for {{ data.recipe.title || 'Recipe' }}</h1>
 <div mat-dialog-content>
     <div>
-      <form novalidate id="ri-update-form" (ngSubmit)="this.onSubmit(recipe_ingredient)" [formGroup]="recipe_ingredient">
+      <form novalidate id="ri-update-form" (ngSubmit)="this.onSubmit()" [formGroup]="recipe_ingredient">
         <mat-form-field class="full-width">
             <input matInput #amount formControlName="amount" maxlength="5" placeholder="Choose an Amount" [value]>
             <mat-hint align="end">Please enter fractions as decimals.
