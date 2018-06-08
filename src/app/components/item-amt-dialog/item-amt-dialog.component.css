@@ -1,0 +1,10 @@
+#amount-display {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#amount-measure {
+    margin-left: 5px;
+    padding-left: 3px;
+}

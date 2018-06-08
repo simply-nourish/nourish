@@ -25,8 +25,8 @@ import { MatAutocompleteModule,
 import {MatTabsModule} from '@angular/material/tabs';
 import {SlideshowModule} from 'ng-simple-slideshow';
 
-import { AuthService } from "./services/auth.service";
-import { AuthGuard } from "./guards/auth.guard";
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 
 import { AppComponent } from './app.component';
 
@@ -54,13 +54,19 @@ import { IngredientService } from './services/ingredient.service';
 import { DietaryRestrictionService } from './services/dietary-restriction.service';
 import { SelectIngredientComponent } from './components/select-ingredient/select-ingredient.component';
 import { MealPlanService } from './services/meal-plan.service';
+import { ShoppingListService } from './services/shopping-list.service';
+import { MeasureService } from './services/measure.service';
 
 import { TitleCasePipe } from './pipes/title-case.pipe';
 import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-dialog.component';
 import { MealPlanValidator } from './validators/mealplan-validator.validator';
+import { ShoppinglistDialogComponent } from './components/shoppinglist-dialog/shoppinglist-dialog.component';
+import { ShoppinglistAdditemDialogComponent } from './components/shoppinglist-additem-dialog/shoppinglist-additem-dialog.component';
+import { ShoppinglistItemComponent } from './components/shoppinglist-item/shoppinglist-item.component';
+import { ItemAmtDialogComponent } from './components/item-amt-dialog/item-amt-dialog.component';
+import { ShoppingListValidator } from './validators/shopping-list-validator.validator';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { RecipeformDialogComponent } from './components/recipeform-dialog/recipeform-dialog.component';
-
 
 @NgModule({
   declarations: [
@@ -84,8 +90,12 @@ import { RecipeformDialogComponent } from './components/recipeform-dialog/recipe
     SelectIngredientComponent,
     TitleCasePipe,
     MealplanDialogComponent,
-    CarouselComponent,
-    RecipeformDialogComponent
+    RecipeformDialogComponent,
+    ShoppinglistDialogComponent,
+    ShoppinglistAdditemDialogComponent,
+    ShoppinglistItemComponent,
+    ItemAmtDialogComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -125,15 +135,21 @@ import { RecipeformDialogComponent } from './components/recipeform-dialog/recipe
     IngredientService,
     DietaryRestrictionService,
     MealPlanService,
+    ShoppingListService,
+    MeasureService,
     TitleCasePipe,
-    MealPlanValidator
+    MealPlanValidator,
+    ShoppingListValidator
   ],
   bootstrap: [
     AppComponent
   ],
   entryComponents: [
     MealplanDialogComponent,
-    RecipeformDialogComponent
+    RecipeformDialogComponent,
+    ShoppinglistDialogComponent,
+    ShoppinglistAdditemDialogComponent,
+    ItemAmtDialogComponent
   ]
 })
 export class AppModule { }
