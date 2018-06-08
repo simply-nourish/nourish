@@ -1,58 +1,111 @@
 <div class="container">
   <div class="row">
     <div class="col s12">
+
       <div class="margin-20">
-        <h4>Add Recipe</h4>
+        <h4>Create A Recipe</h4>
       </div>
-      <form [formGroup]="recipeForm" id="new-recipe-form" novalidate (ngSubmit)="save(recipeForm['name'])">
+
+      <form [formGroup]="recipeForm" id="new-recipe-form" (ngSubmit)="onSubmit()">
+
         <div>
           <mat-form-field class="full-width">
             <input matInput placeholder="Recipe Name" matInput formControlName="title">
           </mat-form-field>
         </div>
+     
         <div>
           <mat-form-field class="full-width">
             <textarea matInput placeholder="Summary" formControlName="summary"></textarea>
           </mat-form-field>
         </div>
+        
         <div>
-        <mat-form-field class="full-width">
+          <mat-form-field class="full-width">
             <input matInput placeholder="Servings" matInput formControlName="servings">
           </mat-form-field>
         </div>
+
         <div>
           <mat-form-field class="full-width">
-            <mat-select placeholder="Dietary Restrictions" [formControl]="recipe.dietary_restriction_recipes_attributes" multiple>
-              <mat-option *ngFor="let restriction of restrictions" [value]="restrictions">{{restriction.id}} {{ restriction.name}}</mat-option>
+            <textarea matInput placeholder="Instructions" formControlName="instructions"></textarea>
+          </mat-form-field>
+        </div>
+      
+        <div>
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Dietary Restrictions" formControlName="dietary_restrictions" multiple>
+              <mat-option *ngFor="let restriction of restrictions" [value]="restrictions">{{restriction.name}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
+
         <div>
-<!--    
-          <ul>
-              <li *ngFor="let ri of recipeForm.ingredient_recipes_attributes">
-                {{ ri.amount }} 
-                {{ ri.measure.name }} 
-                {{ ri.ingredient.name }}
+          <div>
+            <ul>
+              <li *ngFor="let item of this.recipe.ingredient_recipes_attributes">
+                <p>{{item.ingredient.name}}</p>
+                <!-- recipe ingredient listing component: receives item // emits delete -->
               </li>
             </ul>
--->
-            <button (click)="openDialog(recipe)" class="btn btn-light btn-block mb-3">Add Ingredient</button>
+          </div>
         </div>
-        <div>
-          <mat-form-field class="full-width">
-            <textarea matInput placeholder="Instructions" matInput formControlName="instructions"></textarea>
-          </mat-form-field>
-        </div>
-        <div class="margin-20">
-          <button click="fireEvent($event)" type="submit" class="btn btn-primary pull-right" [disabled]="!recipeForm.valid">Submit</button>
-        </div>
-        <div class="clearfix"></div>
 
-     <!--- Log the FormGroup values to see if the binding is working -->
-    <p>Form value {{ recipeForm.value | json }} </p>
-    <p> Form status {{ recipeForm.status | json}} </p>
       </form>
+
+      <form [formGroup]="addIngredientForm" id="addingredientform" (ngSubmit)="addIngredientRecipe()">
+
+        <div id="ingrediententry">
+
+          <div>
+            <mat-form-field>
+              <input matInput type="number" matInput formControlName="amount">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field>
+                <input placeholder="Ingredient" matInput [matAutocomplete]="autoingredient" formControlName="ingredient">
+                <mat-autocomplete #autoingredient="matAutocomplete" [displayWith]="displayIngredient">
+                  <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">{{ ingredient.name | titleCase }}</mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field>
+                <input placeholder="Unit of Measure" matInput [matAutocomplete]="automeasure" formControlName="measure">
+                <mat-autocomplete #automeasure="matAutocomplete" [displayWith]="displayMeasure">
+                  <mat-option *ngFor="let measure of filteredMeasures | async" [value]="measure">{{ measure.name }}</mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+          </div>
+
+        </div>
+
+      </form>
+
+      <div>
+          <button [disabled]="addIngredientForm.invalid"
+            form="addingredientform"
+            mat-button>
+            Add Ingredient
+          </button>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div>
+          <button 
+            class="full-width"
+            [disabled]="recipeForm.invalid || this.recipe.ingredient_recipes_attributes.length < 1" 
+            form="new-recipe-form" 
+            mat-button 
+            cdkFocusInitial>
+            Create
+          </button>
+      </div>
+
     </div>
   </div>
 </div>
