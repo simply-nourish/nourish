@@ -2,3 +2,17 @@
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+
+button {
+  background-color: #B8AEB8;
+}
+
+button:hover, button:focus {
+  background-color: #807980;
+}
+
+.heading {
+  color: #99CCCC;
+  /* color: #242A33; */
+}

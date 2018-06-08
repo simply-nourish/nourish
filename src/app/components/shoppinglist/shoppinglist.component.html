@@ -1,29 +1,60 @@
-<div>
-    <h2> Shopping List </h2>
+<div layout="vertical">
+    <mat-sidenav-container fullscreen>
+      <mat-sidenav #snav mode="side" opened="true" class="shopping-list-sidenav">      
+    
+        <h1 class="text-left heading">Shopping Lists</h1>
+        <mat-divider></mat-divider>
 
-    <div class="row">
-        <div class="col-xs-6 col-md-4">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="enter grocery items" [(ngModel)]="task.name" />
-                <div class="input-group-btn">
-                    <button class="btn btn-primary" type="button" (click)="onClick()">
-                        <i class="fa fa-plus"></i>
-                    </button>
-                </div>
-            </div>
-            <ul class="list-group">
-                <li *ngFor="let task of tasks" class="list-group-item">
-                    <span (click)="onStrike(task)" [ngClass]="{'strike': task.strike}"> {{ task.name }} </span>
-                    <span (click)="onEdit(task)" ><i class="fa fa-pencil"></i></span>
-                    <span (click)="onDelete(task)"> 
-                        <i class="fa fa-trash"></i>
-                   </span>
-                    
-                </li>
-            </ul>
+        <mat-nav-list>
+          <ng-container *ngFor="let shopping_list of shopping_lists">
+           <mat-list-item (click)="selectShoppingList(shopping_list)" role="listitem">
+              {{shopping_list.name}}
+            </mat-list-item>
+          </ng-container>
+        </mat-nav-list>
+
+        <div id="button-container">
+          <button (click)="activateCreateDialog()" mat-button float-right cdkFocusInitial>Create New</button>
         </div>
-    </div>
+
+      </mat-sidenav>
+
+      <mat-sidenav-content class="meal-plan-content">
+
+      <div *ngIf="selected_sl">
+        <mat-card class="shopping-list-card">
+          <mat-card-content>
+    
+            <div id="listname">
+              <div>
+                <h1 id="sl-name">{{selected_sl.name}}</h1>
+                <h2 id="sl-meal_plan">Created from Meal Plan: {{selected_sl.meal_plan.name}}</h2>
+              </div>
+              <small>
+                <button (click)="deleteShoppingList(selected_sl)" class="delete float-right btn btn-dark btn-sm">Delete</button>
+              </small>        
+            </div>
+
+            <ul class="list-unstyled">
+              <div *ngFor="let listitem of selected_sl.ingredient_shopping_lists_attributes">
+                <li id="sl-item-card" class="card card=body mb=2">
+                  <app-shoppinglist-item [list_item]="listitem" 
+                                         [background_color]="setPurchasedColor(listitem)"
+                                         (purchasedEvent)="this.setItemPurchased($event)"
+                                         (amountAdjustedEvent)="this.setItemAmount($event)"
+                                         (itemRemovedEvent)="this.removeItem($event)">
+                  </app-shoppinglist-item>
+                </li>
+              </div>
+            </ul>
+            
+            <mat-divider></mat-divider>
+            <button (click)="activateAddItemDialog()" class="btn btn-light btn-block mb-3">Add New Item</button>
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
-
-
-

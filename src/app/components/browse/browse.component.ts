@@ -13,7 +13,7 @@ import {Recipe} from '../../models/Recipe';
 })
 export class BrowseComponent implements OnInit {
   private apiUrl;
-  recipes: Recipe[]; 
+  recipes = []; 
   showExtended: boolean = true; 
 
   constructor(private recipeService: RecipeService) {
