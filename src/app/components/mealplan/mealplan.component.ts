@@ -159,7 +159,12 @@ export class MealplanComponent implements OnInit {
    */
 
   private selectMealPlan(meal_plan) {
-    this.selected_mp = meal_plan;
+
+    // get any new data for this meal plan
+    this.mealPlanService.getUserMealPlanById(meal_plan.id).subscribe( mp => {
+      this.selected_mp = mp;
+    });
+
   }
 
   /*

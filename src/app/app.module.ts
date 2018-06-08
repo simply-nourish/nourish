@@ -21,7 +21,8 @@ import { MatAutocompleteModule,
          MatToolbarModule,
          MatListModule,
          MatDialogModule } from '@angular/material';
-import { MatTabsModule } from '@angular/material/tabs';
+import {MatTabsModule} from '@angular/material/tabs';
+import {SlideshowModule} from 'ng-simple-slideshow';
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
@@ -62,6 +63,7 @@ import { ShoppinglistAdditemDialogComponent } from './components/shoppinglist-ad
 import { ShoppinglistItemComponent } from './components/shoppinglist-item/shoppinglist-item.component';
 import { ItemAmtDialogComponent } from './components/item-amt-dialog/item-amt-dialog.component';
 import { ShoppingListValidator } from './validators/shopping-list-validator.validator';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +89,8 @@ import { ShoppingListValidator } from './validators/shopping-list-validator.vali
     ShoppinglistDialogComponent,
     ShoppinglistAdditemDialogComponent,
     ShoppinglistItemComponent,
-    ItemAmtDialogComponent
+    ItemAmtDialogComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -112,7 +115,8 @@ import { ShoppingListValidator } from './validators/shopping-list-validator.vali
     FormsModule,
     MatFormFieldModule,
     MatAutocompleteModule,
-    CalendarModule.forRoot()
+    CalendarModule.forRoot(),
+    SlideshowModule
   ],
   providers: [
     Angular2TokenService,
