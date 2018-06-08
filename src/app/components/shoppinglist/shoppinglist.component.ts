@@ -234,8 +234,8 @@ export class ShoppinglistComponent implements OnInit {
         this.selected_sl.ingredient_shopping_lists_attributes =
           this.selected_sl.ingredient_shopping_lists_attributes.filter( item => {
             return item.id !== list_item_id; });
-        }
-      });
+      }
+    });
 
   }
 
