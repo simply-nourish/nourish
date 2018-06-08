@@ -36,3 +36,11 @@ header {
 	font-size: 30px;
 	border-bottom: 2px solid #eee;
 }
+
+button {
+	background-color: #B8AEB8;
+}
+
+button:hover, button:focus {
+	background-color: #807980;
+}

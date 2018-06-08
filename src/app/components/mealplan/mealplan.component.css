@@ -68,3 +68,14 @@ mat-nav-list {
   margin-bottom: 10px;
   padding-bottom: 10px;
 }
+
+button {
+  background-color: #B8AEB8;
+}
+
+button:hover, button:focus {
+  background-color: #807980;
+}
+
+
+

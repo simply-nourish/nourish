@@ -11,6 +11,11 @@ h2 {
 button {
     padding: 5px;
     margin: 5px;
+    background-color: #B8AEB8;
+}
+
+button:hover, button:focus {
+    background-color: #807980;
 }
 
 #list-item-container {
