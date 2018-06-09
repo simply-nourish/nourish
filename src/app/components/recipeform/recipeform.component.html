@@ -23,7 +23,7 @@
         
         <div>
           <mat-form-field class="full-width">
-            <input matInput placeholder="Servings" matInput formControlName="servings">
+            <input matInput type="number" placeholder="Servings" matInput formControlName="servings">
           </mat-form-field>
         </div>
 
@@ -43,8 +43,10 @@
 
       </form>
 
-      <h2>Ingredients</h2>
-      <mat-divider></mat-divider>
+      <div *ngIf="this.recipe.ingredient_recipes_attributes.length > 0">
+        <h2>Ingredients</h2>
+        <mat-divider></mat-divider>
+      </div>
 
       <div>
           <ul class="list-unstyled">
@@ -72,20 +74,20 @@
 
           <div>
             <mat-form-field>
-                <input placeholder="Ingredient" matInput [matAutocomplete]="autoingredient" formControlName="ingredient">
-                <mat-autocomplete #autoingredient="matAutocomplete" [displayWith]="displayIngredient">
-                  <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">{{ ingredient.name | titleCase }}</mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
+              <input placeholder="Unit of Measure" matInput [matAutocomplete]="automeasure" formControlName="measure">
+              <mat-autocomplete #automeasure="matAutocomplete" [displayWith]="displayMeasure">
+                <mat-option *ngFor="let measure of filteredMeasures | async" [value]="measure">{{ measure.name }}</mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
           </div>
 
           <div>
             <mat-form-field>
-                <input placeholder="Unit of Measure" matInput [matAutocomplete]="automeasure" formControlName="measure">
-                <mat-autocomplete #automeasure="matAutocomplete" [displayWith]="displayMeasure">
-                  <mat-option *ngFor="let measure of filteredMeasures | async" [value]="measure">{{ measure.name }}</mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
+              <input placeholder="Ingredient" matInput [matAutocomplete]="autoingredient" formControlName="ingredient">
+              <mat-autocomplete #autoingredient="matAutocomplete" [displayWith]="displayIngredient">
+                <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">{{ ingredient.name | titleCase }}</mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
           </div>
 
         </div>

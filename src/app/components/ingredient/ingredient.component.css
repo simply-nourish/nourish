@@ -1,19 +1,15 @@
-h1 {
-  font-size: 32px;
-}
-
 h2 {
-  font-size: 24px;
-  margin-left: 5px;
-  padding-left: 5px;
+  font-size: 16px;
+  margin-left: 2px;
+  padding-left: 2px;
 }
 
 button {
-  padding: 5px;
-  margin: 5px;
+  padding: 2px;
+  margin: 2px;
 }
 
-#list-item-container {
+#ingredient-container {
   display: flex;
   flex-direction: row;
   align-items: center;

@@ -69,7 +69,7 @@ export class RecipeformComponent implements OnInit {
     this.recipeForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.minLength(2)], this.recVal.ValidateRecipeName.bind(this.recVal)),
       summary: new FormControl('', [Validators.required]),
-      servings: new FormControl('', [Validators.min(0), Validators.max(32)]),
+      servings: new FormControl('', [Validators.min(1), Validators.max(32)]),
       instructions: new FormControl('', [Validators.required]),
       dietary_restrictions: new FormControl()
     });
