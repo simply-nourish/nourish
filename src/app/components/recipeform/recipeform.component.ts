@@ -1,7 +1,8 @@
-import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Inject, ViewChild, AfterViewInit } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { MatSelectModule, MatInputModule, MatFormField, MatAutocompleteModule, MatAutocompleteTrigger, 
-    MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatSelectModule, MatInputModule, MatFormField, MatAutocompleteModule,
+         MatAutocompleteTrigger, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import { startWith, map } from 'rxjs/operators';
@@ -19,6 +20,10 @@ import { IngredientRecipe } from '../../models/IngredientRecipe';
 
 import { RecipeformDialogComponent } from '../recipeform-dialog/recipeform-dialog.component';
 import { MeasureService } from '../../services/measure.service';
+import { TitleCasePipe } from '@angular/common';
+import { DietaryRestrictionRecipe } from '../../models/DietaryRestrictionRecipe';
+
+import { RecipeNameValidator } from '../../validators/recipe-name-validator.validator';
 
 @Component({
   selector: 'app-recipeform',
@@ -27,42 +32,73 @@ import { MeasureService } from '../../services/measure.service';
 })
 export class RecipeformComponent implements OnInit {
 
+  @ViewChild(MatAutocompleteTrigger) trigger;
+
   recipe: Recipe;
   recipeForm: FormGroup;
+  addIngredientForm: FormGroup;
   available_ingredients: Ingredient[];
   measures: Measure[];
   restrictions: DietaryRestriction[];
 
-  constructor(private fb: FormBuilder,
-              private ingredientService: IngredientService,
-              private restrictionService: DietaryRestrictionService,
-              private recipeService: RecipeService,
-              private measureService: MeasureService,
-              public dialog: MatDialog) {
+  filteredIngredients: Observable<Ingredient[]>;
+  filteredMeasures: Observable<Measure[]>;
 
-      this.getIngredients();
-      this.getDietaryRestrictions();
+  constructor( private ingredientService: IngredientService,
+               private restrictionService: DietaryRestrictionService,
+               private recipeService: RecipeService,
+               private measureService: MeasureService,
+               public dialog: MatDialog,
+               private router: Router,
+               private recVal: RecipeNameValidator ) {
 
   }
+
+  /*
+   * init: setup form controls
+   */
 
   ngOnInit() {
 
     this.recipe = new Recipe();
+    this.recipe.ingredient_recipes_attributes = new Array<IngredientRecipe>();
+    this.recipe.dietary_restriction_recipes_attributes = new Array<DietaryRestrictionRecipe>();
+
     console.log(this.recipe);
-    this.recipeForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(2)]],
-      summary: [''],
-      servings: [''],
-      instructions: ['']
+
+    this.recipeForm = new FormGroup({
+      title: new FormControl('', [Validators.required, Validators.minLength(2)], this.recVal.ValidateRecipeName.bind(this.recVal)),
+      summary: new FormControl('', [Validators.required]),
+      servings: new FormControl('', [Validators.min(0), Validators.max(32)]),
+      instructions: new FormControl('', [Validators.required]),
+      dietary_restrictions: new FormControl()
     });
 
+    this.addIngredientForm = new FormGroup({
+      amount: new FormControl('', [Validators.required, Validators.min(0.0001), Validators.max(9999)]),
+      ingredient: new FormControl('', [Validators.required]),
+      measure: new FormControl('', [Validators.required])
+    });
+
+    this.getIngredients(this.addIngredientForm);
+    this.getMeasures(this.addIngredientForm);
+    this.getDietaryRestrictions();
+
+  }
+
+  AfterViewInit() {
+    this.trigger.panelClosingActions.subscribe(event => {
+      if ( !(event && event.source) ) {
+        this.trigger.closePanel();
+      }
+    });
   }
 
   /*
    * gets all ingredients
    */
 
-  getIngredients() {
+  private getIngredients(addIngredientForm: FormGroup) {
 
     this.ingredientService.getAllIngredients().subscribe(
       data => {
@@ -70,6 +106,8 @@ export class RecipeformComponent implements OnInit {
         console.log(data);
         this.available_ingredients = data;
         console.log(this.available_ingredients);
+
+        this.setupIngredientFilter(addIngredientForm);
       }
     );
 
@@ -79,7 +117,8 @@ export class RecipeformComponent implements OnInit {
    * get all available dietary restrictions
    */
 
-  getDietaryRestrictions() {
+  private getDietaryRestrictions() {
+
     this.restrictionService.getAllDietaryRestrictions()
     .subscribe( data => {
       console.log('Ingredient Service data');
@@ -87,42 +126,78 @@ export class RecipeformComponent implements OnInit {
       this.restrictions = data;
       console.log(this.restrictions);
     });
+
   }
 
   /*
    * get all available units of measure
+   * and setup filter for ingredients
    */
 
-  getMeasures() {
+  private getMeasures(addIngredientForm: FormGroup) {
 
     this.measureService.getAllMeasures()
     .subscribe( data => {
       this.measures = data;
+      this.setupMeasureFilter(addIngredientForm);
     });
 
   }
 
   /*
-   * open add meal dialog
+   * add ingredient for recipe
    */
 
-  openDialog(new_recipe: Recipe): void {
+  addIngredientRecipe() {
 
-    const dialogRef = this.dialog.open(RecipeformDialogComponent, {
-      width: '350px',
-      data: { recipe: new_recipe }
+    const ingredient_recipe = new IngredientRecipe();
+    ingredient_recipe.ingredient = this.addIngredientForm.controls.ingredient.value;
+    ingredient_recipe.amount = this.addIngredientForm.controls.amount.value;
+    ingredient_recipe.measure = this.addIngredientForm.controls.measure.value;
+
+    console.log(this.addIngredientForm.controls.measure.value);
+    console.log(ingredient_recipe);
+
+    // remove ingredient from available ingredients
+    this.available_ingredients = this.available_ingredients.filter( ing => {
+      console.log('ing_name.toLowerCase: ' + ing.name.toLowerCase() + ' ingr_rec: ' + ingredient_recipe.ingredient.name.toLowerCase());
+      return ing.name.toLowerCase() !== ingredient_recipe.ingredient.name.toLowerCase();
+    });
+    this.recipe.ingredient_recipes_attributes.push(ingredient_recipe);
+
+    console.log(this.recipe.ingredient_recipes_attributes);
+    console.log(this.available_ingredients);
+/*
+    this.addIngredientForm.controls.ingredient.setValue('');
+    this.addIngredientForm.controls.amount.setValue('');
+    this.addIngredientForm.controls.measure.setValue('');
+
+    this.addIngredientForm.markAsPristine();
+    this.addIngredientForm.markAsUntouched();
+    this.addIngredientForm.updateValueAndValidity();
+*/
+    this.addIngredientForm.reset();
+    this.setupIngredientFilter(this.addIngredientForm);
+    this.setupMeasureFilter(this.addIngredientForm);
+
+  }
+
+  /*
+   * remove ingredient from recipe
+   */
+
+  removeIngredientRecipe(removed_ingredient_recipe: IngredientRecipe) {
+
+    console.log('in remove');
+
+    // filter out ingredient-recipe from recipe
+    this.recipe.ingredient_recipes_attributes =
+      this.recipe.ingredient_recipes_attributes.filter( ing_rec => {
+        return ing_rec.ingredient.name !== removed_ingredient_recipe.ingredient.name;
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-
-      const new_ri = new IngredientRecipe();
-      new_ri.amount = result.amount;
-      new_ri.measure = result.measure;
-      new_ri.ingredient = result.ingredient;
-
-      this.recipe.ingredient_recipes_attributes.push(new_ri);
-
-    });
+    // add removed ingredient back to our list
+    this.available_ingredients.push(removed_ingredient_recipe.ingredient);
 
   }
 
@@ -131,30 +206,99 @@ export class RecipeformComponent implements OnInit {
     console.log(this.recipeForm.value);
   }
   /*
+   * display ingredients for autocomplete
+   */
 
-    save(model: Recipe) {
-        // call API to save
-        console.log(this.recipe);
-        console.log(model);
-        this.recipeService.createRecipe(model).subscribe(
-            data => {
-                console.log(data);
-                // this is just for testing:
-                this.recipeService.getUserRecipes().subscribe(
-                    recipe_data => {
-                        console.log(recipe_data);
-                    }
-                );
-            }
-        );
-    }
-
-    */
+  displayIngredient(ingredient?: Ingredient): string | undefined {
+    const titleCasePipe = new TitleCasePipe();
+    return ingredient ? titleCasePipe.transform(ingredient.name) : undefined;
+  }
 
   /*
-  fireEvent(e) {
-    console.log(e)
+   * display measures for autocomplete
+   */
+
+  displayMeasure(measure?: Measure): string | undefined {
+    return measure ? measure.name : undefined;
   }
-  */
+
+  /*
+   * setup ingredient filter
+   */
+
+  private setupIngredientFilter(form: FormGroup) {
+
+    this.filteredIngredients = form.controls.ingredient.valueChanges.pipe(
+      startWith<string | Ingredient>(''),
+      map( value => typeof value === 'string' ? value : value.name),
+      map( name => name ? this.filterIngredients(name) : this.available_ingredients.slice() )
+    );
+
+  }
+
+  /*
+   * setup measures filter
+   */
+
+  private setupMeasureFilter(form: FormGroup) {
+
+    this.filteredMeasures = form.controls.measure.valueChanges.pipe(
+      startWith<string | Measure>(''),
+      map( value => (typeof value === 'string' || value == null) ? value : value.name),
+      map( name => name ? this.filterMeasures(name) : this.measures.slice() )
+    );
+
+  }
+
+  /*
+   * ingredient filtering function (for autocomplete)
+   */
+
+  private filterIngredients(entry: string) {
+
+    return this.available_ingredients.filter( ing => {
+      ing.name.toLowerCase().includes(entry.toLowerCase());
+    });
+
+  }
+
+  /*
+   * measure filtering function (for autocomplete)
+   */
+
+  private filterMeasures(entry: string | null) {
+
+    return this.measures.filter( meas => {
+      meas.name.toLowerCase().includes(entry.toLowerCase());
+    });
+
+  }
+
+  /*
+   * submit recipe
+   */
+
+  onSubmit() {
+
+    console.log(this.recipeForm.controls.dietary_restrictions.value);
+
+    this.recipe.title = this.recipeForm.controls.title.value;
+    this.recipe.summary = this.recipeForm.controls.summary.value;
+    this.recipe.instructions = this.recipeForm.controls.instructions.value;
+    this.recipe.servings = this.recipeForm.controls.servings.value;
+
+    this.recipeForm.controls.dietary_restrictions.value.forEach( data => {
+      this.recipe.dietary_restriction_recipes_attributes.push(data);
+    });
+
+    console.log(this.recipe);
+
+    this.recipeService.createRecipe(this.recipe).subscribe( res => {
+      if (res && res.id) {
+        this.router.navigate(['myrecipes']);
+      }
+    });
+
+  }
 
 }

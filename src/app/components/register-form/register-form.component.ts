@@ -60,6 +60,7 @@ export class RegisterFormComponent implements OnInit {
         console.log('err:', err);
         this.onFormResult.emit({signedIn: false, err});
       }
-    );
+  );
+
   }
 }
