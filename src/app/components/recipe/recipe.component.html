@@ -15,7 +15,13 @@
 				</ul>
 		
 				<h2>Instructions:</h2>
-				<li class="list-group-item"> {{recipe.instructions}}</li> 
+				<li class="list-group-item"> {{recipe.instructions}}</li>
+				<div *ngIf="recipe.dietary_restriction_recipes_attributes.length > 0"> 
+					<h2>Dietary Restrictions:</h2>
+					<ul class="list-group"> 
+							<li class="list-group-item" *ngFor="let restriction of recipe.dietary_restriction_recipes_attributes"> {{restriction.dietary_restriction.name | titleCase}} </li>
+					</ul>
+        </div> 
 			</div>
 		</ul>
 
