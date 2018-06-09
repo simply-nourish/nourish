@@ -256,10 +256,12 @@ export class RecipeformComponent implements OnInit {
     this.recipe.instructions = this.recipeForm.controls.instructions.value;
     this.recipe.servings = this.recipeForm.controls.servings.value;
 
-    this.recipeForm.controls.dietary_restrictions.value.forEach( data => {
-      this.recipe.dietary_restriction_recipes_attributes.push(data);
-    });
-
+    // there may not be any dietary restrictions here
+    if (this.recipeForm.controls.dietary_restrictions.value) {
+      this.recipeForm.controls.dietary_restrictions.value.forEach( data => {
+        this.recipe.dietary_restriction_recipes_attributes.push(data);
+      });
+    }
     this.recipeService.createRecipe(this.recipe).subscribe( res => {
       if (res && res.id) {
         this.router.navigate(['myrecipes']);
