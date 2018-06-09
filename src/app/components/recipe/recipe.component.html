@@ -1,11 +1,10 @@
- <div *ngIf="recipe">
-	<h1> {{recipe.title | titleCase}}
-		<small><button (click)="hide = !hide" class="float-right btn btn-dark btn-sm"> <i [ngClass]="hide ? 'fa fa-plus' : 'fa fa-minus'"></i></button></small>
-	</h1>
-
-	<ul class="borderless list-group" *ngIf="!hide"> 
-		<div class="recipe-card">
-			<h2>Summary:</h2>
+<div *ngIf="recipe">
+		<h1> {{recipe.title | titleCase}}
+			<small><button (click)="hide = !hide" class="float-right btn btn-dark btn-sm"> <i [ngClass]="hide ? 'fa fa-plus' : 'fa fa-minus'"></i></button></small>
+		</h1>
+		<ul class="borderless list-group" *ngIf="!hide"> 
+			<div class="recipe-card">
+				<h2>Summary:</h2>
 				
 				<li class="list-group-item">{{recipe.summary}}</li>
 					
@@ -18,6 +17,4 @@
 				<li class="list-group-item"> {{recipe.instructions}}</li> 
 			</div>
 		</ul>
-	
-
-</div>
+	</div>

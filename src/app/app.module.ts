@@ -65,6 +65,7 @@ import { ShoppinglistItemComponent } from './components/shoppinglist-item/shoppi
 import { ItemAmtDialogComponent } from './components/item-amt-dialog/item-amt-dialog.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { RecipeformDialogComponent } from './components/recipeform-dialog/recipeform-dialog.component';
+import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
 
 import { MealPlanValidator } from './validators/mealplan-validator.validator';
 import { ShoppingListValidator } from './validators/shopping-list-validator.validator';
@@ -100,7 +101,8 @@ import { IngredientComponent } from './components/ingredient/ingredient.componen
     ShoppinglistItemComponent,
     ItemAmtDialogComponent,
     CarouselComponent,
-    IngredientComponent
+    IngredientComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,
