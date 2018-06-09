@@ -24,9 +24,7 @@ export class IngredientComponent implements OnInit {
   }
 
   ingredientRemoved() {
-
     this.removedEvent.emit( this.ingredient_recipe );
-
   }
 
 }

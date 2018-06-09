@@ -64,8 +64,6 @@ export class RecipeformComponent implements OnInit {
     this.recipe.ingredient_recipes_attributes = new Array<IngredientRecipe>();
     this.recipe.dietary_restriction_recipes_attributes = new Array<DietaryRestrictionRecipe>();
 
-    console.log(this.recipe);
-
     this.recipeForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.minLength(2)], this.recVal.ValidateRecipeName.bind(this.recVal)),
       summary: new FormControl('', [Validators.required]),
@@ -102,11 +100,7 @@ export class RecipeformComponent implements OnInit {
 
     this.ingredientService.getAllIngredients().subscribe(
       data => {
-        console.log('Ingredient Service data');
-        console.log(data);
         this.available_ingredients = data;
-        console.log(this.available_ingredients);
-
         this.setupIngredientFilter(addIngredientForm);
       }
     );
@@ -121,10 +115,7 @@ export class RecipeformComponent implements OnInit {
 
     this.restrictionService.getAllDietaryRestrictions()
     .subscribe( data => {
-      console.log('Ingredient Service data');
-      console.log(data);
       this.restrictions = data;
-      console.log(this.restrictions);
     });
 
   }
@@ -150,15 +141,10 @@ export class RecipeformComponent implements OnInit {
 
   addIngredientRecipe(addForm: FormGroup, formDirective: FormGroupDirective) {
 
-    console.log("form added");
-
     const ingredient_recipe = new IngredientRecipe();
     ingredient_recipe.ingredient = addForm.controls.ingredient.value;
     ingredient_recipe.amount = addForm.controls.amount.value;
     ingredient_recipe.measure = addForm.controls.measure.value;
-
-    console.log(addForm.controls.measure.value);
-    console.log(ingredient_recipe);
 
     // remove ingredient from available ingredients
     this.available_ingredients = this.available_ingredients.filter( ing => {
@@ -168,8 +154,6 @@ export class RecipeformComponent implements OnInit {
 
     this.addIngredientForm.reset();
     formDirective.resetForm();
-  //  this.setupIngredientFilter(this.addIngredientForm);
-  //  this.setupMeasureFilter(this.addIngredientForm);
 
   }
 
@@ -178,8 +162,6 @@ export class RecipeformComponent implements OnInit {
    */
 
   removeIngredientRecipe(removed_ingredient_recipe: IngredientRecipe) {
-
-    console.log('in remove');
 
     // filter out ingredient-recipe from recipe
     this.recipe.ingredient_recipes_attributes =
@@ -269,8 +251,6 @@ export class RecipeformComponent implements OnInit {
 
   onSubmit() {
 
-    console.log(this.recipeForm.controls.dietary_restrictions.value);
-
     this.recipe.title = this.recipeForm.controls.title.value;
     this.recipe.summary = this.recipeForm.controls.summary.value;
     this.recipe.instructions = this.recipeForm.controls.instructions.value;
@@ -279,8 +259,6 @@ export class RecipeformComponent implements OnInit {
     this.recipeForm.controls.dietary_restrictions.value.forEach( data => {
       this.recipe.dietary_restriction_recipes_attributes.push(data);
     });
-
-    console.log(this.recipe);
 
     this.recipeService.createRecipe(this.recipe).subscribe( res => {
       if (res && res.id) {
