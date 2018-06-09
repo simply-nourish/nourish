@@ -52,19 +52,26 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { RecipeService } from './services/recipe.service';
 import { IngredientService } from './services/ingredient.service';
 import { DietaryRestrictionService } from './services/dietary-restriction.service';
+import { SelectIngredientComponent } from './components/select-ingredient/select-ingredient.component';
 import { MealPlanService } from './services/meal-plan.service';
 import { ShoppingListService } from './services/shopping-list.service';
 import { MeasureService } from './services/measure.service';
 
 import { TitleCasePipe } from './pipes/title-case.pipe';
 import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-dialog.component';
-import { MealPlanValidator } from './validators/mealplan-validator.validator';
 import { ShoppinglistDialogComponent } from './components/shoppinglist-dialog/shoppinglist-dialog.component';
 import { ShoppinglistAdditemDialogComponent } from './components/shoppinglist-additem-dialog/shoppinglist-additem-dialog.component';
 import { ShoppinglistItemComponent } from './components/shoppinglist-item/shoppinglist-item.component';
 import { ItemAmtDialogComponent } from './components/item-amt-dialog/item-amt-dialog.component';
-import { ShoppingListValidator } from './validators/shopping-list-validator.validator';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { RecipeformDialogComponent } from './components/recipeform-dialog/recipeform-dialog.component';
+import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
+
+import { MealPlanValidator } from './validators/mealplan-validator.validator';
+import { ShoppingListValidator } from './validators/shopping-list-validator.validator';
+import { RecipeNameValidator } from './validators/recipe-name-validator.validator';
+import { IngredientComponent } from './components/ingredient/ingredient.component';
+
 
 @NgModule({
   declarations: [
@@ -85,13 +92,17 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     ShoppinglistComponent,
     MealplanComponent,
     SidenavComponent,
+    SelectIngredientComponent,
     TitleCasePipe,
     MealplanDialogComponent,
+    RecipeformDialogComponent,
     ShoppinglistDialogComponent,
     ShoppinglistAdditemDialogComponent,
     ShoppinglistItemComponent,
     ItemAmtDialogComponent,
-    CarouselComponent
+    CarouselComponent,
+    IngredientComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -135,13 +146,15 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     MeasureService,
     TitleCasePipe,
     MealPlanValidator,
-    ShoppingListValidator
+    ShoppingListValidator,
+    RecipeNameValidator
   ],
   bootstrap: [
     AppComponent
   ],
   entryComponents: [
     MealplanDialogComponent,
+    RecipeformDialogComponent,
     ShoppinglistDialogComponent,
     ShoppinglistAdditemDialogComponent,
     ItemAmtDialogComponent

@@ -1,15 +1,22 @@
  <h2 class="heading"> Browse Recipes</h2>
 <ul class="list-unstyled" *ngIf="recipes.length > 0">
     <li class="card card-body mb-2" *ngFor="let recipe of recipes"> 
-    <h4> {{recipe.title}}
+    <h4> {{recipe.title | titleCase}}
     <small> <button (click)="recipe.hide = !recipe.hide" class="btn btn-dark btn-sm"> <i [ngClass]="recipe.hide ? 'fa fa-plus' : 'fa fa-minus'"></i></button></small>
      <!-- <button type="submit"  class="waves-effect waves-light btn right"> Add to My Recipes </button> -->
     </h4>
         <ul class="list-group"  *ngIf="!recipe.hide"> 
             <li class="list-group-item"> {{recipe.summary}}</li>
-	        <li class="list-group-item" *ngFor="let item of recipe.ingredient_recipes"> {{item.amount}} {{item.measure.name}} {{item.ingredient.name}} </li>
+	        <li class="list-group-item" *ngFor="let item of recipe.ingredient_recipes_attributes"> {{item.amount}} {{item.measure.name}} {{item.ingredient.name}} </li>
 	        <li class="list-group-item"> {{recipe.instructions}}</li> 
         </ul>
+
+        <div *ngIf="recipe.dietary_restriction_recipes_attributes.length > 0"> 
+            <h5>Dietary Restrictions</h5>
+            <ul class="list-group"> 
+                <li class="list-group-item" *ngFor="let restriction of recipe.dietary_restriction_recipes_attributes"> {{restriction.dietary_restriction.name | titleCase}} </li>
+            </ul>
+        </div>
         
         
     </li>

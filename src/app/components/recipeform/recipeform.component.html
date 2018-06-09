@@ -1,81 +1,116 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="margin-20">
-        <h4 class="heading">Add Recipe</h4>
-      </div>
-      <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm['name'])">
-        <div class="form-group">
-          <label>Recipe Name</label>
-          <input type="text" class="form-control" formControlName="name">
-          <small *ngIf="!myForm.controls.name.valid" class="text-danger">
-              Name is required (minimum 2 characters).
-            </small>
-        </div>
-        <!--addresses-->
-        <div formArrayName="ingredients">
-          <div *ngFor="let ingredient of myForm['controls'].ingredients['controls']; let i=index" class="panel panel-default">
-            <div class="panel-heading">
-              <span>Ingredient {{i + 1}}</span>
-              <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.ingredients.controls.length > 1" (click)="removeIngredient(i)"></span>
-            </div>
-            <div class="panel-body" [formGroupName]="i">
-              <div class="form-group col-xs-6">
-                <input type="text" class="form-control" formControlName="ingredient">
-                <small [hidden]="myForm.controls.ingredients.controls[i].controls.street.valid" class="text-danger">
-                    Ingredient is required
-                </small>
-              </div>
-              <div class="form-group col-xs-6">
-                <label>Amount</label>
-                <input type="text" class="form-control" formControlName="amount">
-              </div>
-               <div class="form-group col-xs-6">
-                <label>Measurement</label>
-                <input type="text" class="form-control" formControlName="measure">
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="margin-20">
-          <a (click)="addIngredient()" style="cursor: default">
-            <button class = "btn btn-dark"> Add another Ingredient + </button>
-          </a>
-        </div>
-        
-        <div formArrayName="steps">
-          <div *ngFor="let step of myForm['controls'].steps['controls']; let i=index" class="panel panel-default">
-            <div class="panel-heading">
-              <span>Step {{i + 1}}</span>
-              <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.steps.controls.length > 1" (click)="removeStep(i)"></span>
-            </div>
-            <div class="panel-body" [formGroupName]="i">
-              <div class="form-group col-xs-6">
- 
-                <input type="text" class="form-control" formControlName="step">
-                <small [hidden]="myForm.controls.steps.controls[i].controls.street.valid" class="text-danger">
-                    Step is required
-                </small>
-              </div>
-             
-            </div>
-          </div>
-        </div>
-        
-         <div class="margin-20">
-          <a (click)="addStep()" style="cursor: default">
-            <button class = "btn btn-dark"> Add another Step + </button>
-          </a>
-        </div>
-
-        <div class="margin-20">
-          <button click="fireEvent($event)" type="submit" class="btn btn-primary pull-right" [disabled]="!myForm.valid">Submit</button>
-        </div>
-        <div class="clearfix"></div>
-
-     
-      </form>
+    <div class="margin-20">
+      <h4 class="heading">Create A Recipe</h4>
     </div>
-  </div>
+
+    <form [formGroup]="recipeForm" id="new-recipe-form" class="recipe-form-container" (ngSubmit)="onSubmit()">
+
+      <div>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Recipe Name" matInput formControlName="title">
+        </mat-form-field>
+      </div>
+    
+      <div>
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Summary" formControlName="summary"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Instructions" formControlName="instructions"></textarea>
+        </mat-form-field>
+      </div>
+    
+      <div id="bottom-form-block">
+        <mat-form-field class="half-width">
+          <mat-select placeholder="Dietary Restrictions" formControlName="dietary_restrictions" multiple>
+            <mat-option *ngFor="let restriction of restrictions" [value]="restriction">{{restriction.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="half-width">
+          <input matInput type="number" placeholder="Servings" matInput formControlName="servings">
+        </mat-form-field>
+      </div>
+
+    </form>
+
+    <div *ngIf="this.recipe.ingredient_recipes_attributes.length > 0">
+      <h4 class="heading">Ingredients</h4>
+      <mat-divider></mat-divider>
+    </div>
+
+    <div>
+        <ul class="list-unstyled">
+          <li id="recipe-ingredient-card" class="card card=body mb=2">
+            <div *ngFor="let item of this.recipe.ingredient_recipes_attributes">
+              <app-ingredient [ingredient_recipe]=item (removedEvent)="this.removeIngredientRecipe($event)"></app-ingredient>
+            </div>
+          </li>
+        </ul>
+    </div>
+
+    <h4 class="heading">Add Ingredients</h4>
+
+    <div id="add-ingredients">
+
+      <form [formGroup]="addIngredientForm" id="addingredientform" class="recipe-form-container" (ngSubmit)="addIngredientRecipe(addIngredientForm, formDirective)" #formDirective="ngForm">
+        
+        <div id="ingrediententry">
+
+          <div>
+            <mat-form-field>
+              <input class="ingredient-input" matInput placeholder="Amount" type="number" matInput formControlName="amount">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field>
+              <input class="ingredient-input" placeholder="Unit of Measure" matInput [matAutocomplete]="automeasure" formControlName="measure">
+              <mat-autocomplete #automeasure="matAutocomplete" [displayWith]="displayMeasure">
+                <mat-option *ngFor="let measure of filteredMeasures | async" [value]="measure">{{ measure.name }}</mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field>
+              <input class="ingredient-input" placeholder="Ingredient" matInput [matAutocomplete]="autoingredient" formControlName="ingredient">
+              <mat-autocomplete #autoingredient="matAutocomplete" [displayWith]="displayIngredient">
+                <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">{{ ingredient.name | titleCase }}</mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+        </div>
+
+      </form>
+
+      <div>
+          <button [disabled]="addIngredientForm.invalid"
+            class="btn btn-light btn-block mb-3"
+            form="addingredientform"
+            mat-button>
+            Add Ingredient
+          </button>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div id="submit-button-container">
+          <button 
+            class="btn btn-light btn-block mb-3"
+            [disabled]="recipeForm.invalid || this.recipe.ingredient_recipes_attributes.length < 1" 
+            form="new-recipe-form" 
+            mat-button 
+            cdkFocusInitial>
+            Create
+          </button>
+      </div>
+
+    </div>
+
 </div>

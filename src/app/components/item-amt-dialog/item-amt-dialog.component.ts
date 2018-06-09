@@ -11,7 +11,7 @@ import { appConfig } from '../../app.constants';
 
 import {IngredientShoppingList} from '../../models/IngredientShoppingList';
 
-import {ValidateRecipe} from '../../validators/recipe-validator.validator';
+import {ValidateRecipeType} from '../../validators/recipe-type-validator.validator';
 
 import {TitleCasePipe} from '../../pipes/title-case.pipe';
 

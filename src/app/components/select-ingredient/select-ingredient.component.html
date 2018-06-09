@@ -1,0 +1,11 @@
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Ingredient"  [matAutocomplete]="auto" [formControl]="ingredientCtrl">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayIngredients">
+      <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">
+        <span>{{ ingredient.name }}</span> |
+        <small>Category: {{ingredient.ingredient_category.name}}</small>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+ 
+
