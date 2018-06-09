@@ -60,7 +60,7 @@
 
       <h3>Add Ingredients</h3>
 
-      <form [formGroup]="addIngredientForm" id="addingredientform" (ngSubmit)="addIngredientRecipe()">
+      <form [formGroup]="addIngredientForm" id="addingredientform" (ngSubmit)="addIngredientRecipe(addIngredientForm, formDirective)" #formDirective="ngForm">
 
         <div id="ingrediententry">
 
