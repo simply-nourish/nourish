@@ -4,7 +4,12 @@
 	justify-content: center;
 	align-items: center;
 	border-style: solid;
-    border-width: 5px;
+	border-width: 5px;
+	margin-top: 15px;
+	border-color: #C3CEE4;
+	/* background-color: #e0efef; */
+	border-radius: 5px;
+	box-shadow: 5px 5px 20px #888888;
 }
 
 div.input {
@@ -46,3 +51,4 @@ button:hover, button:focus {
 	color: white;
 	background-color: #807980;
 }
+
