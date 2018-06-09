@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Inject, ViewChild, AfterViewInit } from '@angular/core';
-import { Validators, FormGroup, FormArray, FormBuilder, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { Validators, FormGroup, FormArray, FormBuilder, ReactiveFormsModule, FormControl, FormGroupDirective } from '@angular/forms';
 import { MatSelectModule, MatInputModule, MatFormField, MatAutocompleteModule,
          MatAutocompleteTrigger, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
@@ -148,37 +148,26 @@ export class RecipeformComponent implements OnInit {
    * add ingredient for recipe
    */
 
-  addIngredientRecipe() {
+  addIngredientRecipe(addForm: FormGroup, formDirective: FormGroupDirective) {
 
     const ingredient_recipe = new IngredientRecipe();
-    ingredient_recipe.ingredient = this.addIngredientForm.controls.ingredient.value;
-    ingredient_recipe.amount = this.addIngredientForm.controls.amount.value;
-    ingredient_recipe.measure = this.addIngredientForm.controls.measure.value;
+    ingredient_recipe.ingredient = addForm.controls.ingredient.value;
+    ingredient_recipe.amount = addForm.controls.amount.value;
+    ingredient_recipe.measure = addForm.controls.measure.value;
 
-    console.log(this.addIngredientForm.controls.measure.value);
+    console.log(addForm.controls.measure.value);
     console.log(ingredient_recipe);
 
     // remove ingredient from available ingredients
     this.available_ingredients = this.available_ingredients.filter( ing => {
-      console.log('ing_name.toLowerCase: ' + ing.name.toLowerCase() + ' ingr_rec: ' + ingredient_recipe.ingredient.name.toLowerCase());
       return ing.name.toLowerCase() !== ingredient_recipe.ingredient.name.toLowerCase();
     });
     this.recipe.ingredient_recipes_attributes.push(ingredient_recipe);
 
-    console.log(this.recipe.ingredient_recipes_attributes);
-    console.log(this.available_ingredients);
-/*
-    this.addIngredientForm.controls.ingredient.setValue('');
-    this.addIngredientForm.controls.amount.setValue('');
-    this.addIngredientForm.controls.measure.setValue('');
-
-    this.addIngredientForm.markAsPristine();
-    this.addIngredientForm.markAsUntouched();
-    this.addIngredientForm.updateValueAndValidity();
-*/
     this.addIngredientForm.reset();
-    this.setupIngredientFilter(this.addIngredientForm);
-    this.setupMeasureFilter(this.addIngredientForm);
+    formDirective.resetForm();
+  //  this.setupIngredientFilter(this.addIngredientForm);
+  //  this.setupMeasureFilter(this.addIngredientForm);
 
   }
 
@@ -226,6 +215,7 @@ export class RecipeformComponent implements OnInit {
 
     this.filteredIngredients = form.controls.ingredient.valueChanges.pipe(
       startWith<string | Ingredient>(''),
+      map( value => value == null ? '' : value),
       map( value => typeof value === 'string' ? value : value.name),
       map( name => name ? this.filterIngredients(name) : this.available_ingredients.slice() )
     );
@@ -240,7 +230,8 @@ export class RecipeformComponent implements OnInit {
 
     this.filteredMeasures = form.controls.measure.valueChanges.pipe(
       startWith<string | Measure>(''),
-      map( value => (typeof value === 'string' || value == null) ? value : value.name),
+      map( value => value == null ? '' : value),
+      map( value => (typeof value === 'string') ? value : value.name),
       map( name => name ? this.filterMeasures(name) : this.measures.slice() )
     );
 
@@ -262,7 +253,7 @@ export class RecipeformComponent implements OnInit {
    * measure filtering function (for autocomplete)
    */
 
-  private filterMeasures(entry: string | null) {
+  private filterMeasures(entry: string) {
 
     return this.measures.filter( meas => {
       meas.name.toLowerCase().includes(entry.toLowerCase());
