@@ -23,12 +23,16 @@ import { MeasureService } from '../../services/measure.service';
 import { TitleCasePipe } from '@angular/common';
 import { DietaryRestrictionRecipe } from '../../models/DietaryRestrictionRecipe';
 
+import { RecipeNameValidator } from '../../validators/recipe-name-validator.validator';
+
 @Component({
   selector: 'app-recipeform',
   templateUrl: './recipeform.component.html',
   styleUrls: ['./recipeform.component.css']
 })
 export class RecipeformComponent implements OnInit {
+
+  @ViewChild(MatAutocompleteTrigger) trigger;
 
   recipe: Recipe;
   recipeForm: FormGroup;
@@ -45,7 +49,8 @@ export class RecipeformComponent implements OnInit {
                private recipeService: RecipeService,
                private measureService: MeasureService,
                public dialog: MatDialog,
-               private router: Router) {
+               private router: Router,
+               private recVal: RecipeNameValidator ) {
 
   }
 
@@ -62,7 +67,7 @@ export class RecipeformComponent implements OnInit {
     console.log(this.recipe);
 
     this.recipeForm = new FormGroup({
-      title: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      title: new FormControl('', [Validators.required, Validators.minLength(2)], this.recVal.ValidateRecipeName.bind(this.recVal)),
       summary: new FormControl('', [Validators.required]),
       servings: new FormControl('', [Validators.min(0), Validators.max(32)]),
       instructions: new FormControl('', [Validators.required]),
@@ -70,15 +75,23 @@ export class RecipeformComponent implements OnInit {
     });
 
     this.addIngredientForm = new FormGroup({
-      amount: new FormControl(),
-      ingredient: new FormControl(''),
-      measure: new FormControl('')
+      amount: new FormControl('', [Validators.required, Validators.min(0.0001), Validators.max(9999)]),
+      ingredient: new FormControl('', [Validators.required]),
+      measure: new FormControl('', [Validators.required])
     });
 
     this.getIngredients(this.addIngredientForm);
     this.getMeasures(this.addIngredientForm);
     this.getDietaryRestrictions();
 
+  }
+
+  AfterViewInit() {
+    this.trigger.panelClosingActions.subscribe(event => {
+      if ( !(event && event.source) ) {
+        this.trigger.closePanel();
+      }
+    });
   }
 
   /*
@@ -154,8 +167,18 @@ export class RecipeformComponent implements OnInit {
 
     console.log(this.recipe.ingredient_recipes_attributes);
     console.log(this.available_ingredients);
+/*
+    this.addIngredientForm.controls.ingredient.setValue('');
+    this.addIngredientForm.controls.amount.setValue('');
+    this.addIngredientForm.controls.measure.setValue('');
 
-  //  this.addIngredientForm.reset();
+    this.addIngredientForm.markAsPristine();
+    this.addIngredientForm.markAsUntouched();
+    this.addIngredientForm.updateValueAndValidity();
+*/
+    this.addIngredientForm.reset();
+    this.setupIngredientFilter(this.addIngredientForm);
+    this.setupMeasureFilter(this.addIngredientForm);
 
   }
 
@@ -165,9 +188,12 @@ export class RecipeformComponent implements OnInit {
 
   removeIngredientRecipe(removed_ingredient_recipe: IngredientRecipe) {
 
+    console.log('in remove');
+
     // filter out ingredient-recipe from recipe
-    this.recipe.ingredient_recipes_attributes.filter( ing_rec => {
-      return ing_rec.ingredient.name !== removed_ingredient_recipe.ingredient.name;
+    this.recipe.ingredient_recipes_attributes =
+      this.recipe.ingredient_recipes_attributes.filter( ing_rec => {
+        return ing_rec.ingredient.name !== removed_ingredient_recipe.ingredient.name;
     });
 
     // add removed ingredient back to our list
@@ -214,7 +240,7 @@ export class RecipeformComponent implements OnInit {
 
     this.filteredMeasures = form.controls.measure.valueChanges.pipe(
       startWith<string | Measure>(''),
-      map( value => typeof value === 'string' ? value : value.name),
+      map( value => (typeof value === 'string' || value == null) ? value : value.name),
       map( name => name ? this.filterMeasures(name) : this.measures.slice() )
     );
 
@@ -236,7 +262,7 @@ export class RecipeformComponent implements OnInit {
    * measure filtering function (for autocomplete)
    */
 
-  private filterMeasures(entry: string) {
+  private filterMeasures(entry: string | null) {
 
     return this.measures.filter( meas => {
       meas.name.toLowerCase().includes(entry.toLowerCase());
@@ -256,8 +282,10 @@ export class RecipeformComponent implements OnInit {
     this.recipe.summary = this.recipeForm.controls.summary.value;
     this.recipe.instructions = this.recipeForm.controls.instructions.value;
     this.recipe.servings = this.recipeForm.controls.servings.value;
-    this.recipe.dietary_restriction_recipes_attributes =
-      this.recipeForm.controls.dietary_restrictions.value;
+
+    this.recipeForm.controls.dietary_restrictions.value.forEach( data => {
+      this.recipe.dietary_restriction_recipes_attributes.push(data);
+    });
 
     console.log(this.recipe);
 

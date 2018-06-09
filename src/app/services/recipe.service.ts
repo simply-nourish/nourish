@@ -75,6 +75,7 @@ export class RecipeService {
     console.log(recipe_request);
     return this.authTokenService.post('users/' + this.userID + '/recipes', recipe_request)
     .map( res => {
+        console.log(res.json());
         return this.jsonConvert.deserialize(res.json(), Recipe);
       }).catch(this.handleError);
 
@@ -187,6 +188,7 @@ export class RecipeService {
     });
 
     recipe.dietary_restriction_recipes_attributes.forEach( data => {
+      console.log(data);
       request.recipe.dietary_restriction_recipes_attributes.push({dietary_restriction_id: data.id} );
     });
 

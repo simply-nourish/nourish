@@ -21,7 +21,6 @@ export class ShoppingListValidator {
     if (control.value == null) { return new Promise( resolve => resolve(null) ); }
 
     console.log(this.shoppingListService);
-    console.log("filtering...");
 
     const promise = new Promise( resolve => {
       setTimeout(() => {

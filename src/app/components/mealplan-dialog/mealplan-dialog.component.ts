@@ -13,7 +13,7 @@ import {MealPlan} from '../../models/MealPlan';
 import {MealPlanRecipe} from '../../models/MealPlanRecipe';
 import {Recipe} from '../../models/Recipe';
 
-import {ValidateRecipe} from '../../validators/recipe-validator.validator';
+import {ValidateRecipeType} from '../../validators/recipe-type-validator.validator';
 
 import {TitleCasePipe} from '../../pipes/title-case.pipe';
 
@@ -50,7 +50,7 @@ export class MealplanDialogComponent implements OnInit, AfterViewInit {
 
     this.meal_plan_recipe = new FormGroup({
       meal: new FormControl('', [Validators.required]),
-      recipe: new FormControl('', [Validators.required, ValidateRecipe])
+      recipe: new FormControl('', [Validators.required, ValidateRecipeType])
     });
 
     /* get recipes, assign to filteredRecipes */

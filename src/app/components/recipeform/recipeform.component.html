@@ -35,23 +35,29 @@
         <div>
           <mat-form-field class="full-width">
             <mat-select placeholder="Dietary Restrictions" formControlName="dietary_restrictions" multiple>
-              <mat-option *ngFor="let restriction of restrictions" [value]="restrictions">{{restriction.name}}</mat-option>
+              <mat-option *ngFor="let restriction of restrictions" [value]="restriction">{{restriction.name}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
 
-        <div>
-          <div>
-            <ul>
-              <li *ngFor="let item of this.recipe.ingredient_recipes_attributes">
-                <p>{{item.ingredient.name}}</p>
-                <!-- recipe ingredient listing component: receives item // emits delete -->
-              </li>
-            </ul>
-          </div>
-        </div>
-
       </form>
+
+      <h2>Ingredients</h2>
+      <mat-divider></mat-divider>
+
+      <div>
+          <ul class="list-unstyled">
+            <li id="recipe-ingredient-card" class="card card=body mb=2">
+              <div *ngFor="let item of this.recipe.ingredient_recipes_attributes">
+                <app-ingredient [ingredient_recipe]=item (removedEvent)="this.removeIngredientRecipe($event)"></app-ingredient>
+              </div>
+            </li>
+          </ul>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <h3>Add Ingredients</h3>
 
       <form [formGroup]="addIngredientForm" id="addingredientform" (ngSubmit)="addIngredientRecipe()">
 
@@ -59,7 +65,7 @@
 
           <div>
             <mat-form-field>
-              <input matInput type="number" matInput formControlName="amount">
+              <input matInput placeholder="Amount" type="number" matInput formControlName="amount">
             </mat-form-field>
           </div>
 

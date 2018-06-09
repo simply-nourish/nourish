@@ -31,6 +31,7 @@ export class MealPlanValidator {
         });
       }, 500);
     });
+
     return promise;
   }
 

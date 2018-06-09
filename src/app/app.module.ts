@@ -59,14 +59,18 @@ import { MeasureService } from './services/measure.service';
 
 import { TitleCasePipe } from './pipes/title-case.pipe';
 import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-dialog.component';
-import { MealPlanValidator } from './validators/mealplan-validator.validator';
 import { ShoppinglistDialogComponent } from './components/shoppinglist-dialog/shoppinglist-dialog.component';
 import { ShoppinglistAdditemDialogComponent } from './components/shoppinglist-additem-dialog/shoppinglist-additem-dialog.component';
 import { ShoppinglistItemComponent } from './components/shoppinglist-item/shoppinglist-item.component';
 import { ItemAmtDialogComponent } from './components/item-amt-dialog/item-amt-dialog.component';
-import { ShoppingListValidator } from './validators/shopping-list-validator.validator';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { RecipeformDialogComponent } from './components/recipeform-dialog/recipeform-dialog.component';
+
+import { MealPlanValidator } from './validators/mealplan-validator.validator';
+import { ShoppingListValidator } from './validators/shopping-list-validator.validator';
+import { RecipeNameValidator } from './validators/recipe-name-validator.validator';
+import { IngredientComponent } from './components/ingredient/ingredient.component';
+
 
 @NgModule({
   declarations: [
@@ -95,7 +99,8 @@ import { RecipeformDialogComponent } from './components/recipeform-dialog/recipe
     ShoppinglistAdditemDialogComponent,
     ShoppinglistItemComponent,
     ItemAmtDialogComponent,
-    CarouselComponent
+    CarouselComponent,
+    IngredientComponent
   ],
   imports: [
     BrowserModule,
@@ -139,7 +144,8 @@ import { RecipeformDialogComponent } from './components/recipeform-dialog/recipe
     MeasureService,
     TitleCasePipe,
     MealPlanValidator,
-    ShoppingListValidator
+    ShoppingListValidator,
+    RecipeNameValidator
   ],
   bootstrap: [
     AppComponent
