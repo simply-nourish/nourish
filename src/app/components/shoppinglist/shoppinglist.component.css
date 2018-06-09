@@ -4,6 +4,7 @@ h1 {
   
 h2 {
   font-size: 24px;
+  text-align: center; 
 }
 
 .h4 {
@@ -28,7 +29,7 @@ mat-sidenav-container {
 
 .shopping-list-sidenav {
   padding: 20px;
-  background: lightgray;
+  background: #d3d4d6;
 }
 
 #listname {
@@ -43,5 +44,26 @@ mat-sidenav-container {
 }
 
 #sl-meal_plan {
-  padding-top: 3px;
+  padding-top: 3px;   
+}
+
+button {
+  color: white;
+  background-color: #B8AEB8;
+}
+
+button:hover, button:focus {
+  color: white;
+  background-color: #807980;
+}
+
+.card {
+  background-color: #e0efef;
+  border-radius: 5px; 
+  box-shadow: 5px 5px 20px #888888;
+}
+
+
+.mat-button {
+  color: white;
 }

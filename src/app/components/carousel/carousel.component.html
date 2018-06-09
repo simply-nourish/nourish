@@ -1,13 +1,17 @@
 
-<div class="carousel carousel-slider center" data-indicators="true" materialize="carousel" [materializeActions]="carouselActions">
-    <div class="carousel-fixed-item white-text left" id="buttons">
-      <a (click)="prev()">
+<!--  carousel-slider -->
+<div id="carousel" class="carousel carousel-slider center" data-indicators="true" materialize="carousel" [materializeActions]="carouselActions">
+       <div class="carousel-fixed-item white-text" id="left">
+      <div class="button1"> <a (click)="prev()">
         <i class="fa fa-arrow-left"></i>
-        </a> 
-        <a (click)="next()">
-        <i class="fa fa-arrow-right"></i>
-        </a> 
+        </a> </div>
     </div>
+    <div class="carousel-fixed-item white-text" id="right">
+         <div class="button2"> <a (click)="next()">
+        <i class="fa fa-arrow-right"></i>
+        </a> </div>
+    </div>
+
     <div class="carousel-item red white-text" id="image1" href="#one!">
       <h2>Discover Recipes</h2>
        <p class="white-text">Browse what others have shared</p>
@@ -24,4 +28,4 @@
       <h2>Make Shopping Easier</h2>
        <p class="white-text">Generate a shopping list based on your meal plan</p>
     </div>
-  </div>
+</div>

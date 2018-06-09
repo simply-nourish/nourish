@@ -1,2 +1,19 @@
-.clearfix
-  overflow: auto
+.clearfix {
+  overflow: auto;
+}
+
+button {
+  color: white;
+  background-color: #B8AEB8;
+}
+
+button:hover, button:focus {
+  color: white;
+  background-color: #807980;
+}
+
+.card {
+  background-color: #e0efef;
+  border-radius: 5px;
+  box-shadow: 5px 5px 20px #888888;
+}

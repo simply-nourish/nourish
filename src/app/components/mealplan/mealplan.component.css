@@ -39,7 +39,7 @@ mat-sidenav-container {
 
 .meal-plan-sidenav {
   padding: 10px;
-  background: lightgray;
+  background: #d3d4d6;
 }
 
 .meal-plan-content {
@@ -68,3 +68,23 @@ mat-nav-list {
   margin-bottom: 10px;
   padding-bottom: 10px;
 }
+
+button {
+  color: white;
+  background-color: #B8AEB8;
+}
+
+button:hover, button:focus {
+  color: white;
+  background-color: #807980;
+}
+
+.card {
+  background-color: #e0efef;
+  border-radius: 5px;
+  box-shadow: 5px 5px 20px #888888;
+}
+
+
+
+

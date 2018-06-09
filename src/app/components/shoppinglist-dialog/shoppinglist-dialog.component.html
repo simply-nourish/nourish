@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Create New Shopping List</h1>
+<h1 mat-dialog-title class="heading">Create New Shopping List</h1>
 <div mat-dialog-content>
 
   <form novalidate id="sl-create-form" (ngSubmit)="this.onSubmit()" [formGroup]="shopping_list"> 
@@ -16,7 +16,7 @@
     </div>
   </form>
 
-  <button mat-button (click)="onClose()">Cancel</button>
-  <button [disabled]="shopping_list.invalid" form="sl-create-form" mat-button cdkFocusInitial>Create</button>
+  <button mat-button (click)="onClose()" class="btn btn-light mb-3">Cancel</button>
+  <button [disabled]="shopping_list.invalid" form="sl-create-form" mat-button cdkFocusInitial class="btn btn-light mb-3">Create</button>
 
 </div>
