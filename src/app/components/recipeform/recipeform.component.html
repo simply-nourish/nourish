@@ -1,80 +1,75 @@
 <div class="container">
-  <div class="row">
-    <div class="col s12">
 
-      <div class="margin-20">
+    <div class="margin-20">
+      <h4 class="heading">Create A Recipe</h4>
+    </div>
 
-        <h4 class="heading">Create A Recipe</h4>
+    <form [formGroup]="recipeForm" id="new-recipe-form" class="recipe-form-container" (ngSubmit)="onSubmit()">
+
+      <div>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Recipe Name" matInput formControlName="title">
+        </mat-form-field>
       </div>
-
-      <form [formGroup]="recipeForm" id="new-recipe-form" (ngSubmit)="onSubmit()">
-
-        <div>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Recipe Name" matInput formControlName="title">
-          </mat-form-field>
-        </div>
-     
-        <div>
-          <mat-form-field class="full-width">
-            <textarea matInput placeholder="Summary" formControlName="summary"></textarea>
-          </mat-form-field>
-        </div>
-        
-        <div>
-          <mat-form-field class="full-width">
-            <input matInput type="number" placeholder="Servings" matInput formControlName="servings">
-          </mat-form-field>
-        </div>
-
-        <div>
-          <mat-form-field class="full-width">
-            <textarea matInput placeholder="Instructions" formControlName="instructions"></textarea>
-          </mat-form-field>
-        </div>
-      
-        <div>
-          <mat-form-field class="full-width">
-            <mat-select placeholder="Dietary Restrictions" formControlName="dietary_restrictions" multiple>
-              <mat-option *ngFor="let restriction of restrictions" [value]="restriction">{{restriction.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-
-      </form>
-
-      <div *ngIf="this.recipe.ingredient_recipes_attributes.length > 0">
-        <h2>Ingredients</h2>
-        <mat-divider></mat-divider>
+    
+      <div>
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Summary" formControlName="summary"></textarea>
+        </mat-form-field>
       </div>
 
       <div>
-          <ul class="list-unstyled">
-            <li id="recipe-ingredient-card" class="card card=body mb=2">
-              <div *ngFor="let item of this.recipe.ingredient_recipes_attributes">
-                <app-ingredient [ingredient_recipe]=item (removedEvent)="this.removeIngredientRecipe($event)"></app-ingredient>
-              </div>
-            </li>
-          </ul>
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Instructions" formControlName="instructions"></textarea>
+        </mat-form-field>
+      </div>
+    
+      <div id="bottom-form-block">
+        <mat-form-field class="half-width">
+          <mat-select placeholder="Dietary Restrictions" formControlName="dietary_restrictions" multiple>
+            <mat-option *ngFor="let restriction of restrictions" [value]="restriction">{{restriction.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="half-width">
+          <input matInput type="number" placeholder="Servings" matInput formControlName="servings">
+        </mat-form-field>
       </div>
 
+    </form>
+
+    <div *ngIf="this.recipe.ingredient_recipes_attributes.length > 0">
+      <h4 class="heading">Ingredients</h4>
       <mat-divider></mat-divider>
+    </div>
 
-      <h3>Add Ingredients</h3>
+    <div>
+        <ul class="list-unstyled">
+          <li id="recipe-ingredient-card" class="card card=body mb=2">
+            <div *ngFor="let item of this.recipe.ingredient_recipes_attributes">
+              <app-ingredient [ingredient_recipe]=item (removedEvent)="this.removeIngredientRecipe($event)"></app-ingredient>
+            </div>
+          </li>
+        </ul>
+    </div>
 
-      <form [formGroup]="addIngredientForm" id="addingredientform" (ngSubmit)="addIngredientRecipe(addIngredientForm, formDirective)" #formDirective="ngForm">
+    <h4 class="heading">Add Ingredients</h4>
 
+    <div id="add-ingredients">
+
+      <form [formGroup]="addIngredientForm" id="addingredientform" class="recipe-form-container" (ngSubmit)="addIngredientRecipe(addIngredientForm, formDirective)" #formDirective="ngForm">
+        
         <div id="ingrediententry">
 
           <div>
             <mat-form-field>
-              <input matInput placeholder="Amount" type="number" matInput formControlName="amount">
+              <input class="ingredient-input" matInput placeholder="Amount" type="number" matInput formControlName="amount">
             </mat-form-field>
           </div>
 
           <div>
             <mat-form-field>
-              <input placeholder="Unit of Measure" matInput [matAutocomplete]="automeasure" formControlName="measure">
+              <input class="ingredient-input" placeholder="Unit of Measure" matInput [matAutocomplete]="automeasure" formControlName="measure">
               <mat-autocomplete #automeasure="matAutocomplete" [displayWith]="displayMeasure">
                 <mat-option *ngFor="let measure of filteredMeasures | async" [value]="measure">{{ measure.name }}</mat-option>
               </mat-autocomplete>
@@ -83,7 +78,7 @@
 
           <div>
             <mat-form-field>
-              <input placeholder="Ingredient" matInput [matAutocomplete]="autoingredient" formControlName="ingredient">
+              <input class="ingredient-input" placeholder="Ingredient" matInput [matAutocomplete]="autoingredient" formControlName="ingredient">
               <mat-autocomplete #autoingredient="matAutocomplete" [displayWith]="displayIngredient">
                 <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">{{ ingredient.name | titleCase }}</mat-option>
               </mat-autocomplete>
@@ -96,6 +91,7 @@
 
       <div>
           <button [disabled]="addIngredientForm.invalid"
+            class="btn btn-light btn-block mb-3"
             form="addingredientform"
             mat-button>
             Add Ingredient
@@ -104,9 +100,9 @@
 
       <mat-divider></mat-divider>
 
-      <div>
+      <div id="submit-button-container">
           <button 
-            class="full-width"
+            class="btn btn-light btn-block mb-3"
             [disabled]="recipeForm.invalid || this.recipe.ingredient_recipes_attributes.length < 1" 
             form="new-recipe-form" 
             mat-button 
@@ -116,5 +112,5 @@
       </div>
 
     </div>
-  </div>
+
 </div>

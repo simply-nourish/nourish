@@ -150,6 +150,8 @@ export class RecipeformComponent implements OnInit {
 
   addIngredientRecipe(addForm: FormGroup, formDirective: FormGroupDirective) {
 
+    console.log("form added");
+
     const ingredient_recipe = new IngredientRecipe();
     ingredient_recipe.ingredient = addForm.controls.ingredient.value;
     ingredient_recipe.amount = addForm.controls.amount.value;
