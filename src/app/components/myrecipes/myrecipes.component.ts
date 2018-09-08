@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import {JsonConvert, OperationMode, ValueCheckingMode} from "json2typescript";
+import { JsonConvert, OperationMode, ValueCheckingMode } from 'json2typescript';
 
-import {RecipeService} from "../../services/recipe.service"
-import {Recipe} from '../../models/Recipe';
+import { RecipeService } from '../../services/recipe.service';
+import { Recipe } from '../../models/Recipe';
 
 import 'rxjs/add/operator/map';
 import { AuthService } from '../../services/auth.service';
@@ -13,11 +13,10 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './myrecipes.component.html',
   styleUrls: ['./myrecipes.component.css']
 })
-
 export class MyRecipesComponent implements OnInit {
-    
-    recipes = []; 
-    showExtended: boolean = true; 
+
+    recipes = [];
+    showExtended = true;
 
     constructor(public authService: AuthService, public recipeService: RecipeService) {
       this.getUserRecipes();

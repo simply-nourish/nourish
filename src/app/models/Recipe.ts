@@ -1,6 +1,6 @@
 // https://www.npmjs.com/package/json2typescript
 
-import {JsonObject, JsonProperty} from 'json2typescript';
+import { JsonObject, JsonProperty } from 'json2typescript';
 
 import { DietaryRestrictionRecipe } from './DietaryRestrictionRecipe';
 import { RecipeUser } from './RecipeUser';

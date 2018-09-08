@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { RecipeService } from "../../services/recipe.service";
+import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../models/Recipe';
 
 @Component({
@@ -13,11 +13,11 @@ import { Recipe } from '../../models/Recipe';
 })
 export class BrowseComponent implements OnInit {
   private apiUrl;
-  recipes = []; 
-  showExtended: boolean = true; 
+  recipes = [];
+  showExtended = true;
 
   constructor(private recipeService: RecipeService) {
-    this.getRecipes();    
+    this.getRecipes();
   }
   ngOnInit() {}
 

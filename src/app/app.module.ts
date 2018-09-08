@@ -29,7 +29,6 @@ import { CalendarModule } from 'angular-calendar';
 import { MaterializeModule } from 'angular2-materialize';
 import { SlideshowModule } from 'ng-simple-slideshow';
 
-
 // app
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';

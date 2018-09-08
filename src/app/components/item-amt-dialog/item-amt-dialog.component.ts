@@ -1,7 +1,7 @@
 
 
 import { Component, OnInit, EventEmitter, Input, Inject, ViewChild, AfterViewInit } from '@angular/core';
-import { MatInputModule, MatFormField, MatAutocompleteModule, MatAutocompleteTrigger, 
+import { MatInputModule, MatFormField, MatAutocompleteModule, MatAutocompleteTrigger,
          MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Validators, FormGroup, FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { ReactiveFormsModule, } from '@angular/forms';
@@ -9,11 +9,11 @@ import { Title } from '@angular/platform-browser';
 
 import { appConfig } from '../../app.constants';
 
-import {IngredientShoppingList} from '../../models/IngredientShoppingList';
+import { IngredientShoppingList } from '../../models/IngredientShoppingList';
 
-import {ValidateRecipeType} from '../../validators/recipe-type-validator.validator';
+import { ValidateRecipeType } from '../../validators/recipe-type-validator.validator';
 
-import {TitleCasePipe} from '../../pipes/title-case.pipe';
+import { TitleCasePipe } from '../../pipes/title-case.pipe';
 
 import { Observable } from 'rxjs/Observable';
 import { map, startWith } from 'rxjs/operators';

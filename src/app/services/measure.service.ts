@@ -2,10 +2,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 
-import {Angular2TokenService} from 'angular2-token';
-import {AuthService} from './auth.service';
+import { Angular2TokenService } from 'angular2-token';
+import { AuthService } from './auth.service';
 
-import {JsonConvert, OperationMode, ValueCheckingMode} from 'json2typescript';
+import { JsonConvert, OperationMode, ValueCheckingMode } from 'json2typescript';
 import { Observable } from 'rxjs/Observable';
 
 import { Measure } from '../models/Measure';
@@ -54,5 +54,5 @@ export class MeasureService {
     console.error('ShoppingListService::handleError', error);
     return Observable.throw(error);
   }
-  
+
 }

@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import {AuthDialogComponent} from '../auth-dialog/auth-dialog.component';
-import {AuthService} from '../../services/auth.service';
-import {Router} from '@angular/router';
+import { AuthDialogComponent } from '../auth-dialog/auth-dialog.component';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({

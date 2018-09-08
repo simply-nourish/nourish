@@ -1,4 +1,4 @@
-import {JsonObject, JsonProperty} from 'json2typescript';
+import { JsonObject, JsonProperty } from 'json2typescript';
 import { RecipeUser } from './RecipeUser';
 import { AbbrevMealPlan } from './AbbrevMealPlan';
 import { IngredientShoppingList } from './IngredientShoppingList';

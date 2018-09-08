@@ -1,10 +1,12 @@
 body, html {
     height: 100%;
 }
+
 #container {
     width: 100%;
     margin: 0 auto;
 }
+
 #left {
     text-align: left; 
     position:relative;
@@ -18,7 +20,6 @@ body, html {
     top: calc(50% - 10px); /* 50% - 3/4 of icon height */
     float: right;
 }
-
 
 #image1 {
     background-image: url('https://images.unsplash.com/photo-1471193945509-9ad0617afabf?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d2b5c3a30ad1ec478df74c83536d47e3&auto=format&fit=crop&w=1950&q=80');

@@ -6,16 +6,16 @@ import { BrowseComponent } from './components/browse/browse.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { HomeComponent } from './components/home/home.component';
-import { HomepageComponent } from "./components/homepage/homepage.component";
+import { HomepageComponent } from './components/homepage/homepage.component';
 import { MealplanComponent } from './components/mealplan/mealplan.component';
 import { MyRecipesComponent } from './components/myrecipes/myrecipes.component';
-import { ProfileComponent } from "./components/profile/profile.component";
+import { ProfileComponent } from './components/profile/profile.component';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { RecipeformComponent } from './components/recipeform/recipeform.component';
 import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
 
 // guards
-import {AuthGuard} from './guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent, pathMatch: 'full'},
@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'list', component: ShoppinglistComponent },
   { path: 'mealplan', component: MealplanComponent, canActivate: [AuthGuard] },
   { path: 'carousel', component: CarouselComponent },
-  ]; 
+];
 
 @NgModule({
   exports: [RouterModule],

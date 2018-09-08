@@ -1,5 +1,5 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {AuthService} from "../../services/auth.service";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -13,23 +13,23 @@ export class LoginFormComponent implements OnInit {
     password: ''
   };
 
-  @Output() onFormResult = new EventEmitter<any>();
-  
-  constructor(public authService:AuthService) {}
+  @Output() formResult = new EventEmitter<any>();
+
+  constructor(public authService: AuthService) {}
 
   ngOnInit() {}
 
-  onSignInSubmit(){
+  onSignInSubmit() {
 
     this.authService.logInUser(this.signInUser).subscribe(
         res => {
-          if(res.status == 200){
-            this.onFormResult.emit({signedIn: true, res});
+          if (res.status === 200) {
+            this.formResult.emit({signedIn: true, res});
           }
         },
         err => {
           console.log('err:', err);
-          this.onFormResult.emit({signedIn: false, err});
+          this.formResult.emit({signedIn: false, err});
         }
     );
 

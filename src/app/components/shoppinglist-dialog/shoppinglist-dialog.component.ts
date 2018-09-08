@@ -7,12 +7,12 @@ import { Title } from '@angular/platform-browser';
 
 import { appConfig } from '../../app.constants';
 
-import {MealPlan} from '../../models/MealPlan';
+import { MealPlan } from '../../models/MealPlan';
 import { ShoppinglistComponent } from '../shoppinglist/shoppinglist.component';
 
-import {ValidateMealPlanName} from '../../validators/mealplan-name-validator';
+import { ValidateMealPlanName } from '../../validators/mealplan-name-validator';
 
-import {TitleCasePipe} from '../../pipes/title-case.pipe';
+import { TitleCasePipe } from '../../pipes/title-case.pipe';
 
 import { Observable } from 'rxjs/Observable';
 import { map, startWith } from 'rxjs/operators';

@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { Angular2TokenService } from 'angular2-token';
 import { AuthService } from './auth.service';
 import { ShoppingList } from '../models/ShoppingList';
-import {JsonConvert, OperationMode, ValueCheckingMode} from 'json2typescript';
+import { JsonConvert, OperationMode, ValueCheckingMode } from 'json2typescript';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
