@@ -1,84 +1,95 @@
-import { BrowserModule } from '@angular/platform-browser';
+// angular
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialAppModule } from './ngmaterial.module';
-import { FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
-import { CalendarModule } from 'angular-calendar';
+import { AbstractControl,
+         FormsModule,
+         ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { Angular2TokenService } from 'angular2-token';
-import { MaterializeModule } from 'angular2-materialize';
 import { MatAutocompleteModule,
-         MatFormFieldModule,
-         MatButtonToggleModule,
-         MatMenuModule,
          MatButtonModule,
-         MatIconModule,
+         MatButtonToggleModule,
          MatCardModule,
-         MatRadioModule,
-         MatInputModule,
-         MatSidenavModule,
-         MatToolbarModule,
-         MatListModule,
          MatDialogModule,
-         MatSelectModule } from '@angular/material';
-import {MatTabsModule} from '@angular/material/tabs';
-import {SlideshowModule} from 'ng-simple-slideshow';
+         MatFormFieldModule,
+         MatIconModule,
+         MatInputModule,
+         MatListModule,
+         MatMenuModule,
+         MatRadioModule,
+         MatSelectModule,
+         MatSidenavModule,
+         MatToolbarModule } from '@angular/material';
+import { MatTabsModule } from '@angular/material/tabs';
 
-import { AuthService } from './services/auth.service';
+// external libraries
+import { Angular2TokenService } from 'angular2-token';
+import { CalendarModule } from 'angular-calendar';
+import { MaterializeModule } from 'angular2-materialize';
+import { SlideshowModule } from 'ng-simple-slideshow';
+
+
+// app
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { MaterialAppModule } from './ngmaterial.module';
+
+// app/components
+import { AuthDialogComponent } from './components/auth-dialog/auth-dialog.component';
+import { BrowseComponent } from './components/browse/browse.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { HomeComponent } from './components/home/home.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { IngredientComponent } from './components/ingredient/ingredient.component';
+import { ItemAmtDialogComponent } from './components/item-amt-dialog/item-amt-dialog.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { MealplanComponent } from './components/mealplan/mealplan.component';
+import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-dialog.component';
+import { MyRecipesComponent } from './components/myrecipes/myrecipes.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { RecipeComponent } from './components/recipe/recipe.component';
+import { RecipeformComponent } from './components/recipeform/recipeform.component';
+import { RecipeformDialogComponent } from './components/recipeform-dialog/recipeform-dialog.component';
+import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { SelectIngredientComponent } from './components/select-ingredient/select-ingredient.component';
+import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
+import { ShoppinglistAdditemDialogComponent } from './components/shoppinglist-additem-dialog/shoppinglist-additem-dialog.component';
+import { ShoppinglistDialogComponent } from './components/shoppinglist-dialog/shoppinglist-dialog.component';
+import { ShoppinglistItemComponent } from './components/shoppinglist-item/shoppinglist-item.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
+
+// app/guards
 import { AuthGuard } from './guards/auth.guard';
 
-import { AppComponent } from './app.component';
-
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { AppRoutingModule } from './/app-routing.module';
-
-import { HomeComponent } from './components/home/home.component';
-import { BrowseComponent } from './components/browse/browse.component';
-import { RecipeComponent } from './components/recipe/recipe.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { MyRecipesComponent } from './components/myrecipes/myrecipes.component';
-import { RecipeformComponent } from './components/recipeform/recipeform.component';
-import { HomepageComponent } from './components/homepage/homepage.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { AuthDialogComponent } from './components/auth-dialog/auth-dialog.component';
-import { LoginFormComponent } from './components/login-form/login-form.component';
-import { RegisterFormComponent } from './components/register-form/register-form.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
-import { MealplanComponent } from './components/mealplan/mealplan.component';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
-
+// app/services
+import { AuthService } from './services/auth.service';
 import { RecipeService } from './services/recipe.service';
 import { IngredientService } from './services/ingredient.service';
 import { DietaryRestrictionService } from './services/dietary-restriction.service';
-import { SelectIngredientComponent } from './components/select-ingredient/select-ingredient.component';
 import { MealPlanService } from './services/meal-plan.service';
 import { ShoppingListService } from './services/shopping-list.service';
 import { MeasureService } from './services/measure.service';
 
+// app/pipes
 import { TitleCasePipe } from './pipes/title-case.pipe';
-import { MealplanDialogComponent } from './components/mealplan-dialog/mealplan-dialog.component';
-import { ShoppinglistDialogComponent } from './components/shoppinglist-dialog/shoppinglist-dialog.component';
-import { ShoppinglistAdditemDialogComponent } from './components/shoppinglist-additem-dialog/shoppinglist-additem-dialog.component';
-import { ShoppinglistItemComponent } from './components/shoppinglist-item/shoppinglist-item.component';
-import { ItemAmtDialogComponent } from './components/item-amt-dialog/item-amt-dialog.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
-import { RecipeformDialogComponent } from './components/recipeform-dialog/recipeform-dialog.component';
-import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
 
+// app/validators
 import { MealPlanValidator } from './validators/mealplan-validator.validator';
 import { ShoppingListValidator } from './validators/shopping-list-validator.validator';
 import { RecipeNameValidator } from './validators/recipe-name-validator.validator';
-import { IngredientComponent } from './components/ingredient/ingredient.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    BrowseComponent,
     NavbarComponent,
     HomeComponent,
-    BrowseComponent,
     RecipeComponent,
     CalendarComponent,
     MyRecipesComponent,
@@ -138,10 +149,10 @@ import { IngredientComponent } from './components/ingredient/ingredient.componen
     AuthService,
     AuthGuard,
     BrowseComponent,
-    RecipeService,
     IngredientService,
     DietaryRestrictionService,
     MealPlanService,
+    RecipeService,
     ShoppingListService,
     MeasureService,
     TitleCasePipe,
