@@ -9,18 +9,27 @@
       <div>
         <mat-form-field class="full-width">
           <input matInput placeholder="Recipe Name" matInput formControlName="title">
+          <mat-error>
+            required field
+          </mat-error>
         </mat-form-field>
       </div>
     
       <div>
         <mat-form-field class="full-width">
           <textarea matInput placeholder="Summary" formControlName="summary"></textarea>
+          <mat-error>
+            required field
+          </mat-error>
         </mat-form-field>
       </div>
 
       <div>
         <mat-form-field class="full-width">
           <textarea matInput placeholder="Instructions" formControlName="instructions"></textarea>
+          <mat-error>
+            required field
+          </mat-error>
         </mat-form-field>
       </div>
     
@@ -33,6 +42,9 @@
 
         <mat-form-field class="half-width">
           <input matInput type="number" placeholder="Servings" matInput formControlName="servings">
+          <mat-error>
+            required field
+          </mat-error>
         </mat-form-field>
       </div>
 
@@ -64,6 +76,9 @@
           <div>
             <mat-form-field>
               <input class="ingredient-input" matInput placeholder="Amount" type="number" matInput formControlName="amount">
+              <mat-error>
+                required field
+              </mat-error>
             </mat-form-field>
           </div>
 
@@ -73,6 +88,9 @@
               <mat-autocomplete #automeasure="matAutocomplete" [displayWith]="displayMeasure">
                 <mat-option *ngFor="let measure of filteredMeasures | async" [value]="measure">{{ measure.name }}</mat-option>
               </mat-autocomplete>
+              <mat-error>
+                required field
+              </mat-error>
             </mat-form-field>
           </div>
 
@@ -82,6 +100,9 @@
               <mat-autocomplete #autoingredient="matAutocomplete" [displayWith]="displayIngredient">
                 <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">{{ ingredient.name | titleCase }}</mat-option>
               </mat-autocomplete>
+              <mat-error>
+                required field
+              </mat-error>
             </mat-form-field>
           </div>
 
