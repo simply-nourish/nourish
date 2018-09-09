@@ -1,14 +1,14 @@
-//services/ingredient.service.ts
+// services/ingredient.service.ts
 
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
 
-import { Angular2TokenService } from "angular2-token";
-import { AuthService } from "./auth.service";
+import { Angular2TokenService } from 'angular2-token';
+import { AuthService } from './auth.service';
 import { IngredientCategory } from '../models/IngredientCategory';
 import { Ingredient } from '../models/Ingredient';
-import { JsonConvert, OperationMode, ValueCheckingMode } from "json2typescript";
+import { JsonConvert, OperationMode, ValueCheckingMode } from 'json2typescript';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -20,10 +20,10 @@ export class IngredientService {
   private userID: number;
   private jsonConvert: JsonConvert;
 
-  constructor(private authTokenService: Angular2TokenService, private authService: AuthService) { 
+  constructor(private authTokenService: Angular2TokenService, private authService: AuthService) {
     console.log('IngredientService constructed:');
     console.log(this.authService.getUser());
-    // console.log(this.authService.getUser().email);  
+    // console.log(this.authService.getUser().email);
     this.userID = this.authService.getUser().id;
 
     this.jsonConvert = new JsonConvert();
@@ -38,7 +38,7 @@ export class IngredientService {
       res => {
         return this.jsonConvert.deserialize(res.json(), Ingredient);
       }
-    ).catch(this.handleError);    
+    ).catch(this.handleError);
   }
 
   // GET /ingredient_categories/:ingredient_category_id/ingredients
@@ -49,24 +49,24 @@ export class IngredientService {
         return this.jsonConvert.deserialize(res.json(), IngredientCategory);
       }
     ).catch(this.handleError);
-  }  
-  
+  }
+
   // POST /ingredient_categories/:ingredient_category_id/ingredients
   public createIngredient(categoryID: number, ingredient: Ingredient): Observable<Ingredient> {
     return this.authTokenService.post('/ingredient_categories/' + categoryID + '/ingredients', ingredient).map(
       res => {
-        return this.jsonConvert.deserialize(res.json(), Ingredient)
+        return this.jsonConvert.deserialize(res.json(), Ingredient);
       }
     ).catch(this.handleError);
   }
-  
+
   // GET /ingredient_categories
   public getAllIngredientCategories(): Observable<IngredientCategory[]> {
     return this.authTokenService.get('/ingredient_categories').map(
       res => {
         return this.jsonConvert.deserialize(res.json(), IngredientCategory);
       }
-    ).catch(this.handleError);    
+    ).catch(this.handleError);
   }
 
   // POST /ingredient_categories
@@ -77,15 +77,15 @@ export class IngredientService {
       }
     ).catch(this.handleError);
   }
-  
+
   // GET /ingredient_categories/:id
   public getIngredientCategoryById(categoryID: number): Observable<IngredientCategory> {
-    return this.authTokenService.get('ingredient_categories' + categoryID).map( 
+    return this.authTokenService.get('ingredient_categories' + categoryID).map(
       res => {
         return this.jsonConvert.deserialize(res.json(), IngredientCategory);
       }
-    ).catch(this.handleError);    
-  }  
+    ).catch(this.handleError);
+  }
   // PUT /ingredient_categories/:id
   public updateIngredientCategory(category: IngredientCategory): Observable<IngredientCategory> {
     return this.authTokenService.put('/ingredient_categories/' + category.id, category).map(
@@ -93,22 +93,22 @@ export class IngredientService {
         return this.jsonConvert.deserialize(res.json(), IngredientCategory);
       }
     ).catch(this.handleError);
-  } 
-  
+  }
+
   // DELETE /ingredient_categories/:id
   public deleteIngredientCategory(categoryID: number): Observable<null> {
     return this.authTokenService.delete('/ingredient_categories/' + categoryID)
     .map(res => null)
     .catch(this.handleError);
   }
-  
+
   // GET /ingredients/:id
   public getIngredientById(ingredientID: number): Observable<Ingredient> {
     return this.authTokenService.get('/ingredients/' + ingredientID).map(
       res => {
         return this.jsonConvert.deserialize(res.json(), Ingredient);
       }
-    ).catch(this.handleError);    
+    ).catch(this.handleError);
   }
 
   // PUT /ingredients/:id

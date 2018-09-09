@@ -1,7 +1,7 @@
 import { IngredientRecipe } from '../../models/IngredientRecipe';
 
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import {TitleCasePipe} from '../../pipes/title-case.pipe';
+import { TitleCasePipe } from '../../pipes/title-case.pipe';
 
 import { MatInputModule, MatFormField, MatAutocompleteModule, MatAutocompleteTrigger,
          MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';

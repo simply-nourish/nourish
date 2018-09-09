@@ -3,10 +3,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
-import {Angular2TokenService} from 'angular2-token';
-import {AuthService} from './auth.service';
+import { Angular2TokenService     } from 'angular2-token';
+import { AuthService } from './auth.service';
 import { Recipe } from '../models/Recipe';
-import {JsonConvert, OperationMode, ValueCheckingMode} from 'json2typescript';
+import { JsonConvert, OperationMode, ValueCheckingMode } from 'json2typescript';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';

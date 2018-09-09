@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import {MaterializeAction} from 'angular2-materialize';
+import { MaterializeAction } from 'angular2-materialize';
 
 @Component({
   selector: 'app-carousel',
@@ -9,30 +9,28 @@ import {MaterializeAction} from 'angular2-materialize';
 })
 export class CarouselComponent implements OnInit {
 
+  modalActions = new EventEmitter<string|MaterializeAction>();
+  carouselActions = new EventEmitter<string|MaterializeAction>();
+
   constructor() { }
 
   ngOnInit() {
   }
 
-
-  modalActions = new EventEmitter<string|MaterializeAction>();
-  carouselActions = new EventEmitter<string|MaterializeAction>();
-
-
   openModal() {
-    this.modalActions.emit({action:"modal",params:['open']});
+    this.modalActions.emit({action: 'modal', params: ['open']});
   }
+
   closeModal() {
-    this.modalActions.emit({action:"modal",params:['close']});
+    this.modalActions.emit({action: 'modal', params: ['close']});
   }
 
-
-  prev(){
-      this.carouselActions.emit({action:"carousel",params:['prev']});
+  prev() {
+      this.carouselActions.emit({action: 'carousel', params: ['prev']});
   }
 
-  next(){
-      this.carouselActions.emit({action:"carousel",params:['next']});
+  next() {
+      this.carouselActions.emit({action: 'carousel', params: ['next']});
   }
 
 }

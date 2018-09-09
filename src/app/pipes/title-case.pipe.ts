@@ -3,7 +3,7 @@
  * https://medium.com/@mwhitt.w/converting-text-to-titlecase-using-angular2-pipes-552b3bfa8e22
  */
 
-import {Pipe, PipeTransform} from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({name: 'titleCase'})
 export class TitleCasePipe implements PipeTransform {

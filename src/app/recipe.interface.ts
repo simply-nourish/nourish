@@ -1,15 +1,15 @@
 // recipe.interface.ts
 
 export interface Recipe {
-    name: string; 
-    ingredients: Ingredients[]; 
-    steps: Steps[]; 
+    name: string;
+    ingredients: Ingredients[];
+    steps: Steps[];
 }
 
 export interface Ingredients {
     ingredient: string;  // required field
-    amount: string; 
-    measure: string; 
+    amount: string;
+    measure: string;
 }
 
 export interface Steps {

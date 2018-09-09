@@ -1,7 +1,5 @@
-// still needs measure service added from Colin's branch
-
 import { Component, OnInit, EventEmitter, Input, Inject, ViewChild, AfterViewInit } from '@angular/core';
-import { MatInputModule, MatFormField, MatAutocompleteModule, MatAutocompleteTrigger, 
+import { MatInputModule, MatFormField, MatAutocompleteModule, MatAutocompleteTrigger,
          MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Validators, FormGroup, FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -26,7 +24,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './recipeform-dialog.component.html',
   styleUrls: ['./recipeform-dialog.component.css']
 })
-export class RecipeformDialogComponent implements OnInit {
+export class RecipeformDialogComponent implements OnInit, AfterViewInit {
   recipe_ingredient: FormGroup;
   measures: Measure[];
   filteredMeasures: Observable<Measure[]>;
@@ -47,8 +45,8 @@ export class RecipeformDialogComponent implements OnInit {
     });
     this.getMeasures();
     this.getIngredients();
-  } 
-  
+  }
+
   /*
   * forcing user to choose from the list of recipes
   * adapted from: https://github.com/angular/material2/issues/3334
@@ -93,10 +91,10 @@ export class RecipeformDialogComponent implements OnInit {
    */
 
   onSubmit() {
-    const data = {  
+    const data = {
       amount: this.recipe_ingredient.controls.amount.value,
       measure: this.recipe_ingredient.controls.measure.value,
-      ingredient: this.recipe_ingredient.controls.ingredient.value 
+      ingredient: this.recipe_ingredient.controls.ingredient.value
     };
     this.dialogRef.close(data);
   }
@@ -121,35 +119,35 @@ export class RecipeformDialogComponent implements OnInit {
 
   getIngredients() {
     this.ingredientService.getAllIngredients().subscribe(
-        data => {
-            console.log('Ingredient Service data');
-            console.log(data);
-            this.ingredients = data;
-            console.log(this.ingredients);
-            this.filteredIngredients = this.recipe_ingredient.controls.ingredient.valueChanges
-            .pipe(
-              startWith<string | Ingredient>(''),
-              map(value => typeof value === 'string' ? value : value.name),
-              map(name => name ? this.filterIngredients(name) : this.ingredients.slice() )
-            ); 
-        }
-    )
+      data => {
+        console.log('Ingredient Service data');
+        console.log(data);
+        this.ingredients = data;
+        console.log(this.ingredients);
+        this.filteredIngredients = this.recipe_ingredient.controls.ingredient.valueChanges
+        .pipe(
+          startWith<string | Ingredient>(''),
+          map(value => typeof value === 'string' ? value : value.name),
+          map(name => name ? this.filterIngredients(name) : this.ingredients.slice() )
+        );
+      }
+    );
   }
 
   getMeasures() {
     this.measureService.getAllMeasures().subscribe(
       data => {
-          console.log('Measure Service data');
-          console.log(data);
-          this.measures = data;
-          console.log(this.measures);
-          this.filteredMeasures = this.recipe_ingredient.controls.measure.valueChanges
-          .pipe(
-            startWith<string | Measure>(''),
-            map(value => typeof value === 'string' ? value : value.name),
-            map(name => name ? this.filterMeasures(name) : this.measures.slice() )
-          ); 
+        console.log('Measure Service data');
+        console.log(data);
+        this.measures = data;
+        console.log(this.measures);
+        this.filteredMeasures = this.recipe_ingredient.controls.measure.valueChanges
+        .pipe(
+          startWith<string | Measure>(''),
+          map(value => typeof value === 'string' ? value : value.name),
+          map(name => name ? this.filterMeasures(name) : this.measures.slice() )
+        );
       }
-    )    
+    );
   }
 }

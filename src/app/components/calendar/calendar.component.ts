@@ -9,7 +9,7 @@ export interface CalendarDate {
 }
 
 @Component({
-  selector: 'yoshimi-calendar',
+  selector: 'app-calendar',
   templateUrl: './calendar.component.html',
 })
 export class CalendarComponent implements OnInit, OnChanges {
@@ -20,7 +20,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   sortedDates: CalendarDate[] = [];
 
   @Input() selectedDates: CalendarDate[] = [];
-  @Output() onSelectDate = new EventEmitter<CalendarDate>();
+  @Output() selectDate = new EventEmitter<CalendarDate>();
 
   constructor() {}
 
@@ -53,8 +53,8 @@ export class CalendarComponent implements OnInit, OnChanges {
     return moment(date).isSame(this.currentDate, 'month');
   }
 
-  selectDate(date: CalendarDate): void {
-    this.onSelectDate.emit(date);
+  onSelectDate(date: CalendarDate): void {
+    this.selectDate.emit(date);
   }
 
   // actions from calendar

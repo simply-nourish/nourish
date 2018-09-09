@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import {Recipe} from '../../models/Recipe';
-import {RecipeService} from '../../services/recipe.service';
-import {AuthService} from '../../services/auth.service';
+import { Recipe } from '../../models/Recipe';
+import { RecipeService } from '../../services/recipe.service';
+import { AuthService } from '../../services/auth.service';
 
-import {TitleCasePipe} from '../../pipes/title-case.pipe';
+import { TitleCasePipe } from '../../pipes/title-case.pipe';
 
 @Component({
   selector: 'app-recipe',

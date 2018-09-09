@@ -25,7 +25,7 @@
           </div>
           <div class="week-date enabled"
                *ngIf="isSelectedMonth(day.mDate)"
-               (click)="selectDate(day)"
+               (click)="onSelectDate(day)"
                [ngClass]="{ today: day.today, selected: day.selected }">
             <span class="date-text">{{ day.mDate.date() }}</span>
           </div>

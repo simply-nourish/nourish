@@ -7,7 +7,7 @@ import { Angular2TokenService } from 'angular2-token';
 import { AuthService } from './auth.service';
 import { MealPlan } from '../models/MealPlan';
 
-import {JsonConvert, OperationMode, ValueCheckingMode} from "json2typescript";
+import { JsonConvert, OperationMode, ValueCheckingMode } from 'json2typescript';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -109,5 +109,3 @@ export class MealPlanService implements OnInit {
   }
 
 }
-
-

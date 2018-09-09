@@ -1,7 +1,7 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import {IngredientShoppingList} from '../../models/IngredientShoppingList';
+import { IngredientShoppingList } from '../../models/IngredientShoppingList';
 
-import {TitleCasePipe} from '../../pipes/title-case.pipe';
+import { TitleCasePipe } from '../../pipes/title-case.pipe';
 
 import { MatInputModule, MatFormField, MatAutocompleteModule, MatAutocompleteTrigger,
          MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';

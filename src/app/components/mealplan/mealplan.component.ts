@@ -2,24 +2,24 @@ import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { MatInputModule, MatFormField, MatAutocompleteModule, MatAutocompleteTrigger, 
+import { MatInputModule, MatFormField, MatAutocompleteModule, MatAutocompleteTrigger,
          MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Validators, FormGroup, FormArray, FormBuilder,
          FormControl, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 
-import {AuthService} from '../../services/auth.service';
-import {Angular2TokenService} from 'angular2-token';
+import { AuthService } from '../../services/auth.service';
+import { Angular2TokenService } from 'angular2-token';
 
-import {MealPlanService} from '../../services/meal-plan.service';
+import { MealPlanService } from '../../services/meal-plan.service';
 
-import {appConfig} from '../../app.constants';
-import {TitleCasePipe} from '../../pipes/title-case.pipe';
+import { appConfig } from '../../app.constants';
+import { TitleCasePipe } from '../../pipes/title-case.pipe';
 
-import {MealPlan} from '../../models/MealPlan';
-import {MealPlanRecipe} from '../../models/MealPlanRecipe';
+import { MealPlan } from '../../models/MealPlan';
+import { MealPlanRecipe } from '../../models/MealPlanRecipe';
 
-import {MealplanDialogComponent} from '../mealplan-dialog/mealplan-dialog.component';
-import {MealPlanValidator} from '../../validators/mealplan-validator.validator';
+import { MealplanDialogComponent } from '../mealplan-dialog/mealplan-dialog.component';
+import { MealPlanValidator } from '../../validators/mealplan-validator.validator';
 
 
 @Component({
@@ -27,7 +27,6 @@ import {MealPlanValidator} from '../../validators/mealplan-validator.validator';
   templateUrl: './mealplan.component.html',
   styleUrls: ['./mealplan.component.css'],
 })
-
 export class MealplanComponent implements OnInit {
 
   meal_plans: MealPlan [];

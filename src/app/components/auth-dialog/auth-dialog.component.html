@@ -15,11 +15,11 @@
       <div class="row">
         <h3 class="heading">{{authMode}}</h3> 
 
-        <app-login-form (onFormResult)="onLoginFormResult($event)"
+        <app-login-form (formResult)="onLoginFormResult($event)"
                         *ngIf="isLoginMode()">
 
         </app-login-form>
-        <app-register-form (onFormResult)="onRegisterFormResult($event)"
+        <app-register-form (formResult)="onRegisterFormResult($event)"
                            *ngIf="isRegisterMode()">
 
         </app-register-form>
