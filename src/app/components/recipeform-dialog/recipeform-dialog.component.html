@@ -6,6 +6,9 @@
             <input matInput #amount formControlName="amount" maxlength="5" placeholder="Choose an Amount" [value]>
             <mat-hint align="end">Please enter fractions as decimals.
             </mat-hint>
+            <mat-error>
+              required field
+            </mat-error>
           </mat-form-field>
 
         <mat-form-field class="full-width">
@@ -13,6 +16,9 @@
             <mat-autocomplete #automeasure="matAutocomplete" [displayWith]="displayMeasures">
               <mat-option *ngFor="let measure of filteredMeasures | async" [value]="measure">{{ measure.name | titleCase }}</mat-option>
             </mat-autocomplete>
+            <mat-error>
+              required field
+            </mat-error>
           </mat-form-field>
 
         <mat-form-field class="full-width">
@@ -20,6 +26,9 @@
           <mat-autocomplete #autoingredient="matAutocomplete" [displayWith]="displayIngredients">
             <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">{{ ingredient.name | titleCase }}</mat-option>
           </mat-autocomplete>
+          <mat-error>
+            required field
+          </mat-error>
         </mat-form-field>
 
       </form>

@@ -34,3 +34,7 @@ button:hover, button:focus {
 .card {
   background-color: #e0efef;
 }
+
+.modal-content{
+  height: 100%;
+}
